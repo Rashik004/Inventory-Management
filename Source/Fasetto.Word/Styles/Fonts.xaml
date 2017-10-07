@@ -31,4 +31,5 @@
     <system:String x:Key="FontAwesomeUserIcon">&#xf007;</system:String>
     <system:String x:Key="FontAwesomePictureIcon">&#xf1c5;</system:String>
     <system:String x:Key="FontAwesomeCogIcon">&#xf013;</system:String>
+    <system:String x:Key="FontAwesomePlusIcon">&#xf067;</system:String>
 </ResourceDictionary>

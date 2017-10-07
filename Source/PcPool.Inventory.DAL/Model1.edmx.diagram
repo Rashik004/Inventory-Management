@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="61de2036d67946d5931ed071aaf122d2" Name="Diagram1">
+        <EntityTypeShape EntityType="PcPoolModel.DeviceInstance" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PcPoolModel.DeviceStatu" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PcPoolModel.DeviceType" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PcPoolModel.ReservationList" Width="1.5" PointX="9.5" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PcPoolModel.User" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="PcPoolModel.UserType" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <AssociationConnector Association="PcPoolModel.User_FK_UserType" ManuallyRouted="false" />
+        <AssociationConnector Association="PcPoolModel.DeviceInstance_FK_DeviceStatusId" />
+        <AssociationConnector Association="PcPoolModel.DeviceInstance_FK_DeviceType" />
+        <AssociationConnector Association="PcPoolModel.ReservationList_FK_DeviceType" />
+        <AssociationConnector Association="PcPoolModel.REL_1" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
