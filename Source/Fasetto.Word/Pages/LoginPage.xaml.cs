@@ -25,11 +25,14 @@ namespace Fasetto.Word
         public LoginPage()
         {
             InitializeComponent();
+            var testing=this.DataContext;
         }
 
         /// <summary>
         /// The secure password for this login page
         /// </summary>
         public SecureString SecurePassword => PasswordText.SecurePassword;
+
+        
     }
 }

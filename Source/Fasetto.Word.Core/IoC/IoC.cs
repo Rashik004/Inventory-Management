@@ -1,5 +1,7 @@
 ﻿using Ninject;
 using System;
+using PcPool.Inventory.BusinessLayer;
+using PcPool.Inventory.BusinessLayer.Interfaces;
 
 namespace Fasetto.Word.Core
 {
@@ -28,6 +30,12 @@ namespace Fasetto.Word.Core
         {
             // Bind all required view models
             BindViewModels();
+            BindBusinessLayers();
+        }
+
+        private static void BindBusinessLayers()
+        {
+            Kernel.Bind<IUserDataProvider>().ToConstant(new UserDataProvider());
         }
 
         /// <summary>

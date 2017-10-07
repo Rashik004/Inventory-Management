@@ -232,6 +232,10 @@
       <Project>{cac0a047-d879-4a29-8136-be1e33f5f35c}</Project>
       <Name>Fasetto.Word.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PcPool.Inventory.BusinessLayer\PcPool.Inventory.BusinessLayer.csproj">
+      <Project>{40E009AF-687F-4620-BEF1-10BEF8B8E271}</Project>
+      <Name>PcPool.Inventory.BusinessLayer</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Logo\CompanyLogo.png" />

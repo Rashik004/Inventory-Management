@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using System.Security;
+using System.Security.Permissions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using PcPool.Inventory.BusinessLayer;
+using PcPool.Inventory.BusinessLayer.Interfaces;
 
 namespace Fasetto.Word.Core
 {
@@ -13,12 +15,16 @@ namespace Fasetto.Word.Core
     /// </summary>
     public class LoginViewModel : BaseViewModel
     {
+        private IUserDataProvider _userDataProvider;
+
         #region Public Properties
 
         /// <summary>
         /// The email of the user
         /// </summary>
         public string Email { get; set; }
+
+        public string Password { get; set; }
 
         /// <summary>
         /// A flag indicating if the login command is running
@@ -46,11 +52,13 @@ namespace Fasetto.Word.Core
         /// <summary>
         /// Default constructor
         /// </summary>
-        public LoginViewModel()
+        public LoginViewModel(/*IUserDataProvider userDataProvider*/)
         {
             // Create commands
             LoginCommand = new RelayParameterizedCommand(async (parameter) => await LoginAsync(parameter));
             RegisterCommand = new RelayCommand(async () => await RegisterAsync());
+            _userDataProvider = new UserDataProvider();
+            //_userDataProvider = userDataProvider;
         }
 
         #endregion
