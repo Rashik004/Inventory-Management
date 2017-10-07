@@ -75,6 +75,16 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PcPool.DataAccessLayer.PcPoolDBaseModel\PcPool.DataAccessLayer.PcPoolDBaseModel.csproj">
+      <Project>{b96a32e6-10c2-45c4-a2a1-c98fcf811b97}</Project>
+      <Name>PcPool.DataAccessLayer.PcPoolDBaseModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PcPool.Inventory.BusinessLayer\PcPool.Inventory.BusinessLayer.csproj">
+      <Project>{40e009af-687f-4620-bef1-10bef8b8e271}</Project>
+      <Name>PcPool.Inventory.BusinessLayer</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.1.29.4\build\dotnet\Fody.targets" Condition="Exists('..\packages\Fody.1.29.4\build\dotnet\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

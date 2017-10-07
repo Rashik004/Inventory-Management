@@ -4,6 +4,7 @@ using System.Security;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using PcPool.Inventory.BusinessLayer;
 
 namespace Fasetto.Word.Core
 {
@@ -63,6 +64,9 @@ namespace Fasetto.Word.Core
         {
             await RunCommandAsync(() => LoginIsRunning, async () =>
             {
+                var test= new UserDataProvider();
+                test.VerifyUser("a", "b");
+
                 await Task.Delay(1000);
 
                 // Go to chat page
