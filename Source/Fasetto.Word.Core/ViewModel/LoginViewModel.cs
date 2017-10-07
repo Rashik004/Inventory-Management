@@ -1,9 +1,4 @@
-﻿using System;
-using System.Runtime.InteropServices;
-using System.Security;
-using System.Security.Permissions;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Threading.Tasks;
 using System.Windows.Input;
 using PcPool.Inventory.BusinessLayer;
 using PcPool.Inventory.BusinessLayer.Interfaces;
@@ -72,19 +67,29 @@ namespace Fasetto.Word.Core
         {
             await RunCommandAsync(() => LoginIsRunning, async () =>
             {
-                var test= new UserDataProvider();
-                test.VerifyUser("a", "b");
+                var userDataProvider= new UserDataProvider();
+                var pass = (parameter as IHavePassword).SecurePassword.Unsecure();
+
+                var user = userDataProvider.VerifyUser(Email, pass);
 
                 await Task.Delay(1000);
 
                 // Go to chat page
-                IoC.Get<ApplicationViewModel>().GoToPage(ApplicationPage.Chat);
+                if (user != null)
+                {
+                    IoC.Get<ApplicationViewModel>().GoToPage(ApplicationPage.Chat);
+                }
 
                 //var email = Email;
 
                 //// IMPORTANT: Never store unsecure password in variable like this
-                //var pass = (parameter as IHavePassword).SecurePassword.Unsecure();
             });
+        }
+
+        private void TestMethod()
+        {
+            var inventoryData=new InventoryDeviceProvider();
+            var ast=inventoryData.GetAll();
         }
 
         /// <summary>
