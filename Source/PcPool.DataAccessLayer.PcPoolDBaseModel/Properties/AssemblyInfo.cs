@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("PcPool.Inventory.DAL")]
+[assembly: AssemblyTitle("PcPool.DataAccessLayer.PcPoolDBaseModel")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("PcPool.Inventory.DAL")]
+[assembly: AssemblyProduct("PcPool.DataAccessLayer.PcPoolDBaseModel")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("6b74c6d2-a188-422d-92c3-7b696a406eb4")]
+[assembly: Guid("b96a32e6-10c2-45c4-a2a1-c98fcf811b97")]
 
 // Version information for an assembly consists of the following four values:
 //
