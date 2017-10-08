@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using Fasetto.Word.Core;
 
 namespace Fasetto.Word
 {
@@ -27,6 +28,23 @@ namespace Fasetto.Word
         public static readonly DependencyProperty CurrentPageProperty =
             DependencyProperty.Register(nameof(CurrentPage), typeof(BasePage), typeof(PageHost), new UIPropertyMetadata(CurrentPagePropertyChanged));
 
+
+        /// <summary>
+        /// The current page to show in the page host
+        /// </summary>
+        public BaseViewModel CurrentPageViewModel
+        {
+            get { return (BaseViewModel) GetValue(CurrentPageViewModelProperty); }
+            set { SetValue(CurrentPageViewModelProperty, value); }
+        }
+
+        /// <summary>
+        /// Registers <see cref="CurrentPageViewModel"/> as a dependency property
+        /// </summary>
+        public static readonly DependencyProperty CurrentPageViewModelProperty =
+            DependencyProperty.Register(nameof(CurrentPageViewModel),
+                typeof(BaseViewModel), typeof(PageHost),
+                new UIPropertyMetadata());
         #endregion
 
         #region Constructor

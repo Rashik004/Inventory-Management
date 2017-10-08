@@ -32,14 +32,14 @@
                         </Grid.ColumnDefinitions>
 
                         <!-- Main buttons -->
-                        <StackPanel Orientation="Horizontal">
-                            <Button Style="{StaticResource IconButton}" Content="{StaticResource FontAwesomeChatIcon}" />
+                        <!--<StackPanel Orientation="Horizontal">
+                            <Button Style="{StaticResource IconButton}" Content="{Binding In}"/>
                             <Button Style="{StaticResource IconButton}" Content="{StaticResource FontAwesomeUserIcon}" />
                             <Button Style="{StaticResource IconButton}" Content="{StaticResource FontAwesomePictureIcon}" />
-                        </StackPanel>
+                        </StackPanel>-->
 
                         <!-- Settings button -->
-                        <Button Grid.Column="2" Foreground="{StaticResource WordDarkBlueBrush}" Style="{StaticResource IconButton}" Content="{StaticResource FontAwesomeCogIcon}" />
+                        <!--<Button Grid.Column="2" Foreground="{StaticResource WordDarkBlueBrush}" Style="{StaticResource IconButton}" Content="{StaticResource FontAwesomeCogIcon}" />-->
 
                     </Grid>
 
