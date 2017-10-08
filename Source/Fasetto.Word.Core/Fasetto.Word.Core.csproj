@@ -84,6 +84,10 @@
       <Project>{40e009af-687f-4620-bef1-10bef8b8e271}</Project>
       <Name>PcPool.Inventory.BusinessLayer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PcPool.Inventory.Model\PcPool.Inventory.Model.csproj">
+      <Project>{fc5453f7-214d-4c93-8c72-a71ec9e6d58b}</Project>
+      <Name>PcPool.Inventory.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.1.29.4\build\dotnet\Fody.targets" Condition="Exists('..\packages\Fody.1.29.4\build\dotnet\Fody.targets')" />

@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PcPool.DataAccessLayer.PcPo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PcPool.Inventory.BusinessLayer", "PcPool.Inventory.BusinessLayer\PcPool.Inventory.BusinessLayer.csproj", "{40E009AF-687F-4620-BEF1-10BEF8B8E271}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PcPool.Inventory.Model", "PcPool.Inventory.Model\PcPool.Inventory.Model.csproj", "{FC5453F7-214D-4C93-8C72-A71EC9E6D58B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{40E009AF-687F-4620-BEF1-10BEF8B8E271}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40E009AF-687F-4620-BEF1-10BEF8B8E271}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40E009AF-687F-4620-BEF1-10BEF8B8E271}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC5453F7-214D-4C93-8C72-A71EC9E6D58B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC5453F7-214D-4C93-8C72-A71EC9E6D58B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC5453F7-214D-4C93-8C72-A71EC9E6D58B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC5453F7-214D-4C93-8C72-A71EC9E6D58B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

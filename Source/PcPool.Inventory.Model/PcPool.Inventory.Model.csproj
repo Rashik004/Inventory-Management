@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{40E009AF-687F-4620-BEF1-10BEF8B8E271}</ProjectGuid>
+    <ProjectGuid>{FC5453F7-214D-4C93-8C72-A71EC9E6D58B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PcPool.Inventory.BusinessLayer</RootNamespace>
-    <AssemblyName>PcPool.Inventory.BusinessLayer</AssemblyName>
+    <RootNamespace>PcPool.Inventory.Model</RootNamespace>
+    <AssemblyName>PcPool.Inventory.Model</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,14 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,25 +40,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\IInventoryDeviceProvider.cs" />
-    <Compile Include="Interfaces\IUserDataProvider.cs" />
-    <Compile Include="InventoryDeviceProvider.cs" />
-    <Compile Include="UserDataProvider.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="DeviceInstance.cs" />
+    <Compile Include="DeviceReservation.cs" />
+    <Compile Include="DeviceStatus.cs" />
+    <Compile Include="DeviceType.cs" />
+    <Compile Include="ModelBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\PcPool.DataAccessLayer.PcPoolDBaseModel\PcPool.DataAccessLayer.PcPoolDBaseModel.csproj">
-      <Project>{b96a32e6-10c2-45c4-a2a1-c98fcf811b97}</Project>
-      <Name>PcPool.DataAccessLayer.PcPoolDBaseModel</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PcPool.Inventory.Model\PcPool.Inventory.Model.csproj">
-      <Project>{fc5453f7-214d-4c93-8c72-a71ec9e6d58b}</Project>
-      <Name>PcPool.Inventory.Model</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
+    <Compile Include="UserInitials.cs" />
+    <Compile Include="UserType.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
