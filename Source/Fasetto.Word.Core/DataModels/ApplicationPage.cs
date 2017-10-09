@@ -19,5 +19,6 @@
         /// The register page
         /// </summary>
         Register = 2,
+        AddItem=3
     }
 }

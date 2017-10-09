@@ -10,5 +10,7 @@ namespace PcPool.Inventory.BusinessLayer.Interfaces
     public interface IInventoryStatProvide
     {
         IList<InventoryItemStat> GetInventoryStatus();
+
+        List<DeviceType> GetDeviceTypes();
     }
 }

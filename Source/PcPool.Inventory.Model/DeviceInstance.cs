@@ -27,5 +27,7 @@ namespace PcPool.Inventory.Model
 
         public string Description { get; set; }
 
+        public int ManufacturingYear { get; set; }
+
     }
 }

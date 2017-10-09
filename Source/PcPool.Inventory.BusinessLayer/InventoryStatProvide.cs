@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using PcPool.DataAccessLayer.PcPoolDBaseModel;
 using PcPool.Inventory.BusinessLayer.Interfaces;
 using PcPool.Inventory.Model;
+using DeviceType = PcPool.Inventory.Model.DeviceType;
 
 namespace PcPool.Inventory.BusinessLayer
 {
@@ -37,6 +38,26 @@ namespace PcPool.Inventory.BusinessLayer
                 {
                     ItemName = device.DevicaeName, Loaned = loanedCount, Maintanace = maintanceCount, InStock = inStockCount
                 }).ToList();
+        }
+
+        public List<DeviceType> GetDeviceTypes()
+        {
+            var ctx=new PcPoolEntities();
+            var dbDeviceTypes = ctx.DeviceTypes.Select(dt=>new DeviceType()
+            {
+                DeviceName = dt.DevicaeName,
+                DeviceTypeId = dt.DeviceTypeId
+            }).ToList();
+            return dbDeviceTypes;
+        }
+
+        private DeviceType ConvertDeviceType(DataAccessLayer.PcPoolDBaseModel.DeviceType arg)
+        {
+            return new DeviceType()
+            {
+                DeviceTypeId = arg.DeviceTypeId,
+                DeviceName = arg.DevicaeName
+            };
         }
     }
 }

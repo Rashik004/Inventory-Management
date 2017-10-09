@@ -42,7 +42,19 @@
                     <!--<ComboBox Width="80" ItemsSource="">
                         <ComboBoxItem>12</ComboBoxItem>
                     </ComboBox>-->
-
+                    <!--<ComboBox ItemsSource="{Binding Items}"  
+                              Width="120"  
+                              HorizontalAlignment="Left"   
+                              VerticalAlignment="Top"  >
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Path=ItemName}"/>
+                                  
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>-->
                 </StackPanel>
                 <Grid x:Name="Container" Grid.Row="2" Background="Transparent">
                     <Grid.ColumnDefinitions>

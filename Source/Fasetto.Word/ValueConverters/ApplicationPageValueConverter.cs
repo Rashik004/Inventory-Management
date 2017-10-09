@@ -24,6 +24,9 @@ namespace Fasetto.Word
                 case ApplicationPage.Chat:
                     return new ChatPage();
 
+                case ApplicationPage.AddItem:
+                    return new AddItemPage();
+
                 default:
                     Debugger.Break();
                     return null;

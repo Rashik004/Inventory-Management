@@ -32,6 +32,24 @@ namespace PcPool.Inventory.BusinessLayer
             return deviceInstance;
         }
 
+        public bool AddnewItem(DeviceInstance deviceInstance)
+        {
+            var ctx=new PcPoolEntities();
+            try
+            {
+                var test = ctx.DeviceInstances.FirstOrDefault();
+                test.Description = "Desc changed";
+                ctx.DeviceInstances.Add(test);
+                ctx.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+
+                return false;
+            }
+            return true;
+        }
+
         public IList<DeviceInstance> GetAll(DeviceStatus deviceStatus=DeviceStatus.None, int deviceTypeId=0)
         {
             var ctx = new PcPoolEntities();

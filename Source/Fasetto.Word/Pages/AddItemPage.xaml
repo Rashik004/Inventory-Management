@@ -30,28 +30,88 @@
                         <StackPanel>
 
                             <!-- Sign Up header -->
-                            <TextBlock Text="Sign Up" 
-                                   FontSize="{StaticResource FontSizeLarge}" 
-                                   FontFamily="{StaticResource LatoRegular}"
-                                   Foreground="{StaticResource WordBlueBrush}" />
 
-                            <!-- Sign up subtext-->
-                            <TextBlock Text="It's about to get fun" 
-                                       FontSize="{StaticResource FontSizeRegular}"
-                                       Foreground="{StaticResource ForegroundDarkBrush}"
+
+                            <!-- Serial No -->
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Serial No" 
+                                       FontSize="{StaticResource FontSizeLarge}"
                                        Margin="0 0 0 20"
+                                       Padding="0 10 0 0"
                                        />
+                                <TextBox Grid.Column="1" Text="{Binding Email}" Tag="Serial No" />
+                            </Grid>
 
-                            <!-- Email -->
-                            <TextBox Text="{Binding Email}" Tag="Email" />
+                            <!-- RFID -->
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
 
-                            <!-- Password -->
-                            <PasswordBox x:Name="PasswordText" Tag="Password" Margin="0 0 0 30" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="RFID" 
+                                       FontSize="{StaticResource FontSizeLarge}"
+                                       Margin="0 0 0 20"
+                                       Padding="0 10 0 0"
+                                       />
+                                <TextBox Grid.Column="1" Text="{Binding Email}" Tag="RFID" />
+                            </Grid>
+                            
+                            <!-- Description -->
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Description" 
+                                       FontSize="{StaticResource FontSizeLarge}"
+                                       Margin="0 0 0 20"
+                                       Padding="0 10 0 0"
+                                       />
+                                <TextBox Grid.Column="1" Text="{Binding Email}" Tag="Description" />
+                            </Grid>
+
+                            <!-- Item Type -->
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Item Type" Grid.Column="0"
+                                       FontSize="{StaticResource FontSizeLarge}"
+                                     
+                                       />
+                                <ComboBox ItemsSource="{Binding DeviceTypes}"  
+                                          HorizontalContentAlignment="Center"
+                                          VerticalContentAlignment="Center"
+                                          Margin="10 10"
+                                          Grid.Column="1"
+                                          Width="120"  
+                                          HorizontalAlignment="Left"   
+                                          VerticalAlignment="Top"
+                                          SelectedItem="{Binding SelectedDeviceType}"
+                                          >    
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding Path=DeviceName}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                            </Grid>
 
                             <!-- Next button -->
-                            <Button Content="Register" 
+                            <Button Content="Add Item" 
                                     local:IsBusyProperty.Value="{Binding RegisterIsRunning}"
-                                    Command="{Binding RegisterCommand}"
+                                    Command="{Binding AddItemCommand}"
                                     CommandParameter="{Binding ElementName=Page}" 
                                     HorizontalAlignment="Center" />
 
