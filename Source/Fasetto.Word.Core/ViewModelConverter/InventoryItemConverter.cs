@@ -15,7 +15,8 @@ namespace Fasetto.Word.Core.ViewModelConverter
             {
                 ItemName = arg.ItemName,
                 InStockCount = arg.InStock,
-                MaintanaceCount = arg.Maintanace
+                MaintanaceCount = arg.Maintanace,
+                LoanedCount = arg.Loaned
             };
         }
     }

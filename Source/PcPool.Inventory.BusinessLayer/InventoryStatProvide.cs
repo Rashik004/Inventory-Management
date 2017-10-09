@@ -15,7 +15,20 @@ namespace PcPool.Inventory.BusinessLayer
         {
             var ctx=new PcPoolEntities();
             var devices = ctx.DeviceTypes;
-            var inventoryItemStat= (from device in devices
+            //var inventoryItemStat = (from device in devices
+            //                         let typeDevices = ctx.DeviceInstances.Where(di => di.DeviceTypeId == device.DeviceTypeId)
+            //                         let inStockCount = typeDevices.Count(td => td.DeviceStatusId == (int)DeviceStatus.InStock)
+            //                         let maintanceCount = typeDevices.Count(td => td.DeviceStatusId == (int)DeviceStatus.Maintanace)
+            //                         let loanedCount = typeDevices.Count(td => td.DeviceStatusId == (int)DeviceStatus.Loaned)
+            //                         select new InventoryItemStat()
+            //                         {
+            //                             ItemName = device.DevicaeName,
+            //                             Loaned = loanedCount,
+            //                             Maintanace = maintanceCount,
+            //                             InStock = inStockCount
+            //                         }).ToList();
+            //return inventoryItemStat;
+            return (from device in devices
                 let typeDevices = ctx.DeviceInstances.Where(di => di.DeviceTypeId == device.DeviceTypeId)
                 let inStockCount = typeDevices.Count(td => td.DeviceStatusId == (int) DeviceStatus.InStock)
                 let maintanceCount = typeDevices.Count(td => td.DeviceStatusId == (int) DeviceStatus.Maintanace)
@@ -24,7 +37,6 @@ namespace PcPool.Inventory.BusinessLayer
                 {
                     ItemName = device.DevicaeName, Loaned = loanedCount, Maintanace = maintanceCount, InStock = inStockCount
                 }).ToList();
-            return inventoryItemStat;
         }
     }
 }
