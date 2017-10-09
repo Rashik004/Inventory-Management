@@ -23,7 +23,7 @@ namespace Fasetto.Word.Core
             {
                  new InventoryItemViewModel()
                 {
-                    ItemName = "Projector2",
+                    ItemName = "Projector42",
                     InStockCount = 420,
                     LoanedCount = 40,
                     MaintanaceCount = 23
@@ -48,7 +48,7 @@ namespace Fasetto.Word.Core
                     InStockCount = 420,
                     LoanedCount = 40,
                     MaintanaceCount = 23
-                }
+                },
             };
         }
     }
