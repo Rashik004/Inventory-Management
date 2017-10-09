@@ -46,9 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\IInventoryDeviceProvider.cs" />
+    <Compile Include="Interfaces\IInventoryDeviceStatusProvider.cs" />
+    <Compile Include="Interfaces\IInventoryStatProvide.cs" />
     <Compile Include="Interfaces\IUserDataProvider.cs" />
     <Compile Include="InventoryDeviceProvider.cs" />
+    <Compile Include="InventoryStatProvide.cs" />
     <Compile Include="UserDataProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

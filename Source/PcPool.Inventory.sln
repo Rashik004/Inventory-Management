@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PcPool.Inventory.BusinessLa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PcPool.Inventory.Model", "PcPool.Inventory.Model\PcPool.Inventory.Model.csproj", "{FC5453F7-214D-4C93-8C72-A71EC9E6D58B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PcPool.Inventory.Converter", "PcPool.Inventory.Converter\PcPool.Inventory.Converter.csproj", "{0D7E60CC-3E45-40CE-8489-51D3138CFEDD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{FC5453F7-214D-4C93-8C72-A71EC9E6D58B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC5453F7-214D-4C93-8C72-A71EC9E6D58B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC5453F7-214D-4C93-8C72-A71EC9E6D58B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D7E60CC-3E45-40CE-8489-51D3138CFEDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D7E60CC-3E45-40CE-8489-51D3138CFEDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D7E60CC-3E45-40CE-8489-51D3138CFEDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D7E60CC-3E45-40CE-8489-51D3138CFEDD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

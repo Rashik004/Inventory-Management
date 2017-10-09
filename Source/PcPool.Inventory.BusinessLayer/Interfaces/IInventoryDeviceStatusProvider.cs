@@ -7,7 +7,7 @@ using PcPool.Inventory.Model;
 
 namespace PcPool.Inventory.BusinessLayer.Interfaces
 {
-    public interface IInventoryDeviceProvider
+    public interface IInventoryDeviceStatusProvider
     {
         //IList<DeviceInstance> GetAll();
 

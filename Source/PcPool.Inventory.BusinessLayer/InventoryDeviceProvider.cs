@@ -11,7 +11,7 @@ using DeviceInstance = PcPool.Inventory.Model.DeviceInstance;
 
 namespace PcPool.Inventory.BusinessLayer
 {
-    public class InventoryDeviceProvider: IInventoryDeviceProvider
+    public class InventoryDeviceProvider: IInventoryDeviceStatusProvider
     {
         //public IList<DeviceInstance> GetAll()
         //{
