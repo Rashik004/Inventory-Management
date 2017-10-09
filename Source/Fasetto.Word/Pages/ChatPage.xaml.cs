@@ -14,13 +14,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Fasetto.Word.Core;
 
 namespace Fasetto.Word
 {
     /// <summary>
     /// Interaction logic for ChatPage.xaml
     /// </summary>
-    public partial class ChatPage : BasePage<LoginViewModel>
+    public partial class ChatPage : BasePage<DashboardViewModel>
     {
         public ChatPage()
         {

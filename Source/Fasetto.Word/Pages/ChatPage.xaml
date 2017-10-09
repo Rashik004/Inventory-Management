@@ -1,4 +1,4 @@
-﻿<local:BasePage x:TypeArguments="core:LoginViewModel" x:Class="Fasetto.Word.ChatPage"
+﻿<local:BasePage x:TypeArguments="core:DashboardViewModel" x:Class="Fasetto.Word.ChatPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -17,9 +17,32 @@
             <!--Grid>
                 <local
             </Grid>-->
-                <StackPanel>
-                    <local:InventoryItemListControl></local:InventoryItemListControl>
-                </StackPanel>
+
+                <!--<StackPanel>
+                <TextBlock Text="{Binding Test}" 
+                           FontFamily="{StaticResource LatoBold}" 
+                           FontSize="{StaticResource FontSizeRegular}">
+
+                </TextBlock>
+                <local:InventoryItemListControl></local:InventoryItemListControl>
+                </StackPanel>-->
+            <Grid Background="red">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"/><!--Upper Margin-->
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="20"/><!--Lower Margin-->
+                </Grid.RowDefinitions>
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                    <ItemsControl ItemsSource="{Binding Items}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <local:InventoryItemControl/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Grid>
         </ScrollViewer>
 
     </StackPanel>
