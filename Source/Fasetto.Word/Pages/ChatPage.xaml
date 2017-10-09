@@ -10,7 +10,17 @@
       d:DesignHeight="700" d:DesignWidth="700"
       Title="Chat">
 
-    <Border>
-        <TextBlock Text="Hello Fasetto" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="{StaticResource FontSizeLarge}" />
-    </Border>
+    <StackPanel Background="{StaticResource WordBlueBrush}">
+        <Border  Height="60" Background="AntiqueWhite"></Border>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <!--<Border  Height="1400" Background="DarkRed"></Border>-->
+            <!--Grid>
+                <local
+            </Grid>-->
+                <StackPanel>
+                    <local:InventoryItemListControl></local:InventoryItemListControl>
+                </StackPanel>
+        </ScrollViewer>
+
+    </StackPanel>
 </local:BasePage>

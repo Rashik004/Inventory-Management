@@ -66,6 +66,10 @@
     <Compile Include="ViewModel\Chat\ChatListViewModel.cs" />
     <Compile Include="ViewModel\Chat\Design\ChatListDesignModel.cs" />
     <Compile Include="ViewModel\Chat\Design\ChatListItemDesignModel.cs" />
+    <Compile Include="ViewModel\InventoryItem\Design\InventoryItemDesignModel.cs" />
+    <Compile Include="ViewModel\InventoryItem\Design\InventoryListDesignModel.cs" />
+    <Compile Include="ViewModel\InventoryItem\InventoryItemListViewModel.cs" />
+    <Compile Include="ViewModel\InventoryItem\InventoryItemViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\RegisterViewModel.cs" />
   </ItemGroup>
