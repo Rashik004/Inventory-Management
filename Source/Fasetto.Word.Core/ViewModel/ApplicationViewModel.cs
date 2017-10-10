@@ -14,7 +14,7 @@ namespace Fasetto.Word.Core
         /// <summary>
         /// The current page of the application
         /// </summary>
-        public ApplicationPage CurrentPage { get; private set; } = ApplicationPage.ChangeStatus;
+        public ApplicationPage CurrentPage { get; private set; } = ApplicationPage.AddItem;
 
         /// <summary>
         /// The view model to use for the current page when the CurrentPage changes
@@ -43,7 +43,7 @@ namespace Fasetto.Word.Core
         {
             // Always hide settings page if we are changing pages
             //SettingsMenuVisible = false;
-            if (page == ApplicationPage.Chat)
+            if (page == ApplicationPage.Dashboard)
             {
                 viewModel = new InventoryListDesignModel();
             }
@@ -57,7 +57,7 @@ namespace Fasetto.Word.Core
             OnPropertyChanged(nameof(CurrentPage));
 
             // Show side menu or not?
-            SideMenuVisible = page == ApplicationPage.Chat;
+            SideMenuVisible = page == ApplicationPage.Dashboard;
 
         }
     }

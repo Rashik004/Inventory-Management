@@ -22,7 +22,7 @@
         public ChatListItemDesignModel()
         {
             Initials = "LM";
-            Name = "Luke";
+            Name = "DashBoard";
             Message = "This chat app is awesome! I bet it will be fast too";
             ProfilePictureRGB = "3099c5";
         }

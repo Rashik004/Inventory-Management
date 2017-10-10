@@ -77,7 +77,7 @@ namespace Fasetto.Word.Core
                 // Go to chat page
                 if (user != null)
                 {
-                    IoC.Get<ApplicationViewModel>().GoToPage(ApplicationPage.Chat);
+                    IoC.Get<ApplicationViewModel>().GoToPage(ApplicationPage.Dashboard);
                 }
 
                 //var email = Email;

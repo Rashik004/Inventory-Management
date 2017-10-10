@@ -21,7 +21,7 @@ namespace Fasetto.Word
                 case ApplicationPage.Register:
                     return new RegisterPage();
 
-                case ApplicationPage.Chat:
+                case ApplicationPage.Dashboard:
                     return new DashBoard();
 
                 case ApplicationPage.AddItem:

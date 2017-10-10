@@ -13,7 +13,7 @@
         /// <summary>
         /// The main chat page
         /// </summary>
-        Chat = 1,
+        Dashboard = 1,
 
         /// <summary>
         /// The register page
