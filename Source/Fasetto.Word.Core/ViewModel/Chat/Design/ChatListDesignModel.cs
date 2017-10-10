@@ -46,12 +46,17 @@ namespace Fasetto.Word.Core
                 },
                 new ChatListItemViewModel
                 {
-                    Name = "Add new Out",
+                    Name = "Add new Item",
                     Initials = "PL",
                     Message = "The new server is up, got 192.168.1.1",
                     ProfilePictureRGB = "00d405",
                     Page = ApplicationPage.AddItem
 
+                },
+                new ChatListItemDesignModel()
+                {
+                    Name = "Add Item Type",
+                    Page = ApplicationPage.AddItemType
                 }
             };
         }

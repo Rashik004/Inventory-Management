@@ -10,6 +10,7 @@ using PcPool.DataAccessLayer.PcPoolDBaseModel;
 using PcPool.Inventory.BusinessLayer.Interfaces;
 using PcPool.Inventory.Model;
 using DeviceInstance = PcPool.Inventory.Model.DeviceInstance;
+using DeviceType = PcPool.Inventory.Model.DeviceType;
 
 namespace PcPool.Inventory.BusinessLayer
 {
@@ -33,6 +34,19 @@ namespace PcPool.Inventory.BusinessLayer
         //    deviceInstance.Description = arg.Description;
         //    return deviceInstance;
         //}
+
+        public bool AddnewItemType(DeviceType newType)
+        {
+            var ctx=new PcPoolEntities();
+            var dbModel = new PcPool.DataAccessLayer.PcPoolDBaseModel.DeviceType()
+            {
+                DevicaeName = newType.DeviceName,
+                DeviceDescription = newType.Description
+            };
+            ctx.DeviceTypes.Add(dbModel);
+            ctx.SaveChanges();
+            return true;
+        }
 
         public bool AddnewItem(DeviceInstance deviceInstance)
         {

@@ -9,7 +9,8 @@ namespace PcPool.Inventory.BusinessLayer.Interfaces
 {
     public interface IInventoryDeviceStatusProvider
     {
-        //IList<DeviceInstance> GetAll();
+        bool AddnewItemType(DeviceType NewType);
+
         bool AddnewItem(DeviceInstance deviceInstance);
 
         IList<DeviceInstance> GetAll(DeviceStatus deviceStatus, int deviceTypeId=0);

@@ -30,6 +30,9 @@ namespace Fasetto.Word
                 case ApplicationPage.ChangeStatus:
                     return new ChangeItemStatus();
 
+                case ApplicationPage.AddItemType:
+                    return new AddItemTypePage();
+
                 default:
                     Debugger.Break();
                     return null;
