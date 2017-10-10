@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -74,7 +75,48 @@ namespace PcPool.Inventory.BusinessLayer
             return devices.ToList();
         }
 
-        public bool ChangeStatus(int deviceId, DeviceStatus newStatus)
+        public bool ChangeStatusBySerialNo(string serialNo, DeviceStatus newStatus)
+        {
+            var ctx=new PcPoolEntities();
+            var device = ctx.DeviceInstances.FirstOrDefault(di => di.SeriaNo == serialNo);
+            if (device == null)
+            {
+                return false;
+            }
+            return UpdateDeviceStatus(newStatus, device, ctx);
+        }
+
+        private static bool UpdateDeviceStatus(DeviceStatus newStatus, DataAccessLayer.PcPoolDBaseModel.DeviceInstance device, PcPoolEntities ctx)
+        {
+            device.DeviceStatusId = (int) newStatus;
+
+            try
+            {
+                ctx.DeviceInstances.Attach(device);
+                var entry = ctx.Entry(device);
+                entry.Property(s => s.DeviceStatusId).IsModified = true;
+                ctx.SaveChanges();
+            }
+            catch (Exception)
+            {
+                Debugger.Break();
+                return false;
+            }
+            return true;
+        }
+
+        public bool ChangeStatusByRfid(string rfid, DeviceStatus newStatus)
+        {
+            var ctx = new PcPoolEntities();
+            var device = ctx.DeviceInstances.FirstOrDefault(di => di.RFID == rfid);
+            if (device == null)
+            {
+                return false;
+            }
+            return UpdateDeviceStatus(newStatus, device, ctx);
+        }
+
+        public bool ChangeStatusBySerialNo(int deviceId, DeviceStatus newStatus)
         {
             throw new NotImplementedException();
         }

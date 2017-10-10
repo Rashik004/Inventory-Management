@@ -14,7 +14,10 @@ namespace PcPool.Inventory.BusinessLayer.Interfaces
 
         IList<DeviceInstance> GetAll(DeviceStatus deviceStatus, int deviceTypeId=0);
 
-        bool ChangeStatus(int deviceId, DeviceStatus newStatus);
+        bool ChangeStatusBySerialNo(string serialNo, DeviceStatus newStatus);
+
+        bool ChangeStatusByRfid(string rfid, DeviceStatus newStatus);
+
 
         bool ChangeStatus(int deviceId, IList<DeviceStatus> newStatus);
 
