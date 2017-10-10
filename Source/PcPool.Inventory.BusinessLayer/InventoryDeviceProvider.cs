@@ -42,7 +42,9 @@ namespace PcPool.Inventory.BusinessLayer
                 var test = ctx.DeviceInstances.FirstOrDefault();
                 test.Description = "Desc changed";
                 ctx.DeviceInstances.Add(test);
+                var state = ctx.Entry(test).State;
                 ctx.SaveChanges();
+                state = ctx.Entry(test).State;
             }
             catch (Exception ex)
             {

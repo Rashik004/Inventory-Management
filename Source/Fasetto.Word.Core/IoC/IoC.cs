@@ -17,6 +17,8 @@ namespace Fasetto.Word.Core
         /// </summary>
         public static IKernel Kernel { get; private set; } = new StandardKernel();
 
+        public static ApplicationViewModel Application => IoC.Get<ApplicationViewModel>();
+
         #endregion
 
         #region Construction

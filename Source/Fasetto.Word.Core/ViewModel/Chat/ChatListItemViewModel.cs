@@ -1,10 +1,14 @@
-﻿namespace Fasetto.Word.Core
+﻿using System.Windows.Input;
+
+namespace Fasetto.Word.Core
 {
     /// <summary>
     /// A view model for each chat list item in the overview chat list
     /// </summary>
     public class ChatListItemViewModel : BaseViewModel
     {
+
+        public ICommand GotoPageCommand { get; set; }
         /// <summary>
         /// The display name of this chat list
         /// </summary>
@@ -35,5 +39,23 @@
         /// True if this item is currently selected
         /// </summary>
         public bool IsSelected { get; set; }
+
+        public ApplicationPage Page { get; set; }
+
+        public ChatListItemViewModel()
+        {
+            GotoPageCommand=new RelayCommand(GotoPage);
+        }
+
+        private void GotoPage()
+        {
+            //if (pag)
+            //{
+            //    IoC.Application.GoToPage(ApplicationPage.Dashboard);
+            //}
+
+            //else if(Name=="Loan In")
+            IoC.Application.GoToPage(Page);
+        }
     }
 }

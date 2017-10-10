@@ -144,7 +144,7 @@
                 local:AnimateSlideInFromLeftProperty.Value="{Binding ApplicationViewModel.SettingsMenuVisible, 
                                      Source={x:Static local:ViewModelLocator.Instance}}">
 
-                <!--<local:ChatListControl />-->
+                <local:ChatListControl />
 
             </local:SideMenuControl>
 

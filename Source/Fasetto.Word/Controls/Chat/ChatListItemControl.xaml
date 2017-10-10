@@ -17,6 +17,9 @@
                         
                         <!-- Content -->
                         <Border x:Name="background" Background="{StaticResource ForegroundLightBrush}">
+                            <Border.InputBindings>
+                                <MouseBinding MouseAction="LeftClick" Command="{Binding GotoPageCommand}" />
+                            </Border.InputBindings>
                             <Grid x:Name="container" Background="Transparent">
                             <Grid.ColumnDefinitions>
                                 <!-- New Message Indicator Bar -->
@@ -34,21 +37,7 @@
                                     />
 
                             <!-- Profile picture padding -->
-                            <Border Grid.Column="0" Padding="8">
-                                <!-- Profile picture background -->
-                                <Border Background="{Binding ProfilePictureRGB, Converter={local:StringRGBToBrushConverter}}" 
-                                        Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"
-                                        CornerRadius="{Binding ActualHeight, RelativeSource={RelativeSource Self}}">
-                                    <!-- Profile picture initials -->
-                                    <TextBlock Text="{Binding Initials}"
-                                               VerticalAlignment="Center"
-                                               HorizontalAlignment="Center"
-                                               Foreground="{StaticResource ForegroundLightBrush}"
-                                               FontSize="{StaticResource FontSizeAverage}"
-                                               FontFamily="{StaticResource LatoRegular}"
-                                               />           
-                                </Border>
-                            </Border>
+                            
 
                             <!-- Main content -->
                             <Border Grid.Column="1" Padding="0 0 8 0">
@@ -58,13 +47,11 @@
                                                 Foreground="{StaticResource WordBlueBrush}"
                                                 TextTrimming="CharacterEllipsis"
                                                 FontFamily="{StaticResource LatoRegular}"
+                                               FontSize="{StaticResource FontSizeVeryLarge}"
+                                               TextAlignment="Center"
                                                 />
                                     <!-- Message -->
-                                    <TextBlock Text="{Binding Message}"
-                                               Foreground="{StaticResource ForegroundDarkBrush}"
-                                               TextTrimming="CharacterEllipsis"
-                                               FontFamily="{StaticResource LatoRegular}"
-                                               />
+                                    
 
                                 </StackPanel>
                             </Border>
