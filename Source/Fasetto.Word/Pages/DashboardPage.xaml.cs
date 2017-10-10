@@ -21,9 +21,9 @@ namespace Fasetto.Word
     /// <summary>
     /// Interaction logic for ChatPage.xaml
     /// </summary>
-    public partial class ChatPage : BasePage<DashboardViewModel>
+    public partial class DashBoard : BasePage<DashboardViewModel>
     {
-        public ChatPage()
+        public DashBoard()
         {
             InitializeComponent();
         }

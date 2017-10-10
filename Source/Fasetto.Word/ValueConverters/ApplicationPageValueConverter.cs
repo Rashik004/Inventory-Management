@@ -22,7 +22,7 @@ namespace Fasetto.Word
                     return new RegisterPage();
 
                 case ApplicationPage.Chat:
-                    return new ChatPage();
+                    return new DashBoard();
 
                 case ApplicationPage.AddItem:
                     return new AddItemPage();
