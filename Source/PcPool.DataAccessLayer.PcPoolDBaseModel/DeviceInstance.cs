@@ -18,13 +18,9 @@ namespace PcPool.DataAccessLayer.PcPoolDBaseModel
         public Nullable<int> ManufacturingYear { get; set; }
         public string SeriaNo { get; set; }
         public string RFID { get; set; }
-        public string Model { get; set; }
         public string DescriptionTitle { get; set; }
         public string Description { get; set; }
         public int DeviceTypeId { get; set; }
         public int DeviceStatusId { get; set; }
-    
-        public virtual DeviceStatu DeviceStatu { get; set; }
-        public virtual DeviceType DeviceType { get; set; }
     }
 }

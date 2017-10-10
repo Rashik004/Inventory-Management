@@ -16,7 +16,6 @@ namespace PcPool.DataAccessLayer.PcPoolDBaseModel
     {
         public DeviceType()
         {
-            this.DeviceInstances = new HashSet<DeviceInstance>();
             this.ReservationLists = new HashSet<ReservationList>();
         }
     
@@ -24,7 +23,6 @@ namespace PcPool.DataAccessLayer.PcPoolDBaseModel
         public string DevicaeName { get; set; }
         public string DeviceDescription { get; set; }
     
-        public virtual ICollection<DeviceInstance> DeviceInstances { get; set; }
         public virtual ICollection<ReservationList> ReservationLists { get; set; }
     }
 }

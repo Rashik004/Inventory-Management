@@ -13,7 +13,6 @@
           <Property Name="ManufacturingYear" Type="int" />
           <Property Name="SeriaNo" Type="varchar" MaxLength="100" />
           <Property Name="RFID" Type="varchar" MaxLength="100" />
-          <Property Name="Model" Type="varchar" MaxLength="25" />
           <Property Name="DescriptionTitle" Type="varchar" MaxLength="100" />
           <Property Name="Description" Type="varchar" MaxLength="500" />
           <Property Name="DeviceTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
@@ -67,30 +66,6 @@
           <Property Name="UserTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserTypeEnglishName" Type="varchar" MaxLength="500" />
         </EntityType>
-        <Association Name="DeviceInstance_FK_DeviceStatusId">
-          <End Role="DeviceStatus" Type="Self.DeviceStatus" Multiplicity="1" />
-          <End Role="DeviceInstance" Type="Self.DeviceInstance" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DeviceStatus">
-              <PropertyRef Name="DeviceStatusId" />
-            </Principal>
-            <Dependent Role="DeviceInstance">
-              <PropertyRef Name="DeviceStatusId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="DeviceInstance_FK_DeviceType">
-          <End Role="DeviceType" Type="Self.DeviceType" Multiplicity="1" />
-          <End Role="DeviceInstance" Type="Self.DeviceInstance" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DeviceType">
-              <PropertyRef Name="DeviceTypeId" />
-            </Principal>
-            <Dependent Role="DeviceInstance">
-              <PropertyRef Name="DeviceTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="REL_1">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="ReservationList" Type="Self.ReservationList" Multiplicity="*" />
@@ -134,14 +109,6 @@
           <EntitySet Name="ReservationList" EntityType="Self.ReservationList" Schema="public" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="public" store:Type="Tables" />
           <EntitySet Name="UserType" EntityType="Self.UserType" Schema="public" store:Type="Tables" />
-          <AssociationSet Name="DeviceInstance_FK_DeviceStatusId" Association="Self.DeviceInstance_FK_DeviceStatusId">
-            <End Role="DeviceStatus" EntitySet="DeviceStatus" />
-            <End Role="DeviceInstance" EntitySet="DeviceInstance" />
-          </AssociationSet>
-          <AssociationSet Name="DeviceInstance_FK_DeviceType" Association="Self.DeviceInstance_FK_DeviceType">
-            <End Role="DeviceType" EntitySet="DeviceType" />
-            <End Role="DeviceInstance" EntitySet="DeviceInstance" />
-          </AssociationSet>
           <AssociationSet Name="REL_1" Association="Self.REL_1">
             <End Role="User" EntitySet="User" />
             <End Role="ReservationList" EntitySet="ReservationList" />
@@ -168,13 +135,10 @@
           <Property Name="ManufacturingYear" Type="Int32" />
           <Property Name="SeriaNo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="RFID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Model" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
           <Property Name="DescriptionTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="DeviceTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DeviceStatusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="DeviceStatu" Relationship="Self.DeviceInstance_FK_DeviceStatusId" FromRole="DeviceInstance" ToRole="DeviceStatus" />
-          <NavigationProperty Name="DeviceType" Relationship="Self.DeviceInstance_FK_DeviceType" FromRole="DeviceInstance" ToRole="DeviceType" />
         </EntityType>
         <EntityType Name="DeviceStatu">
           <Key>
@@ -182,7 +146,6 @@
           </Key>
           <Property Name="DeviceStatusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DeviceStatusEnglishName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="DeviceInstances" Relationship="Self.DeviceInstance_FK_DeviceStatusId" FromRole="DeviceStatus" ToRole="DeviceInstance" />
         </EntityType>
         <EntityType Name="DeviceType">
           <Key>
@@ -191,7 +154,6 @@
           <Property Name="DeviceTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DevicaeName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="DeviceDescription" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="DeviceInstances" Relationship="Self.DeviceInstance_FK_DeviceType" FromRole="DeviceType" ToRole="DeviceInstance" />
           <NavigationProperty Name="ReservationLists" Relationship="Self.ReservationList_FK_DeviceType" FromRole="DeviceType" ToRole="ReservationList" />
         </EntityType>
         <EntityType Name="ReservationList">
@@ -232,30 +194,6 @@
           <Property Name="UserTypeEnglishName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Users" Relationship="Self.User_FK_UserType" FromRole="UserType" ToRole="User" />
         </EntityType>
-        <Association Name="DeviceInstance_FK_DeviceStatusId">
-          <End Role="DeviceStatus" Type="Self.DeviceStatu" Multiplicity="1" />
-          <End Role="DeviceInstance" Type="Self.DeviceInstance" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DeviceStatus">
-              <PropertyRef Name="DeviceStatusId" />
-            </Principal>
-            <Dependent Role="DeviceInstance">
-              <PropertyRef Name="DeviceStatusId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="DeviceInstance_FK_DeviceType">
-          <End Role="DeviceType" Type="Self.DeviceType" Multiplicity="1" />
-          <End Role="DeviceInstance" Type="Self.DeviceInstance" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DeviceType">
-              <PropertyRef Name="DeviceTypeId" />
-            </Principal>
-            <Dependent Role="DeviceInstance">
-              <PropertyRef Name="DeviceTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="ReservationList_FK_DeviceType">
           <End Role="DeviceType" Type="Self.DeviceType" Multiplicity="1" />
           <End Role="ReservationList" Type="Self.ReservationList" Multiplicity="*" />
@@ -299,14 +237,6 @@
           <EntitySet Name="ReservationLists" EntityType="Self.ReservationList" />
           <EntitySet Name="Users" EntityType="Self.User" />
           <EntitySet Name="UserTypes" EntityType="Self.UserType" />
-          <AssociationSet Name="DeviceInstance_FK_DeviceStatusId" Association="Self.DeviceInstance_FK_DeviceStatusId">
-            <End Role="DeviceStatus" EntitySet="DeviceStatus" />
-            <End Role="DeviceInstance" EntitySet="DeviceInstances" />
-          </AssociationSet>
-          <AssociationSet Name="DeviceInstance_FK_DeviceType" Association="Self.DeviceInstance_FK_DeviceType">
-            <End Role="DeviceType" EntitySet="DeviceTypes" />
-            <End Role="DeviceInstance" EntitySet="DeviceInstances" />
-          </AssociationSet>
           <AssociationSet Name="ReservationList_FK_DeviceType" Association="Self.ReservationList_FK_DeviceType">
             <End Role="DeviceType" EntitySet="DeviceTypes" />
             <End Role="ReservationList" EntitySet="ReservationLists" />
@@ -333,7 +263,6 @@
                 <ScalarProperty Name="ManufacturingYear" ColumnName="ManufacturingYear" />
                 <ScalarProperty Name="SeriaNo" ColumnName="SeriaNo" />
                 <ScalarProperty Name="RFID" ColumnName="RFID" />
-                <ScalarProperty Name="Model" ColumnName="Model" />
                 <ScalarProperty Name="DescriptionTitle" ColumnName="DescriptionTitle" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="DeviceTypeId" ColumnName="DeviceTypeId" />

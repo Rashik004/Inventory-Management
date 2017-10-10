@@ -14,14 +14,7 @@ namespace PcPool.DataAccessLayer.PcPoolDBaseModel
     
     public partial class DeviceStatu
     {
-        public DeviceStatu()
-        {
-            this.DeviceInstances = new HashSet<DeviceInstance>();
-        }
-    
         public int DeviceStatusId { get; set; }
         public string DeviceStatusEnglishName { get; set; }
-    
-        public virtual ICollection<DeviceInstance> DeviceInstances { get; set; }
     }
 }
