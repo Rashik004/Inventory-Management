@@ -21,16 +21,16 @@ namespace PcPool.Inventory.BusinessLayer
 
 
 
-        private DeviceInstance ConvertToModel(DataAccessLayer.PcPoolDBaseModel.DeviceInstance arg)
-        {
-            var deviceInstance = new DeviceInstance();
+        //private DeviceInstance ConvertToModel(DataAccessLayer.PcPoolDBaseModel.DeviceInstance arg)
+        //{
+        //    var deviceInstance = new DeviceInstance();
 
-            deviceInstance.DeviceStatus = (DeviceStatus)arg.DeviceStatusId;
-            deviceInstance.DeviceType = arg.DeviceType.DevicaeName;
-            deviceInstance.Model = arg.Model;
-            deviceInstance.Description = arg.Description;
-            return deviceInstance;
-        }
+        //    deviceInstance.DeviceStatus = (DeviceStatus)arg.DeviceStatusId;
+        //    deviceInstance.DeviceType = arg.DeviceType.DevicaeName;
+        //    //deviceInstance.Model = arg.Model;
+        //    deviceInstance.Description = arg.Description;
+        //    return deviceInstance;
+        //}
 
         public bool AddnewItem(DeviceInstance deviceInstance)
         {
@@ -54,7 +54,15 @@ namespace PcPool.Inventory.BusinessLayer
         {
             var ctx = new PcPoolEntities();
 
-            var devices = ctx.DeviceInstances.Select(ConvertToModel);
+            var devices = ctx.DeviceInstances.Join(ctx.DeviceTypes,
+                di => di.DeviceTypeId,
+                dt => dt.DeviceTypeId,
+                (di, dt) => new DeviceInstance()
+                {
+                    DeviceType = dt.DevicaeName,
+                    DeviceTypeId = dt.DeviceTypeId,
+                    Description = dt.DeviceDescription
+                });
             if (deviceStatus != DeviceStatus.None)
             {
                 devices = devices.Where(d => d.DeviceStatus == deviceStatus);
