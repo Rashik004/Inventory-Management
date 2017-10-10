@@ -19,6 +19,7 @@
         /// The register page
         /// </summary>
         Register = 2,
-        AddItem=3
+        AddItem=3,
+        ChangeStatus=4
     }
 }

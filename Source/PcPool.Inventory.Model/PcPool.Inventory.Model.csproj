@@ -45,6 +45,7 @@
     <Compile Include="DeviceReservation.cs" />
     <Compile Include="DeviceStatus.cs" />
     <Compile Include="DeviceType.cs" />
+    <Compile Include="IdType.cs" />
     <Compile Include="InventoryItemStat.cs" />
     <Compile Include="ModelBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

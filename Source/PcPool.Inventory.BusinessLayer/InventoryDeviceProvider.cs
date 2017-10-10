@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -83,12 +84,31 @@ namespace PcPool.Inventory.BusinessLayer
             {
                 return false;
             }
-            return UpdateDeviceStatus(newStatus, device, ctx);
+            device.DeviceStatusId = (int)newStatus;
+
+            //ctx.DeviceInstances.
+
+            try
+            {
+                ctx.DeviceInstances.Attach(device);
+                //ctx.Entry().State = EntityState.Modified;
+                var state = ctx.Entry(device).State;
+                ctx.Entry(device).State = EntityState.Modified;
+                var newState= ctx.Entry(device).State;
+                ctx.SaveChanges();
+                //newState= ctx.Entry(device).State;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+                return true;
         }
 
         private static bool UpdateDeviceStatus(DeviceStatus newStatus, DataAccessLayer.PcPoolDBaseModel.DeviceInstance device, PcPoolEntities ctx)
         {
             device.DeviceStatusId = (int) newStatus;
+            //ctx.DeviceInstances.
 
             try
             {

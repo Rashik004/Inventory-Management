@@ -64,6 +64,7 @@
     <Compile Include="ViewModel\Base\IHavePassword.cs" />
     <Compile Include="ViewModel\Base\RelayCommand.cs" />
     <Compile Include="ViewModel\Base\RelayParameterizedCommand.cs" />
+    <Compile Include="ViewModel\ChangeItemStatusViewModel.cs" />
     <Compile Include="ViewModel\Chat\ChatListItemViewModel.cs" />
     <Compile Include="ViewModel\Chat\ChatListViewModel.cs" />
     <Compile Include="ViewModel\Chat\Design\ChatListDesignModel.cs" />
