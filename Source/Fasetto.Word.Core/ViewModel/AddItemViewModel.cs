@@ -19,9 +19,20 @@ namespace Fasetto.Word.Core
     /// </summary>
     public class AddItemViewModel : BaseViewModel
     {
+        public string SerialNo { get; set; }
+
+        public string RFID { get; set; }
+
+
+        public string Description { get; set; }
+
         public List<DeviceType> DeviceTypes { get; set; }
 
         public DeviceType SelectedDeviceType { get; set; }
+
+        public bool IsFormValid => SelectedDeviceType != null
+                                   && !string.IsNullOrEmpty(RFID)
+                                   && !string.IsNullOrEmpty(SerialNo);
 
         public ICommand AddItemCommand { get; set; }
 
@@ -43,13 +54,13 @@ namespace Fasetto.Word.Core
         {
             _inventoryDeviceStatusProvider.AddnewItem(new DeviceInstance()
             {
-                DeviceTypeId = 1,
+                DeviceTypeId = SelectedDeviceType.DeviceTypeId,
                 DeviceStatus = DeviceStatus.InStock,
-                DeviceName = "New from UI",
-                Description = "Test Desc",
-                RFID = "TestRFID",
-                SeriaNo = "TestSerialNo",
-                DescriptionTitle = "Title"
+                //DeviceName = "New from UI",
+                Description = Description,
+                RFID = RFID,
+                SeriaNo = SerialNo,
+                DescriptionTitle = Description
             });
         }
     }

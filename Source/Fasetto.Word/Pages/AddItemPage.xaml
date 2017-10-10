@@ -44,7 +44,7 @@
                                        Margin="0 0 0 20"
                                        Padding="0 10 0 0"
                                        />
-                                <TextBox Grid.Column="1" Text="{Binding Email}" Tag="Serial No" />
+                                <TextBox Grid.Column="1" Text="{Binding SerialNo}" Tag="Serial No" />
                             </Grid>
 
                             <!-- RFID -->
@@ -59,7 +59,7 @@
                                        Margin="0 0 0 20"
                                        Padding="0 10 0 0"
                                        />
-                                <TextBox Grid.Column="1" Text="{Binding Email}" Tag="RFID" />
+                                <TextBox Grid.Column="1" Text="{Binding RFID}" Tag="RFID" />
                             </Grid>
                             
                             <!-- Description -->
@@ -74,7 +74,7 @@
                                        Margin="0 0 0 20"
                                        Padding="0 10 0 0"
                                        />
-                                <TextBox Grid.Column="1" Text="{Binding Email}" Tag="Description" />
+                                <TextBox Grid.Column="1" Text="{Binding Description}" Tag="Description" />
                             </Grid>
 
                             <!-- Item Type -->
@@ -113,7 +113,8 @@
                                     local:IsBusyProperty.Value="{Binding RegisterIsRunning}"
                                     Command="{Binding AddItemCommand}"
                                     CommandParameter="{Binding ElementName=Page}" 
-                                    HorizontalAlignment="Center" />
+                                    HorizontalAlignment="Center"
+                                    IsEnabled="{Binding IsFormValid}"/>
 
                         </StackPanel>
 
