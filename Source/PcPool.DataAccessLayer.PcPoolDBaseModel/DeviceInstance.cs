@@ -20,9 +20,7 @@ namespace PcPool.DataAccessLayer.PcPoolDBaseModel
         public string RFID { get; set; }
         public string DescriptionTitle { get; set; }
         public string Description { get; set; }
-        public int DeviceTypeId { get; set; }
-        //public int DeviceStatusId { get; set; }
-
         public Nullable<int> DeviceStatusId { get; set; }
+        public int DeviceTypeId { get; set; }
     }
 }

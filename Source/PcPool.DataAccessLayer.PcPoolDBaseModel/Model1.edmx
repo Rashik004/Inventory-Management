@@ -15,8 +15,8 @@
           <Property Name="RFID" Type="varchar" MaxLength="100" />
           <Property Name="DescriptionTitle" Type="varchar" MaxLength="100" />
           <Property Name="Description" Type="varchar" MaxLength="500" />
-          <Property Name="DeviceTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DeviceStatusId" Type="int" />
+          <Property Name="DeviceTypeId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="DeviceStatus">
           <Key>
@@ -151,8 +151,8 @@
           <Property Name="RFID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="DescriptionTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="DeviceTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DeviceStatusId" Type="Int32" />
+          <Property Name="DeviceTypeId" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="DeviceStatu">
           <Key>
@@ -288,6 +288,7 @@
           <EntitySetMapping Name="DeviceInstances">
             <EntityTypeMapping TypeName="PcPoolModel.DeviceInstance">
               <MappingFragment StoreEntitySet="DeviceInstance">
+                <ScalarProperty Name="DeviceTypeId" ColumnName="DeviceTypeId" />
                 <ScalarProperty Name="DeviceStatusId" ColumnName="DeviceStatusId" />
                 <ScalarProperty Name="DeviceInstanceId" ColumnName="DeviceInstanceId" />
                 <ScalarProperty Name="ManufacturingYear" ColumnName="ManufacturingYear" />
@@ -295,7 +296,6 @@
                 <ScalarProperty Name="RFID" ColumnName="RFID" />
                 <ScalarProperty Name="DescriptionTitle" ColumnName="DescriptionTitle" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="DeviceTypeId" ColumnName="DeviceTypeId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
