@@ -108,6 +108,9 @@
     <Compile Include="Pages\AddItemTypePage.xaml.cs">
       <DependentUpon>AddItemTypePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ChangeItemStatus - Copy.xaml.cs">
+      <DependentUpon>ChangeItemStatus - Copy.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\ChangeItemStatus.xaml.cs">
       <DependentUpon>ChangeItemStatus.xaml</DependentUpon>
     </Compile>
@@ -160,6 +163,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\AddItemTypePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\ChangeItemStatus - Copy.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

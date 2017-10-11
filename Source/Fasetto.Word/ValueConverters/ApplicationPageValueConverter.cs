@@ -33,6 +33,9 @@ namespace Fasetto.Word
                 case ApplicationPage.AddItemType:
                     return new AddItemTypePage();
 
+                case ApplicationPage.DeviceDetails:
+                    return new DeviceDetailsPage();
+
                 default:
                     Debugger.Break();
                     return null;
