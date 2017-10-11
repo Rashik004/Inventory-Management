@@ -12,20 +12,13 @@ namespace PcPool.DataAccessLayer.PcPoolDBaseModel
     using System;
     using System.Collections.Generic;
     
-    public partial class DeviceType
+    public partial class DeviceStatusHistory
     {
-        public DeviceType()
-        {
-            this.ReservationLists = new HashSet<ReservationList>();
-        }
-    
-        public int DeviceTypeId { get; set; }
-        public string DevicaeName { get; set; }
-        public string DeviceDescription { get; set; }
-        public string DeviceModel { get; set; }
-        public string DeviceVersion { get; set; }
-        public string DeviceVendor { get; set; }
-    
-        public virtual ICollection<ReservationList> ReservationLists { get; set; }
+        public int DeviceStatusHistoryId { get; set; }
+        public int DeviceInstanceId { get; set; }
+        public int ModifiedByUserId { get; set; }
+        public System.DateTime LastModifiedDate { get; set; }
+        public int OldDeviceStatus { get; set; }
+        public int NewDeviceStatus { get; set; }
     }
 }

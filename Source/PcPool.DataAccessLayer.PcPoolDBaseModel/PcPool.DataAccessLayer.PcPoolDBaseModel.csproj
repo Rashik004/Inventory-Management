@@ -54,6 +54,9 @@
     <Compile Include="DeviceStatu.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="DeviceStatusHistory.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="DeviceType.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

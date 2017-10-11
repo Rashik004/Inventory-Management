@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="PcPoolModel.Store" Provider="Devart.Data.PostgreSql" ProviderManifestToken="PostgreSQL, 9.6.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="PcPoolModel.Store" Provider="Devart.Data.PostgreSql" ProviderManifestToken="PostgreSQL, 9.6.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="DeviceInstance">
           <Key>
             <PropertyRef Name="DeviceInstanceId" />
@@ -25,6 +25,17 @@
           <Property Name="DeviceStatusId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DeviceStatusEnglishName" Type="varchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="DeviceStatusHistory">
+          <Key>
+            <PropertyRef Name="DeviceStatusHistoryId" />
+          </Key>
+          <Property Name="DeviceStatusHistoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DeviceInstanceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ModifiedByUserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LastModifiedDate" Type="date" Nullable="false" />
+          <Property Name="OldDeviceStatus" Type="int" Nullable="false" />
+          <Property Name="NewDeviceStatus" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="DeviceType">
           <Key>
             <PropertyRef Name="DeviceTypeId" />
@@ -32,6 +43,9 @@
           <Property Name="DeviceTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DevicaeName" Type="varchar" MaxLength="500" />
           <Property Name="DeviceDescription" Type="varchar" MaxLength="25" />
+          <Property Name="DeviceModel" Type="varchar" MaxLength="50" />
+          <Property Name="DeviceVersion" Type="varchar" MaxLength="50" />
+          <Property Name="DeviceVendor" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="ReservationList">
           <Key>
@@ -105,6 +119,7 @@
         <EntityContainer Name="PcPoolModelStoreContainer">
           <EntitySet Name="DeviceInstance" EntityType="Self.DeviceInstance" Schema="public" store:Type="Tables" />
           <EntitySet Name="DeviceStatus" EntityType="Self.DeviceStatus" Schema="public" store:Type="Tables" />
+          <EntitySet Name="DeviceStatusHistory" EntityType="Self.DeviceStatusHistory" Schema="public" store:Type="Tables" />
           <EntitySet Name="DeviceType" EntityType="Self.DeviceType" Schema="public" store:Type="Tables" />
           <EntitySet Name="ReservationList" EntityType="Self.ReservationList" Schema="public" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="public" store:Type="Tables" />
@@ -122,8 +137,7 @@
             <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PcPoolModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -155,6 +169,9 @@
           <Property Name="DevicaeName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="DeviceDescription" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ReservationLists" Relationship="Self.ReservationList_FK_DeviceType" FromRole="DeviceType" ToRole="ReservationList" />
+          <Property Name="DeviceModel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DeviceVersion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DeviceVendor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ReservationList">
           <Key>
@@ -249,7 +266,19 @@
             <End Role="UserType" EntitySet="UserTypes" />
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
+          <EntitySet Name="DeviceStatusHistories" EntityType="PcPoolModel.DeviceStatusHistory" />
         </EntityContainer>
+        <EntityType Name="DeviceStatusHistory">
+          <Key>
+            <PropertyRef Name="DeviceStatusHistoryId" />
+          </Key>
+          <Property Name="DeviceStatusHistoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DeviceInstanceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ModifiedByUserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" />
+          <Property Name="OldDeviceStatus" Type="Int32" Nullable="false" />
+          <Property Name="NewDeviceStatus" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -281,6 +310,9 @@
           <EntitySetMapping Name="DeviceTypes">
             <EntityTypeMapping TypeName="PcPoolModel.DeviceType">
               <MappingFragment StoreEntitySet="DeviceType">
+                <ScalarProperty Name="DeviceVendor" ColumnName="DeviceVendor" />
+                <ScalarProperty Name="DeviceVersion" ColumnName="DeviceVersion" />
+                <ScalarProperty Name="DeviceModel" ColumnName="DeviceModel" />
                 <ScalarProperty Name="DeviceTypeId" ColumnName="DeviceTypeId" />
                 <ScalarProperty Name="DevicaeName" ColumnName="DevicaeName" />
                 <ScalarProperty Name="DeviceDescription" ColumnName="DeviceDescription" />
@@ -320,6 +352,18 @@
               <MappingFragment StoreEntitySet="UserType">
                 <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
                 <ScalarProperty Name="UserTypeEnglishName" ColumnName="UserTypeEnglishName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DeviceStatusHistories">
+            <EntityTypeMapping TypeName="PcPoolModel.DeviceStatusHistory">
+              <MappingFragment StoreEntitySet="DeviceStatusHistory">
+                <ScalarProperty Name="NewDeviceStatus" ColumnName="NewDeviceStatus" />
+                <ScalarProperty Name="OldDeviceStatus" ColumnName="OldDeviceStatus" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="ModifiedByUserId" ColumnName="ModifiedByUserId" />
+                <ScalarProperty Name="DeviceInstanceId" ColumnName="DeviceInstanceId" />
+                <ScalarProperty Name="DeviceStatusHistoryId" ColumnName="DeviceStatusHistoryId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
