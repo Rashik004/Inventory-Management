@@ -92,7 +92,7 @@ namespace PcPool.Inventory.BusinessLayer
             return devices.ToList();
         }
 
-        public bool ChangeStatusBySerialNo(string serialNo, DeviceStatus newStatus)
+        public bool ChangeStatusBySerialNo(string serialNo, DeviceStatus newStatus, int userId)
         {
             var ctx=new PcPoolEntities();
             var device = ctx.DeviceInstances.FirstOrDefault(di => di.SeriaNo == serialNo);
@@ -141,7 +141,7 @@ namespace PcPool.Inventory.BusinessLayer
             return true;
         }
 
-        public bool ChangeStatusByRfid(string rfid, DeviceStatus newStatus)
+        public bool ChangeStatusByRfid(string rfid, DeviceStatus newStatus, int userId)
         {
             var ctx = new PcPoolEntities();
             var device = ctx.DeviceInstances.FirstOrDefault(di => di.RFID == rfid);

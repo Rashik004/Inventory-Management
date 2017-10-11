@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using PcPool.Inventory.BusinessLayer;
 using PcPool.Inventory.BusinessLayer.Interfaces;
+using PcPool.Inventory.Model;
 
 namespace Fasetto.Word.Core
 {
@@ -71,6 +72,7 @@ namespace Fasetto.Word.Core
                 var pass = (parameter as IHavePassword).SecurePassword.Unsecure();
 
                 var user = userDataProvider.VerifyUser(Email, pass);
+                LoggedInUserData.LogInUser(user.UserName,user.FirstName,user.LastName,(UserType)user.UserTypeId,user.UserId);
 
                 await Task.Delay(1000);
 

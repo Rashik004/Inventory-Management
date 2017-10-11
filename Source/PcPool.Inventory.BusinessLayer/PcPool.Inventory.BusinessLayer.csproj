@@ -52,6 +52,7 @@
     <Compile Include="Interfaces\IUserDataProvider.cs" />
     <Compile Include="InventoryDeviceProvider.cs" />
     <Compile Include="InventoryStatProvide.cs" />
+    <Compile Include="LoggedInUserData.cs" />
     <Compile Include="UserDataProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -8,7 +8,7 @@ using PcPool.Inventory.BusinessLayer.Interfaces;
 
 namespace PcPool.Inventory.BusinessLayer
 {
-    public class UserDataProvider: IUserDataProvider
+    public  class UserDataProvider: IUserDataProvider
     {
         public User VerifyUser(string userName, string password)
         {
