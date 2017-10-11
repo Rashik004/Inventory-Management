@@ -16,9 +16,8 @@ namespace PcPool.DataAccessLayer.PcPoolDBaseModel
     {
         public int DeviceStatusHistoryId { get; set; }
         public int DeviceInstanceId { get; set; }
+        public Nullable<System.DateTime> ModificationDate { get; set; }
         public int ModifiedByUserId { get; set; }
-        public System.DateTime LastModifiedDate { get; set; }
-        public int OldDeviceStatus { get; set; }
-        public int NewDeviceStatus { get; set; }
+        public int NewStatusId { get; set; }
     }
 }

@@ -30,11 +30,10 @@
             <PropertyRef Name="DeviceStatusHistoryId" />
           </Key>
           <Property Name="DeviceStatusHistoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="DeviceInstanceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ModifiedByUserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="LastModifiedDate" Type="date" Nullable="false" />
-          <Property Name="OldDeviceStatus" Type="int" Nullable="false" />
-          <Property Name="NewDeviceStatus" Type="int" Nullable="false" />
+          <Property Name="DeviceInstanceId" Type="int" Nullable="false" />
+          <Property Name="ModificationDate" Type="date" />
+          <Property Name="ModifiedByUserId" Type="int" Nullable="false" />
+          <Property Name="NewStatusId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="DeviceType">
           <Key>
@@ -239,11 +238,10 @@
             <PropertyRef Name="DeviceStatusHistoryId" />
           </Key>
           <Property Name="DeviceStatusHistoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DeviceInstanceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ModifiedByUserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" />
-          <Property Name="OldDeviceStatus" Type="Int32" Nullable="false" />
-          <Property Name="NewDeviceStatus" Type="Int32" Nullable="false" />
+          <Property Name="DeviceInstanceId" Type="Int32" Nullable="false" />
+          <Property Name="ModificationDate" Type="DateTime" />
+          <Property Name="ModifiedByUserId" Type="Int32" Nullable="false" />
+          <Property Name="NewStatusId" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -324,10 +322,9 @@
           <EntitySetMapping Name="DeviceStatusHistories">
             <EntityTypeMapping TypeName="PcPoolModel.DeviceStatusHistory">
               <MappingFragment StoreEntitySet="DeviceStatusHistory">
-                <ScalarProperty Name="NewDeviceStatus" ColumnName="NewDeviceStatus" />
-                <ScalarProperty Name="OldDeviceStatus" ColumnName="OldDeviceStatus" />
-                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="NewStatusId" ColumnName="NewStatusId" />
                 <ScalarProperty Name="ModifiedByUserId" ColumnName="ModifiedByUserId" />
+                <ScalarProperty Name="ModificationDate" ColumnName="ModificationDate" />
                 <ScalarProperty Name="DeviceInstanceId" ColumnName="DeviceInstanceId" />
                 <ScalarProperty Name="DeviceStatusHistoryId" ColumnName="DeviceStatusHistoryId" />
               </MappingFragment>

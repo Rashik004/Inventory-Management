@@ -142,9 +142,9 @@ namespace PcPool.Inventory.BusinessLayer
             ctx.DeviceStatusHistories.Add(new DeviceStatusHistory()
             {
                 DeviceInstanceId = deviceInstanceId,
-                LastModifiedDate = DateTime.Now,
+                ModificationDate = DateTime.Now,
                 ModifiedByUserId = userId,
-                NewDeviceStatus = (int) newDeviceStatus
+                NewStatusId = (int) newDeviceStatus
             });
             //ctx.SaveChanges();
         }
