@@ -51,7 +51,7 @@ namespace Fasetto.Word.Core
             //{
             //    _inventoryDeviceStatusProvider.ChangeStatusBySerialNo(Id, DeviceStatus.Loaned, LoggedInUserData.UserId);
             //}
-            IoC.Application.GoToPage(ApplicationPage.DeviceDetails, new DeviceDetailsViewModel() {DeviceName = "TestDevice"});
+            IoC.Application.GoToPage(ApplicationPage.ChangeStatus);
         }
 
         public IdType SelectedIdType { get; set; }

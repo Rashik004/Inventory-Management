@@ -62,6 +62,7 @@ namespace Fasetto.Word.Core
                 SeriaNo = SerialNo,
                 DescriptionTitle = Description
             });
+            IoC.Application.GoToPage(ApplicationPage.ChangeStatus);
         }
     }
 }
