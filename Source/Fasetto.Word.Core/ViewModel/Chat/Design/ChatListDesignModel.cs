@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using PcPool.Inventory.BusinessLayer;
+using PcPool.Inventory.Model;
 
 namespace Fasetto.Word.Core
 {
@@ -23,36 +27,51 @@ namespace Fasetto.Word.Core
         /// </summary>
         public ChatListDesignModel()
         {
-            Items = new List<ChatListItemViewModel>
+            LoggedInUserData.UserChanged += OnUserChanged;
+            Items = new ObservableCollection<ChatListItemViewModel>
             {
                 new ChatListItemViewModel
                 {
                     Name = "Dashboard",
                     Page = ApplicationPage.Dashboard
 
-                },
-                new ChatListItemViewModel
+                }
+            };
+
+        }
+
+        private void OnUserChanged(object sender, EventArgs e)
+        {
+            if (LoggedInUserData.UserId != 0
+                && (LoggedInUserData.UserType == UserType.Admin
+                    || LoggedInUserData.UserType == UserType.SuperAdmin))
+            {
+
+                Items.Add(new ChatListItemViewModel
                 {
                     Name = "Loan In/Out",
                     Page = ApplicationPage.ChangeStatus
-                },
-                new ChatListItemViewModel
+                });
+
+                Items.Add(new ChatListItemViewModel
                 {
                     Name = "Add new Item",
                     Page = ApplicationPage.AddItem
+                });
 
-                },
-                new ChatListItemDesignModel()
+                Items.Add(new ChatListItemViewModel
                 {
                     Name = "Add Item Type",
                     Page = ApplicationPage.AddItemType
-                },
-                new ChatListItemDesignModel()
+                });
+
+                Items.Add(new ChatListItemViewModel
                 {
                     Name = "Add new user",
                     Page = ApplicationPage.Register
-                }
-            };
+                });
+
+            }
         }
 
         #endregion

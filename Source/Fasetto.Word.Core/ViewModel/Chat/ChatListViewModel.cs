@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Fasetto.Word.Core
 {
@@ -10,6 +11,6 @@ namespace Fasetto.Word.Core
         /// <summary>
         /// The chat list items for the list
         /// </summary>
-        public List<ChatListItemViewModel> Items { get; set; }
+        public ObservableCollection<ChatListItemViewModel> Items { get; set; }
     }
 }

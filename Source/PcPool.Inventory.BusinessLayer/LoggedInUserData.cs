@@ -9,6 +9,8 @@ namespace PcPool.Inventory.BusinessLayer
 {
     public class LoggedInUserData
     {
+        public static event EventHandler UserChanged;
+
         public static string UserName { get; set; }
 
         public static string FirstName { get; set; }
@@ -26,7 +28,16 @@ namespace PcPool.Inventory.BusinessLayer
             LastName = LastName;
             UserType = userType;
             UserId = userId;
+            OnUserChanged();
         }
 
+        private static void OnUserChanged()
+        {
+            EventHandler handler = UserChanged;
+            if (handler != null)
+            {
+                handler(null, EventArgs.Empty);
+            }
+        }
     }
 }
