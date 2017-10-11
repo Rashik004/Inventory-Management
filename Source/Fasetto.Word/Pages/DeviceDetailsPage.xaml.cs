@@ -7,7 +7,7 @@ namespace Fasetto.Word
     /// <summary>
     /// Interaction logic for RegisterPage.xaml
     /// </summary>
-    public partial class DeviceDetailsPage : BasePage<ChangeItemStatusViewModel>
+    public partial class DeviceDetailsPage : BasePage<DeviceDetailsViewModel>
     {
         public DeviceDetailsPage()
         {
