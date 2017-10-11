@@ -43,14 +43,15 @@ namespace Fasetto.Word.Core
 
         private void ChangeStatus()
         {
-            if (SelectedIdType.Value == 1)
-            {
-                _inventoryDeviceStatusProvider.ChangeStatusByRfid(Id, DeviceStatus.Loaned, LoggedInUserData.UserId);
-            }
-            else if (SelectedIdType.Value == 2)
-            {
-                _inventoryDeviceStatusProvider.ChangeStatusBySerialNo(Id, DeviceStatus.Loaned, LoggedInUserData.UserId);
-            }
+            //if (SelectedIdType.Value == 1)
+            //{
+            //    _inventoryDeviceStatusProvider.ChangeStatusByRfid(Id, DeviceStatus.Loaned, LoggedInUserData.UserId);
+            //}
+            //else if (SelectedIdType.Value == 2)
+            //{
+            //    _inventoryDeviceStatusProvider.ChangeStatusBySerialNo(Id, DeviceStatus.Loaned, LoggedInUserData.UserId);
+            //}
+            IoC.Application.GoToPage(ApplicationPage.DeviceDetails, new DeviceDetailsViewModel() {DeviceName = "TestDevice"});
         }
 
         public IdType SelectedIdType { get; set; }

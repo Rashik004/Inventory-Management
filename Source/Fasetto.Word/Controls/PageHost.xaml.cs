@@ -72,6 +72,18 @@ namespace Fasetto.Word
             var newPageFrame = (d as PageHost).NewPage;
             var oldPageFrame = (d as PageHost).OldPage;
 
+            // If the current page hasn't changed
+            // just update the view model
+            var page = (BasePage) newPageFrame.Content;
+            //if (newPageFrame.Content is BasePage &&
+            //    page.ToApplicationPage() == currentPage)
+            //{
+            //    // Just update the view model
+            //    page.ViewModelObject = currentPageViewModel;
+
+            //    return value;
+            //}
+
             // Store the current page content as the old page
             var oldPageContent = newPageFrame.Content;
 
