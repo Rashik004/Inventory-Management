@@ -20,7 +20,6 @@ namespace PcPool.DataAccessLayer.PcPoolDBaseModel
         }
     
         public int UserId { get; set; }
-        public int UserTypeId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string UserName { get; set; }
@@ -29,8 +28,8 @@ namespace PcPool.DataAccessLayer.PcPoolDBaseModel
         public string Designation { get; set; }
         public string Address { get; set; }
         public string Title { get; set; }
+        public int UserTypeId { get; set; }
     
         public virtual ICollection<ReservationList> ReservationLists { get; set; }
-        public virtual UserType UserType { get; set; }
     }
 }

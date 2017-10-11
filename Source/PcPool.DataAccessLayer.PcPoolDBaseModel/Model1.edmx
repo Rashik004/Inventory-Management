@@ -63,7 +63,6 @@
             <PropertyRef Name="UserId" />
           </Key>
           <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FirstName" Type="varchar" MaxLength="50" />
           <Property Name="LastName" Type="varchar" MaxLength="50" />
           <Property Name="UserName" Type="varchar" MaxLength="100" Nullable="false" />
@@ -72,6 +71,7 @@
           <Property Name="Designation" Type="varchar" MaxLength="10" />
           <Property Name="Address" Type="varchar" MaxLength="500" />
           <Property Name="Title" Type="varchar" MaxLength="50" />
+          <Property Name="UserTypeId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="UserType">
           <Key>
@@ -104,18 +104,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="User_FK_UserType">
-          <End Role="UserType" Type="Self.UserType" Multiplicity="1" />
-          <End Role="User" Type="Self.User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserType">
-              <PropertyRef Name="UserTypeId" />
-            </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="UserTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="PcPoolModelStoreContainer">
           <EntitySet Name="DeviceInstance" EntityType="Self.DeviceInstance" Schema="public" store:Type="Tables" />
           <EntitySet Name="DeviceStatus" EntityType="Self.DeviceStatus" Schema="public" store:Type="Tables" />
@@ -131,10 +119,6 @@
           <AssociationSet Name="ReservationList_FK_DeviceType" Association="Self.ReservationList_FK_DeviceType">
             <End Role="DeviceType" EntitySet="DeviceType" />
             <End Role="ReservationList" EntitySet="ReservationList" />
-          </AssociationSet>
-          <AssociationSet Name="User_FK_UserType" Association="Self.User_FK_UserType">
-            <End Role="UserType" EntitySet="UserType" />
-            <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -191,7 +175,6 @@
             <PropertyRef Name="UserId" />
           </Key>
           <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
@@ -201,7 +184,7 @@
           <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ReservationLists" Relationship="Self.REL_1" FromRole="User" ToRole="ReservationList" />
-          <NavigationProperty Name="UserType" Relationship="Self.User_FK_UserType" FromRole="User" ToRole="UserType" />
+          <Property Name="UserTypeId" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="UserType">
           <Key>
@@ -209,7 +192,6 @@
           </Key>
           <Property Name="UserTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserTypeEnglishName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Users" Relationship="Self.User_FK_UserType" FromRole="UserType" ToRole="User" />
         </EntityType>
         <Association Name="ReservationList_FK_DeviceType">
           <End Role="DeviceType" Type="Self.DeviceType" Multiplicity="1" />
@@ -235,18 +217,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="User_FK_UserType">
-          <End Role="UserType" Type="Self.UserType" Multiplicity="1" />
-          <End Role="User" Type="Self.User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserType">
-              <PropertyRef Name="UserTypeId" />
-            </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="UserTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="PcPoolEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="DeviceInstances" EntityType="Self.DeviceInstance" />
           <EntitySet Name="DeviceStatus" EntityType="Self.DeviceStatu" />
@@ -261,10 +231,6 @@
           <AssociationSet Name="REL_1" Association="Self.REL_1">
             <End Role="User" EntitySet="Users" />
             <End Role="ReservationList" EntitySet="ReservationLists" />
-          </AssociationSet>
-          <AssociationSet Name="User_FK_UserType" Association="Self.User_FK_UserType">
-            <End Role="UserType" EntitySet="UserTypes" />
-            <End Role="User" EntitySet="Users" />
           </AssociationSet>
           <EntitySet Name="DeviceStatusHistories" EntityType="PcPoolModel.DeviceStatusHistory" />
         </EntityContainer>
@@ -334,8 +300,8 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="PcPoolModel.User">
               <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />

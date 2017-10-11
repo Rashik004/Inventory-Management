@@ -8,8 +8,8 @@ namespace PcPool.Inventory.Model
 {
     public enum UserType
     {
-        SuperAdmin=0,
-        Admin=1,
+        Admin = 0,
+        SuperAdmin =1,
         User=2
     }
 }

@@ -14,14 +14,7 @@ namespace PcPool.DataAccessLayer.PcPoolDBaseModel
     
     public partial class UserType
     {
-        public UserType()
-        {
-            this.Users = new HashSet<User>();
-        }
-    
         public int UserTypeId { get; set; }
         public string UserTypeEnglishName { get; set; }
-    
-        public virtual ICollection<User> Users { get; set; }
     }
 }

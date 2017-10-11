@@ -13,7 +13,6 @@
         <EntityTypeShape EntityType="PcPoolModel.UserType" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
         <AssociationConnector Association="PcPoolModel.ReservationList_FK_DeviceType" ManuallyRouted="false" />
         <AssociationConnector Association="PcPoolModel.REL_1" ManuallyRouted="false" />
-        <AssociationConnector Association="PcPoolModel.User_FK_UserType" ManuallyRouted="false" />
         <EntityTypeShape EntityType="PcPoolModel.DeviceStatusHistory" Width="1.5" PointX="8.375" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
