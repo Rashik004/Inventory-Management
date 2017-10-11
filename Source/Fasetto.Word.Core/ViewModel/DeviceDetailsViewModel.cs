@@ -3,11 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using PcPool.Inventory.BusinessLayer;
+using PcPool.Inventory.BusinessLayer.Interfaces;
+using PcPool.Inventory.Model;
 
-namespace PcPool.Inventory.Model
+namespace Fasetto.Word.Core
 {
-    public class DeviceInstance : ModelBase
+    public class DeviceDetailsViewModel:BaseViewModel
     {
+        private IInventoryDeviceStatusProvider _inventoryDeviceStatusProvider;
+
         public string DeviceName { get; set; }
 
         public string DeviceType { get; set; }
@@ -27,6 +33,7 @@ namespace PcPool.Inventory.Model
         public string Description { get; set; }
 
         public int ManufacturingYear { get; set; }
+
 
     }
 }

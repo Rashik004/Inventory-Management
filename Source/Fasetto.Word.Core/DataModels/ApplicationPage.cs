@@ -15,6 +15,8 @@
 
         ChangeStatus=4,
 
-        AddItemType=5
+        AddItemType=5,
+
+        DeviceDetails=6
     }
 }

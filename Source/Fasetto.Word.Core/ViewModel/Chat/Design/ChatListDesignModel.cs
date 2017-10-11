@@ -28,28 +28,17 @@ namespace Fasetto.Word.Core
                 new ChatListItemViewModel
                 {
                     Name = "Dashboard",
-                    Initials = "LM",
-                    Message = "This chat app is awesome! I bet it will be fast too",
-                    ProfilePictureRGB = "3099c5",
-                    NewContentAvailable = true,
                     Page = ApplicationPage.Dashboard
-                    //IsSelected = true
 
                 },
                 new ChatListItemViewModel
                 {
                     Name = "Loan In/Out",
-                    Initials = "JA",
-                    Message = "Hey dude, here are the new icons",
-                    ProfilePictureRGB = "fe4503",
                     Page = ApplicationPage.ChangeStatus
                 },
                 new ChatListItemViewModel
                 {
                     Name = "Add new Item",
-                    Initials = "PL",
-                    Message = "The new server is up, got 192.168.1.1",
-                    ProfilePictureRGB = "00d405",
                     Page = ApplicationPage.AddItem
 
                 },
@@ -57,7 +46,12 @@ namespace Fasetto.Word.Core
                 {
                     Name = "Add Item Type",
                     Page = ApplicationPage.AddItemType
-                }
+                },
+                //                new ChatListItemDesignModel()
+                //{
+                //    Name = "Add Item Type",
+                //    Page = ApplicationPage.AddItemType
+                //}
             };
         }
 
