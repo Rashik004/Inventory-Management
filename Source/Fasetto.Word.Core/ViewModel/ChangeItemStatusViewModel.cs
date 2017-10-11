@@ -45,11 +45,11 @@ namespace Fasetto.Word.Core
         {
             if (SelectedIdType.Value == 1)
             {
-                _inventoryDeviceStatusProvider.ChangeStatusByRfid(Id, DeviceStatus.Loaned,1);
+                _inventoryDeviceStatusProvider.ChangeStatusByRfid(Id, DeviceStatus.Loaned, LoggedInUserData.UserId);
             }
             else if (SelectedIdType.Value == 2)
             {
-                _inventoryDeviceStatusProvider.ChangeStatusBySerialNo(Id, DeviceStatus.Loaned,1);
+                _inventoryDeviceStatusProvider.ChangeStatusBySerialNo(Id, DeviceStatus.Loaned, LoggedInUserData.UserId);
             }
         }
 

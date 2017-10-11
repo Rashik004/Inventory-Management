@@ -53,12 +53,24 @@ namespace PcPool.Inventory.BusinessLayer
             var ctx=new PcPoolEntities();
             try
             {
-                var test = ctx.DeviceInstances.FirstOrDefault();
-                test.Description = "Desc changed";
-                ctx.DeviceInstances.Add(test);
-                var state = ctx.Entry(test).State;
+                //var test = ctx.DeviceInstances.FirstOrDefault();
+                //test.Description = "Desc changed";
+                //ctx.DeviceInstances.Add(test);
+                //var state = ctx.Entry(test).State;
+                //ctx.SaveChanges();
+                //state = ctx.Entry(test).State;
+                ctx.DeviceInstances.Add(new DataAccessLayer.PcPoolDBaseModel.DeviceInstance()
+                {
+                    DeviceTypeId = deviceInstance.DeviceTypeId,
+                    Description = deviceInstance.Description,
+                    DescriptionTitle = deviceInstance.DescriptionTitle,
+                    SeriaNo = deviceInstance.SeriaNo,
+                    RFID = deviceInstance.RFID,
+                    DeviceStatusId = (int)deviceInstance.DeviceStatus,
+                    ManufacturingYear = deviceInstance.ManufacturingYear
+                    
+                });
                 ctx.SaveChanges();
-                state = ctx.Entry(test).State;
             }
             catch (Exception ex)
             {
@@ -100,47 +112,42 @@ namespace PcPool.Inventory.BusinessLayer
             {
                 return false;
             }
-            device.DeviceStatusId = (int)newStatus;
+            AddDeviceStatusHistory(ctx, device.DeviceInstanceId, newStatus, userId);
 
-            //ctx.DeviceInstances.
 
-            try
-            {
-                ctx.DeviceInstances.Attach(device);
-                //ctx.Entry().State = EntityState.Modified;
-                var state = ctx.Entry(device).State;
-                ctx.Entry(device).State = EntityState.Modified;
-                var newState= ctx.Entry(device).State;
-                ctx.SaveChanges();
-                //newState= ctx.Entry(device).State;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
-                return true;
+            return UpdateDeviceStatus(newStatus, device, ctx);
         }
 
         private static bool UpdateDeviceStatus(DeviceStatus newStatus, DataAccessLayer.PcPoolDBaseModel.DeviceInstance device, PcPoolEntities ctx)
         {
-            device.DeviceStatusId = (int) newStatus;
-            //ctx.DeviceInstances.
+            device.DeviceStatusId = (int)newStatus;
 
             try
             {
                 ctx.DeviceInstances.Attach(device);
-                var entry = ctx.Entry(device);
-                entry.Property(s => s.DeviceStatusId).IsModified = true;
+                ctx.Entry(device).State = EntityState.Modified;
                 ctx.SaveChanges();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                Debugger.Break();
+                Console.WriteLine(ex);
                 return false;
             }
             return true;
         }
 
+        private void AddDeviceStatusHistory(PcPoolEntities ctx, int deviceInstanceId, DeviceStatus newDeviceStatus, int userId)
+        {
+            //var ctx=new PcPoolEntities();
+            ctx.DeviceStatusHistories.Add(new DeviceStatusHistory()
+            {
+                DeviceInstanceId = deviceInstanceId,
+                LastModifiedDate = DateTime.Now,
+                ModifiedByUserId = userId,
+                NewDeviceStatus = (int) newDeviceStatus
+            });
+            //ctx.SaveChanges();
+        }
         public bool ChangeStatusByRfid(string rfid, DeviceStatus newStatus, int userId)
         {
             var ctx = new PcPoolEntities();

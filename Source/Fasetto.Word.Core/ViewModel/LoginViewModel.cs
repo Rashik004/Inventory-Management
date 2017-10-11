@@ -71,20 +71,21 @@ namespace Fasetto.Word.Core
                 var userDataProvider= new UserDataProvider();
                 var pass = (parameter as IHavePassword).SecurePassword.Unsecure();
 
-                var user = userDataProvider.VerifyUser(Email, pass);
-                LoggedInUserData.LogInUser(user.UserName,user.FirstName,user.LastName,(UserType)user.UserTypeId,user.UserId);
+                var user=Task.Run(() => userDataProvider.VerifyUser(Email, pass));
+                await user;
 
-                await Task.Delay(1000);
+            
 
-                // Go to chat page
-                if (user != null)
+                if (user.Result != null)
                 {
+                    LoggedInUserData.LogInUser(user.Result.UserName,
+                        user.Result.FirstName,
+                        user.Result.LastName,
+                        (UserType) user.Result.UserTypeId,
+                        user.Result.UserId);
                     IoC.Get<ApplicationViewModel>().GoToPage(ApplicationPage.Dashboard);
                 }
 
-                //var email = Email;
-
-                //// IMPORTANT: Never store unsecure password in variable like this
             });
         }
 
