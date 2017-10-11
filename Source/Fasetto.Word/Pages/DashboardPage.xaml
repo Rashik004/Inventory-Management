@@ -11,21 +11,8 @@
       Title="Chat">
 
     <StackPanel Background="{StaticResource WordBlueBrush}">
-        <Border  Height="60" Background="AntiqueWhite"></Border>
         <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <!--<Border  Height="1400" Background="DarkRed"></Border>-->
-            <!--Grid>
-                <local
-            </Grid>-->
 
-                <!--<StackPanel>
-                <TextBlock Text="{Binding Test}" 
-                           FontFamily="{StaticResource LatoBold}" 
-                           FontSize="{StaticResource FontSizeRegular}">
-
-                </TextBlock>
-                <local:InventoryItemListControl></local:InventoryItemListControl>
-                </StackPanel>-->
             <Grid Background="Transparent">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="20"/><!--Upper Margin-->

@@ -15,7 +15,7 @@
                     <ControlTemplate TargetType="{x:Type ContentControl}">
                         <Border x:Name="background"   Background="{StaticResource WordBlueBrush}" VerticalAlignment="top" >
                             <Border Background="AliceBlue" CornerRadius="5">
-                                <Grid x:Name="Container" Background="Transparent">
+                                <Grid x:Name="Container" Background="Transparent" Height="60">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="1.5*"/>
@@ -30,7 +30,7 @@
                                                Foreground="{StaticResource ForegroundVeryDarkBrush}"
                                                FontSize="{StaticResource FontSizeAverage}"
                                                FontFamily="{StaticResource LatoRegular}"
-                           
+                                               TextAlignment="Center"
                                     />
                                     
                                     <TextBlock Grid.Column="2" Text="{Binding InStockCount}"

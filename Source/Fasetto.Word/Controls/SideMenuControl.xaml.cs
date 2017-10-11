@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PcPool.Inventory.BusinessLayer;
+using Fasetto.Word.Core;
 
 namespace Fasetto.Word
 {
@@ -23,6 +25,12 @@ namespace Fasetto.Word
         public SideMenuControl()
         {
             InitializeComponent();
+        }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            LoggedInUserData.LogOutuser();
+            IoC.Application.GoToPage(ApplicationPage.Login);
         }
     }
 }

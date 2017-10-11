@@ -28,6 +28,12 @@ namespace Fasetto.Word.Core
         public ChatListDesignModel()
         {
             LoggedInUserData.UserChanged += OnUserChanged;
+
+
+        }
+
+        private void OnUserChanged(object sender, EventArgs e)
+        {
             Items = new ObservableCollection<ChatListItemViewModel>
             {
                 new ChatListItemViewModel
@@ -37,11 +43,6 @@ namespace Fasetto.Word.Core
 
                 }
             };
-
-        }
-
-        private void OnUserChanged(object sender, EventArgs e)
-        {
             if (LoggedInUserData.UserId != 0
                 && (LoggedInUserData.UserType == UserType.Admin
                     || LoggedInUserData.UserType == UserType.SuperAdmin))

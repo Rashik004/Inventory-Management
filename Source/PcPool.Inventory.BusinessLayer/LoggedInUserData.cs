@@ -31,6 +31,15 @@ namespace PcPool.Inventory.BusinessLayer
             OnUserChanged();
         }
 
+        public static void LogOutuser()
+        {
+            UserName = null;
+            FirstName = null;
+            LastName = null;
+            UserId = 0;
+            OnUserChanged();
+        }
+
         private static void OnUserChanged()
         {
             EventHandler handler = UserChanged;

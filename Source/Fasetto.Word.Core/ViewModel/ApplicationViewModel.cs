@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Fasetto.Word.Core
 {
@@ -15,6 +16,8 @@ namespace Fasetto.Word.Core
         /// The current page of the application
         /// </summary>
         public ApplicationPage CurrentPage { get; private set; } = ApplicationPage.Login;
+
+        public ICommand LogOut { get; set; }
 
         /// <summary>
         /// The view model to use for the current page when the CurrentPage changes

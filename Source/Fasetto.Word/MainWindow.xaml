@@ -131,13 +131,26 @@
                 <ImageBrush TileMode="Tile" ViewportUnits="Absolute" Viewport="0 0 500 500" ImageSource="/Images/Backgrounds/emoji-background.png" />
             </Grid.Background>
 
-            <local:PageHost Grid.Column="1" 
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <!--<StackPanel Grid.Row="0"
+                            HorizontalAlignment="Right"
+                            Orientation="Horizontal">
+                    <TextBlock
+                        Text="Tester"/>
+                    <Button  />
+                </StackPanel>-->
+                <local:PageHost  Grid.Row="1"
                    d:DataContext=""
                    DataContext="{Binding ApplicationViewModel.CurrentPage, 
                                      Source={x:Static local:ViewModelLocator.Instance},  
                                      Converter={local:ApplicationPageValueConverter}}"
                    CurrentPage="{Binding}" />
-            
+            </Grid>
+
             <!-- Side Menu -->
             <local:SideMenuControl 
                 Width="300" 
