@@ -10,5 +10,7 @@ namespace PcPool.Inventory.BusinessLayer.Interfaces
     public interface IUserDataProvider
     {
         User VerifyUser(string userName, string password);
+
+        bool AddNewUser(Model.User user);
     }
 }

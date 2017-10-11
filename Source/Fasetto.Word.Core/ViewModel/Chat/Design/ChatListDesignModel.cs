@@ -47,11 +47,11 @@ namespace Fasetto.Word.Core
                     Name = "Add Item Type",
                     Page = ApplicationPage.AddItemType
                 },
-                //                new ChatListItemDesignModel()
-                //{
-                //    Name = "Add Item Type",
-                //    Page = ApplicationPage.AddItemType
-                //}
+                new ChatListItemDesignModel()
+                {
+                    Name = "Add new user",
+                    Page = ApplicationPage.Register
+                }
             };
         }
 

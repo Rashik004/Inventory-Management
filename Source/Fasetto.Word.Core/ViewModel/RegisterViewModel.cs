@@ -4,6 +4,9 @@ using System.Security;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using PcPool.Inventory.BusinessLayer;
+using PcPool.Inventory.BusinessLayer.Interfaces;
+using PcPool.Inventory.Model;
 
 namespace Fasetto.Word.Core
 {
@@ -12,19 +15,28 @@ namespace Fasetto.Word.Core
     /// </summary>
     public class RegisterViewModel : BaseViewModel
     {
-        #region Public Properties
+        private IUserDataProvider _userDataProvider;
 
-        /// <summary>
-        /// The email of the user
-        /// </summary>
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public string UserName { get; set; }
+
+        //public string Password { get; set; }
+
+        //public string ConfirmPassword { get; set; }
+
         public string Email { get; set; }
 
-        /// <summary>
-        /// A flag indicating if the register command is running
-        /// </summary>
+        public string Designation { get; set; }
+
+        public string Address { get; set; }
+
+        public string Title { get; set; }
+
         public bool RegisterIsRunning { get; set; }
 
-        #endregion
 
         #region Commands
 
@@ -47,6 +59,7 @@ namespace Fasetto.Word.Core
         /// </summary>
         public RegisterViewModel()
         {
+            _userDataProvider=new UserDataProvider();
             // Create commands
             RegisterCommand = new RelayParameterizedCommand(async (parameter) => await RegisterAsync(parameter));
             LoginCommand = new RelayCommand(async () => await LoginAsync());
@@ -63,7 +76,23 @@ namespace Fasetto.Word.Core
         {
             await RunCommandAsync(() => RegisterIsRunning, async () =>
             {
-                await Task.Delay(5000);
+                var pass = (parameter as IHavePassword).SecurePassword.Unsecure();
+
+                var user = new User()
+                {
+                    Address = Address,
+                    UserType = UserType.User,
+                    LastName = LastName,
+                    FirstName = FirstName,
+                    Designation = Designation,
+                    UserName = UserName,
+                    Password = pass,
+                    Email = Email,
+                    Title = Title
+                };
+                var t = Task.Run(() => _userDataProvider.AddNewUser(user));
+                await t;
+
             });
         }
 

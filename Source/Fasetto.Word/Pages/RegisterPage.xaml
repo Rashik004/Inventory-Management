@@ -30,20 +30,40 @@
                         <StackPanel>
 
                             <!-- Sign Up header -->
-                            <TextBlock Text="Sign Up" 
+                            <TextBlock Text="Add new User" 
                                    FontSize="{StaticResource FontSizeLarge}" 
                                    FontFamily="{StaticResource LatoRegular}"
                                    Foreground="{StaticResource WordBlueBrush}" />
 
                             <!-- Sign up subtext-->
-                            <TextBlock Text="It's about to get fun" 
+                            <!--<TextBlock Text="It's about to get fun" 
                                        FontSize="{StaticResource FontSizeRegular}"
                                        Foreground="{StaticResource ForegroundDarkBrush}"
                                        Margin="0 0 0 20"
-                                       />
+                                       />-->
 
                             <!-- Email -->
+                            <TextBox Text="{Binding FirstName}" Tag="First Name" />
+
+                            <TextBox Text="{Binding LastName}" Tag="Last Name" />
+
                             <TextBox Text="{Binding Email}" Tag="Email" />
+
+                            <TextBox Text="{Binding Designation}" Tag="Designation" />
+
+                            <TextBox Text="{Binding Address}" Tag="Address" />
+
+                            <TextBox Text="{Binding Title}" Tag="Address" />
+
+                            <TextBox Text="{Binding UserName}" Tag="User Name" />
+
+
+
+
+
+
+
+
 
                             <!-- Password -->
                             <PasswordBox x:Name="PasswordText" Tag="Password" Margin="0 0 0 30" />
