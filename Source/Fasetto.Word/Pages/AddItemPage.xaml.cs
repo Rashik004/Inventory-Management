@@ -8,11 +8,20 @@ namespace Fasetto.Word
     /// </summary>
     public partial class AddItemPage : BasePage<AddItemViewModel>
     {
-        public AddItemPage()
+        public AddItemPage():base()
         {
             InitializeComponent();
         }
 
-       
+
+        /// <summary>
+        /// Constructor with specific view model
+        /// </summary>
+        /// <param name="specificViewModel">The specific view model to use for this page</param>
+        public AddItemPage(AddItemViewModel specificViewModel) : base(specificViewModel)
+        {
+            InitializeComponent();
+        }
+
     }
 }

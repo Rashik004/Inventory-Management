@@ -9,11 +9,18 @@ namespace Fasetto.Word
     /// </summary>
     public partial class ChangeItemStatus : BasePage<ChangeItemStatusViewModel>
     {
-        public ChangeItemStatus()
+        public ChangeItemStatus():base()
         {
             InitializeComponent();
         }
 
-
+        /// <summary>
+        /// Constructor with specific view model
+        /// </summary>
+        /// <param name="specificViewModel">The specific view model to use for this page</param>
+        public ChangeItemStatus(ChangeItemStatusViewModel specificViewModel) : base(specificViewModel)
+        {
+            InitializeComponent();
+        }
     }
 }

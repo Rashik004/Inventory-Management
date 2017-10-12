@@ -23,10 +23,19 @@ namespace Fasetto.Word
     /// </summary>
     public partial class DashBoard : BasePage<DashboardViewModel>
     {
-        public DashBoard()
+        public DashBoard():base()
         {
             InitializeComponent();
         }
-        
+
+        /// <summary>
+        /// Constructor with specific view model
+        /// </summary>
+        /// <param name="specificViewModel">The specific view model to use for this page</param>
+        public DashBoard(DashboardViewModel specificViewModel) : base(specificViewModel)
+        {
+            InitializeComponent();
+        }
+
     }
 }

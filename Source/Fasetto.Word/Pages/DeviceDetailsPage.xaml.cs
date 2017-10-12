@@ -9,11 +9,18 @@ namespace Fasetto.Word
     /// </summary>
     public partial class DeviceDetailsPage : BasePage<DeviceDetailsViewModel>
     {
-        public DeviceDetailsPage()
+        public DeviceDetailsPage():base()
         {
             InitializeComponent();
         }
 
-
+        /// <summary>
+        /// Constructor with specific view model
+        /// </summary>
+        /// <param name="specificViewModel">The specific view model to use for this page</param>
+        public DeviceDetailsPage(DeviceDetailsViewModel specificViewModel) : base(specificViewModel)
+        {
+            InitializeComponent();
+        }
     }
 }
