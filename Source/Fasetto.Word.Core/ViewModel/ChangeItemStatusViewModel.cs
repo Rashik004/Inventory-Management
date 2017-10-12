@@ -25,15 +25,38 @@ namespace Fasetto.Word.Core
         public ChangeItemStatusViewModel()
         {
             _inventoryDeviceStatusProvider=new InventoryDeviceProvider();
-            ChangeStatusCommand=new RelayCommand(ChangeStatus);
-            IdTypes=new List<IdType>
+            StatusTypes = new List<ChoiceItem>()
             {
-                new IdType()
+                new ChoiceItem()
+                {
+                    ValueName = "In Stock",
+                    Value = 1,
+                },
+                new ChoiceItem()
+                {
+                    ValueName = "Loaned",
+                    Value = 1,
+                },
+                new ChoiceItem()
+                {
+                    ValueName = "Maintanace",
+                    Value = 2
+                },
+                new ChoiceItem()
+                {
+                    ValueName = "Out Of Order",
+                    Value = 2
+                }
+            };
+            ChangeStatusCommand=new RelayCommand(ChangeStatus);
+            IdTypes=new List<ChoiceItem>
+            {
+                new ChoiceItem()
                 {
                     ValueName = "RFID",
                     Value = 1,
                 },
-                new IdType()
+                new ChoiceItem()
                 {
                     ValueName = "Serial No",
                     Value=2
@@ -43,20 +66,27 @@ namespace Fasetto.Word.Core
 
         private void ChangeStatus()
         {
-            //if (SelectedIdType.Value == 1)
-            //{
-            //    _inventoryDeviceStatusProvider.ChangeStatusByRfid(Id, DeviceStatus.Loaned, LoggedInUserData.UserId);
-            //}
-            //else if (SelectedIdType.Value == 2)
-            //{
-            //    _inventoryDeviceStatusProvider.ChangeStatusBySerialNo(Id, DeviceStatus.Loaned, LoggedInUserData.UserId);
-            //}
+            if (SelectedIdType.Value == 1)
+            {
+                _inventoryDeviceStatusProvider.ChangeStatusByRfid(Id, (DeviceStatus) SelectedStatus.Value,
+                    LoggedInUserData.UserId);
+            }
+            else if (SelectedIdType.Value == 2)
+            {
+                _inventoryDeviceStatusProvider.ChangeStatusBySerialNo(Id, (DeviceStatus) SelectedStatus.Value,
+                    LoggedInUserData.UserId);
+            }
             IoC.Application.GoToPage(ApplicationPage.ChangeStatus);
         }
 
-        public IdType SelectedIdType { get; set; }
+        public ChoiceItem SelectedIdType { get; set; }
 
-        public List<IdType> IdTypes { get; set; }
+        public ChoiceItem SelectedStatus { get; set; }
+
+
+        public List<ChoiceItem> IdTypes { get; set; }
+
+        public List<ChoiceItem> StatusTypes { get; set; }
 
         public string Id { get; set; }
 
@@ -67,7 +97,7 @@ namespace Fasetto.Word.Core
 
     }
 
-    public class IdType
+    public class ChoiceItem
     {
         public int Value { get; set; }
 
