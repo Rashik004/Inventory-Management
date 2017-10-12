@@ -12,7 +12,7 @@ namespace Fasetto.Word.Core
 {
     public class AddItemTypeViewModel:BaseViewModel
     {
-        private IInventoryDeviceStatusProvider _inventoryDeviceStatusProvider;
+        private IInventoryDeviceProvider _inventoryDeviceStatusProvider;
 
         public ICommand AddItemTypeCommand { get; set; }
 

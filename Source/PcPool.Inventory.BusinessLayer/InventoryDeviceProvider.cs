@@ -14,7 +14,7 @@ using DeviceType = PcPool.Inventory.Model.DeviceType;
 
 namespace PcPool.Inventory.BusinessLayer
 {
-    public class InventoryDeviceProvider: IInventoryDeviceStatusProvider
+    public class InventoryDeviceProvider: IInventoryDeviceProvider
     {
         //public IList<DeviceInstance> GetAll()
         //{
@@ -84,15 +84,7 @@ namespace PcPool.Inventory.BusinessLayer
         {
             var ctx = new PcPoolEntities();
 
-            var devices = ctx.DeviceInstances.Join(ctx.DeviceTypes,
-                di => di.DeviceTypeId,
-                dt => dt.DeviceTypeId,
-                (di, dt) => new DeviceInstance()
-                {
-                    DeviceType = dt.DevicaeName,
-                    DeviceTypeId = dt.DeviceTypeId,
-                    Description = dt.DeviceDescription
-                });
+            var devices = GetDeviceDetails(ctx);
             if (deviceStatus != DeviceStatus.None)
             {
                 devices = devices.Where(d => d.DeviceStatus == deviceStatus);
@@ -102,6 +94,27 @@ namespace PcPool.Inventory.BusinessLayer
                 devices = devices.Where(d => d.DeviceTypeId == deviceTypeId);
             }
             return devices.ToList();
+        }
+
+        private static IQueryable<DeviceInstance> GetDeviceDetails(PcPoolEntities ctx)
+        {
+            var devices = ctx.DeviceInstances.Join(ctx.DeviceTypes,
+                di => di.DeviceTypeId,
+                dt => dt.DeviceTypeId,
+                (di, dt) => new DeviceInstance()
+                {
+                    DeviceName = dt.DevicaeName,
+                    DeviceTypeId = dt.DeviceTypeId,
+                    Description = di.Description,
+                    DescriptionTitle = di.DescriptionTitle,
+                    Id = di.DeviceInstanceId,
+                    ManufacturingYear = di.ManufacturingYear.Value,
+                    Model = dt.DeviceModel,
+                    DeviceStatus = (DeviceStatus) di.DeviceStatusId.Value,
+                    SeriaNo = di.SeriaNo,
+                    RFID = di.RFID
+                });
+            return devices;
         }
 
         public bool ChangeStatusBySerialNo(string serialNo, DeviceStatus newStatus, int userId)
@@ -183,6 +196,18 @@ namespace PcPool.Inventory.BusinessLayer
         public bool IsTransitionPossible(int deviceId, IList<DeviceStatus> newStatus)
         {
             throw new NotImplementedException();
+        }
+
+        public DeviceInstance GetItemBySerialId(string serialId)
+        {
+            var ctx=new PcPoolEntities();
+            return GetDeviceDetails(ctx).FirstOrDefault(dd=>dd.SeriaNo==serialId);
+        }
+
+        public DeviceInstance GetItemByRfid(string rfid)
+        {
+            var ctx = new PcPoolEntities();
+            return GetDeviceDetails(ctx).FirstOrDefault(dd => dd.SeriaNo == rfid);
         }
     }
 }

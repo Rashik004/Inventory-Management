@@ -7,7 +7,7 @@ using PcPool.Inventory.Model;
 
 namespace PcPool.Inventory.BusinessLayer.Interfaces
 {
-    public interface IInventoryDeviceStatusProvider
+    public interface IInventoryDeviceProvider
     {
         bool AddnewItemType(DeviceType NewType);
 
@@ -28,6 +28,11 @@ namespace PcPool.Inventory.BusinessLayer.Interfaces
 
         bool IsTransitionPossible(int deviceId, IList<DeviceStatus> newStatus);
 
-        
+        DeviceInstance GetItemBySerialId(string serialId);
+
+        DeviceInstance GetItemByRfid(string rfid);
+
+
+
     }
 }

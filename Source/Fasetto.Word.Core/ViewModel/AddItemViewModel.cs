@@ -39,7 +39,7 @@ namespace Fasetto.Word.Core
 
         private IInventoryStatProvide _inventoryStatProvide;
 
-        private IInventoryDeviceStatusProvider _inventoryDeviceStatusProvider;
+        private IInventoryDeviceProvider _inventoryDeviceStatusProvider;
 
 
         public AddItemViewModel()

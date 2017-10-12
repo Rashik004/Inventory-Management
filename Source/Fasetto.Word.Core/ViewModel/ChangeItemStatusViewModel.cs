@@ -20,7 +20,7 @@ namespace Fasetto.Word.Core
     public class ChangeItemStatusViewModel : BaseViewModel
     {
 
-        private IInventoryDeviceStatusProvider _inventoryDeviceStatusProvider;
+        private IInventoryDeviceProvider _inventoryDeviceStatusProvider;
 
         public ChangeItemStatusViewModel()
         {
