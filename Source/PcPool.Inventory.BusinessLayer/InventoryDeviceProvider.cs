@@ -41,7 +41,9 @@ namespace PcPool.Inventory.BusinessLayer
             var dbModel = new PcPool.DataAccessLayer.PcPoolDBaseModel.DeviceType()
             {
                 DevicaeName = newType.DeviceName,
-                DeviceDescription = newType.Description
+                DeviceDescription = newType.Description,
+                DeviceModel = newType.Model,
+                DeviceVersion = newType.Version
             };
             ctx.DeviceTypes.Add(dbModel);
             ctx.SaveChanges();

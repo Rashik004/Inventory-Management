@@ -39,7 +39,10 @@ namespace Fasetto.Word.Core
             _inventoryDeviceStatusProvider.AddnewItemType(new DeviceType()
             {
                 Description = Description,
-                DeviceName = DevicaeName
+                DeviceName = DevicaeName,
+                 Model = Model,
+                 Version = Version
+                
             });
         }
     }

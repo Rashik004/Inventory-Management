@@ -29,8 +29,50 @@
 
                         <StackPanel>
 
-                            
+                            <!-- Device Name -->
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
 
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Device Name" 
+                                       FontSize="{StaticResource FontSizeLarge}"
+                                       Margin="0 0 0 20"
+                                       Padding="0 10 0 0"
+                                       />
+                                <TextBox Grid.Column="1"  Tag="{Binding DeviceName}" IsReadOnly="True"/>
+                            </Grid>
+
+                            <!-- Model -->
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Model" 
+                                       FontSize="{StaticResource FontSizeLarge}"
+                                       Margin="0 0 0 20"
+                                       Padding="0 10 0 0"
+                                       />
+                                <TextBox Grid.Column="1"  Tag="{Binding Model}" IsReadOnly="True"/>
+                            </Grid>
+
+                            <!-- RFID -->
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="RFID" 
+                                       FontSize="{StaticResource FontSizeLarge}"
+                                       Margin="0 0 0 20"
+                                       Padding="0 10 0 0"
+                                       />
+                                <TextBox Grid.Column="1"  Tag="{Binding RFID}" IsReadOnly="True"/>
+                            </Grid>
 
                             <!-- Serial No -->
                             <Grid>
@@ -39,18 +81,28 @@
                                     <ColumnDefinition Width="*"/>
 
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Text="{Binding DeviceName}" 
+                                <TextBlock Text="Serial No" 
                                        FontSize="{StaticResource FontSizeLarge}"
                                        Margin="0 0 0 20"
                                        Padding="0 10 0 0"
                                        />
-                                <TextBox Grid.Column="1"  Tag="Id" />
+                                <TextBox Grid.Column="1"  Tag="{Binding SeriaNo}" IsReadOnly="True"/>
                             </Grid>
 
+                            <!-- Current Status -->
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
 
-
-                            <!-- Item Type -->
-
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Current Status" 
+                                       FontSize="{StaticResource FontSizeLarge}"
+                                       Margin="0 0 0 20"
+                                       Padding="0 10 0 0"
+                                       />
+                                <TextBox Grid.Column="1"  Tag="{Binding DeviceStatusId}" IsReadOnly="True"/>
+                            </Grid>
 
                             <!-- Next button -->
                             <Button Content="Add Item" 

@@ -66,17 +66,36 @@ namespace Fasetto.Word.Core
 
         private void ChangeStatus()
         {
-            if (SelectedIdType.Value == 1)
+            //Devi
+            //if (SelectedIdType.Value == 1)
+            //{
+            //    _inventoryDeviceStatusProvider.ChangeStatusByRfid(Id, (DeviceStatus)SelectedStatus.Value,
+            //        LoggedInUserData.UserId);
+            //}
+            //else if (SelectedIdType.Value == 2)
+            //{
+            //    _inventoryDeviceStatusProvider.ChangeStatusBySerialNo(Id, (DeviceStatus)SelectedStatus.Value,
+            //        LoggedInUserData.UserId);
+            //}
+
+            var deviceInstance = SelectedStatus.Value == 1
+                ? _inventoryDeviceStatusProvider.GetItemByRfid(Id)
+                : _inventoryDeviceStatusProvider.GetItemBySerialId(Id);
+            var deviceDetailsViewModel = new DeviceDetailsViewModel()
             {
-                _inventoryDeviceStatusProvider.ChangeStatusByRfid(Id, (DeviceStatus) SelectedStatus.Value,
-                    LoggedInUserData.UserId);
-            }
-            else if (SelectedIdType.Value == 2)
-            {
-                _inventoryDeviceStatusProvider.ChangeStatusBySerialNo(Id, (DeviceStatus) SelectedStatus.Value,
-                    LoggedInUserData.UserId);
-            }
-            IoC.Application.GoToPage(ApplicationPage.ChangeStatus);
+                DeviceName = deviceInstance.DeviceName,
+                DeviceType = deviceInstance.DeviceType,
+                DeviceTypeId = deviceInstance.DeviceTypeId,
+                DeviceStatusId = (int) deviceInstance.DeviceStatus,
+                Description = deviceInstance.Description,
+                DescriptionTitle = deviceInstance.Description,
+                SeriaNo = deviceInstance.SeriaNo,
+                RFID = deviceInstance.RFID,
+                ManufacturingYear = deviceInstance.ManufacturingYear,
+                Model = deviceInstance.Model,
+                SelectedDeviceStatusId = SelectedStatus.Value
+            };
+            IoC.Application.GoToPage(ApplicationPage.DeviceDetails, deviceDetailsViewModel);
         }
 
         public ChoiceItem SelectedIdType { get; set; }
