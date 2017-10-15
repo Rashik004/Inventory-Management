@@ -35,12 +35,12 @@
                                    FontFamily="{StaticResource LatoRegular}"
                                    Foreground="{StaticResource WordBlueBrush}" />
 
-                            <!-- Sign up subtext-->
+                            <!-- Sign up subtext--><!--
                             <TextBlock Text="It's about to get fun" 
                                        FontSize="{StaticResource FontSizeRegular}"
                                        Foreground="{StaticResource ForegroundDarkBrush}"
                                        Margin="0 0 0 20"
-                                       />
+                                       />-->
 
                             <!-- Email -->
                             <TextBox Text="{Binding Email}" Tag="User Id" />

@@ -125,9 +125,9 @@
 
                     <Button 
                         Style="{StaticResource TextButton}" 
-                        Content="Or, I already have an account..." 
+                        Content="Want to Add new Item Type? Click Here!" 
                         HorizontalAlignment="Center" 
-                        Command="{Binding LoginCommand}"
+                        Command="{Binding AddItemTypeCommand}"
                         />
 
                 </StackPanel>

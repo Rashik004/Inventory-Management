@@ -35,6 +35,7 @@ namespace Fasetto.Word.Core
                                    && !string.IsNullOrEmpty(SerialNo);
 
         public ICommand AddItemCommand { get; set; }
+        public ICommand AddItemTypeCommand { get; set; }
 
 
         private IInventoryStatProvide _inventoryStatProvide;
@@ -48,6 +49,13 @@ namespace Fasetto.Word.Core
             _inventoryDeviceStatusProvider=new InventoryDeviceProvider();
             DeviceTypes =_inventoryStatProvide.GetDeviceTypes();
             AddItemCommand=new RelayCommand(AddItem);
+            AddItemTypeCommand=new RelayCommand(AddItemType);
+            
+        }
+
+        private void AddItemType()
+        {
+            IoC.Application.GoToPage(ApplicationPage.AddItemType);
         }
 
         private void AddItem()
