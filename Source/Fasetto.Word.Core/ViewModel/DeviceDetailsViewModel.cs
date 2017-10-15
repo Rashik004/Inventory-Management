@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Input;
 using PcPool.Inventory.BusinessLayer;
 using PcPool.Inventory.BusinessLayer.Interfaces;
@@ -11,6 +13,12 @@ namespace Fasetto.Word.Core
     /// </summary>
     public class DeviceDetailsViewModel : BaseViewModel
     {
+
+        private readonly IInventoryDeviceProvider _inventoryDeviceStatusProvider;
+
+
+        public ICommand ConfirmCommand { get; set; }
+
 
         public string DeviceName { get; set; }
 
@@ -35,6 +43,34 @@ namespace Fasetto.Word.Core
         public int ManufacturingYear { get; set; }
 
 
+        public DeviceDetailsViewModel()
+        {
+            _inventoryDeviceStatusProvider = new InventoryDeviceProvider();
 
+            ConfirmCommand = new RelayCommand(Confirm);
+
+        }
+
+        private void Confirm()
+        {
+            var result = false;
+            if (SelectedDeviceStatusId == 1)
+            {
+                result = _inventoryDeviceStatusProvider.ChangeStatusByRfid(RFID, (DeviceStatus) SelectedDeviceStatusId,
+                    LoggedInUserData.UserId);
+            }
+            else if (SelectedDeviceStatusId == 2)
+            {
+                result = _inventoryDeviceStatusProvider.ChangeStatusBySerialNo(SeriaNo, (DeviceStatus)SelectedDeviceStatusId,
+                    LoggedInUserData.UserId);
+            }
+            if (result)
+            {
+                MessageBox.Show("Status Successfully Changed",
+                        "success",
+                        MessageBoxButton.OK); 
+            }
+            IoC.Application.GoToPage(ApplicationPage.ChangeStatus);
+        }
     }
 }

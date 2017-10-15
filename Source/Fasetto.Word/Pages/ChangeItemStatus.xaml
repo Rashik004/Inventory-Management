@@ -117,9 +117,9 @@
                             </Grid>
 
                             <!-- Next button -->
-                            <Button Content="Add Item" 
+                            <Button Content="Proceed" 
                                     local:IsBusyProperty.Value="{Binding RegisterIsRunning}"
-                                    Command="{Binding ChangeStatusCommand}"
+                                    Command="{Binding ProceedCommand}"
                                     CommandParameter="{Binding ElementName=Page}" 
                                     HorizontalAlignment="Center"
                                     IsEnabled="{Binding IsFormValid}"/>

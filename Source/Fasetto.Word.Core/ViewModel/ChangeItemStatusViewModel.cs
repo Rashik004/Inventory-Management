@@ -11,6 +11,7 @@ using PcPool.Inventory.BusinessLayer.Interfaces;
 using PcPool.Inventory.Model;
 using DeviceInstance = PcPool.Inventory.Model.DeviceInstance;
 using DeviceType = PcPool.Inventory.Model.DeviceType;
+using System.Windows;
 
 namespace Fasetto.Word.Core
 {
@@ -20,7 +21,7 @@ namespace Fasetto.Word.Core
     public class ChangeItemStatusViewModel : BaseViewModel
     {
 
-        private IInventoryDeviceProvider _inventoryDeviceStatusProvider;
+        private readonly IInventoryDeviceProvider _inventoryDeviceStatusProvider;
 
         public ChangeItemStatusViewModel()
         {
@@ -48,7 +49,7 @@ namespace Fasetto.Word.Core
                     Value = 2
                 }
             };
-            ChangeStatusCommand=new RelayCommand(ChangeStatus);
+            ProceedCommand=new RelayCommand(Proceed);
             IdTypes=new List<ChoiceItem>
             {
                 new ChoiceItem()
@@ -64,23 +65,20 @@ namespace Fasetto.Word.Core
             };    
         }
 
-        private void ChangeStatus()
+        private void Proceed()
         {
             //Devi
-            //if (SelectedIdType.Value == 1)
-            //{
-            //    _inventoryDeviceStatusProvider.ChangeStatusByRfid(Id, (DeviceStatus)SelectedStatus.Value,
-            //        LoggedInUserData.UserId);
-            //}
-            //else if (SelectedIdType.Value == 2)
-            //{
-            //    _inventoryDeviceStatusProvider.ChangeStatusBySerialNo(Id, (DeviceStatus)SelectedStatus.Value,
-            //        LoggedInUserData.UserId);
-            //}
 
             var deviceInstance = SelectedStatus.Value == 1
                 ? _inventoryDeviceStatusProvider.GetItemByRfid(Id)
                 : _inventoryDeviceStatusProvider.GetItemBySerialId(Id);
+            if (deviceInstance == null)
+            {
+                MessageBox.Show("No device found with given Id",
+                    "No Device Found",
+                    MessageBoxButton.OK);
+                return;
+            }
             var deviceDetailsViewModel = new DeviceDetailsViewModel()
             {
                 DeviceName = deviceInstance.DeviceName,
@@ -109,7 +107,7 @@ namespace Fasetto.Word.Core
 
         public string Id { get; set; }
 
-        public ICommand ChangeStatusCommand { get; set; }
+        public ICommand ProceedCommand { get; set; }
 
         public bool IsFormValid => SelectedIdType != null
                            && !string.IsNullOrEmpty(Id);
