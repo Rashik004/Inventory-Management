@@ -26,7 +26,7 @@ namespace Fasetto.Word.Core
 
         public int DeviceTypeId { get; set; }
 
-        public int DeviceStatusId { get; set; }
+        public string DeviceStatus { get; set; }
 
         public int SelectedDeviceStatusId { get; set; } 
 

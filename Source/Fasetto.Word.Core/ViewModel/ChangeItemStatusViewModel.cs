@@ -36,17 +36,17 @@ namespace Fasetto.Word.Core
                 new ChoiceItem()
                 {
                     ValueName = "Loaned",
-                    Value = 1,
+                    Value = 3,
                 },
                 new ChoiceItem()
                 {
                     ValueName = "Maintanace",
-                    Value = 2
+                    Value = 4
                 },
                 new ChoiceItem()
                 {
                     ValueName = "Out Of Order",
-                    Value = 2
+                    Value = 5
                 }
             };
             ProceedCommand=new RelayCommand(Proceed);
@@ -84,7 +84,7 @@ namespace Fasetto.Word.Core
                 DeviceName = deviceInstance.DeviceName,
                 DeviceType = deviceInstance.DeviceType,
                 DeviceTypeId = deviceInstance.DeviceTypeId,
-                DeviceStatusId = (int) deviceInstance.DeviceStatus,
+                DeviceStatus =  deviceInstance.DeviceStatus.ToString(),
                 Description = deviceInstance.Description,
                 DescriptionTitle = deviceInstance.Description,
                 SeriaNo = deviceInstance.SeriaNo,
