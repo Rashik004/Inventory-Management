@@ -9,7 +9,7 @@ namespace Fasetto.Word.Core
     /// <summary>
     /// The View Model for a login screen
     /// </summary>
-    public class LoginViewModel : BaseViewModel
+    public class UserDetailsViewModel : BaseViewModel
     {
         private IUserDataProvider _userDataProvider;
 
@@ -48,7 +48,7 @@ namespace Fasetto.Word.Core
         /// <summary>
         /// Default constructor
         /// </summary>
-        public LoginViewModel(/*IUserDataProvider userDataProvider*/)
+        public UserDetailsViewModel(/*IUserDataProvider userDataProvider*/)
         {
             // Create commands
             LoginCommand = new RelayParameterizedCommand(async (parameter) => await LoginAsync(parameter));

@@ -136,13 +136,18 @@
                     <RowDefinition Height="60"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <!--<StackPanel Grid.Row="0"
+                <StackPanel Grid.Row="0"
                             HorizontalAlignment="Right"
                             Orientation="Horizontal">
-                    <TextBlock
-                        Text="Tester"/>
-                    <Button  />
-                </StackPanel>-->
+                    <Button 
+                        Style="{StaticResource TextButton}" 
+                        Content="{Binding ApplicationViewModel.LoggedInUser,
+                                        Source={x:Static local:ViewModelLocator.Instance}}" 
+                        HorizontalAlignment="Center" 
+                        Command="{Binding ApplicationViewModel.UserDetailsCommand,
+                                        Source={x:Static local:ViewModelLocator.Instance}}"
+                        />
+                </StackPanel>
                 <local:PageHost  Grid.Row="1"
                    CurrentPage="{Binding ApplicationViewModel.CurrentPage,
                                         Source={x:Static local:ViewModelLocator.Instance}}"

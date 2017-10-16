@@ -26,6 +26,9 @@ namespace Fasetto.Word.Core
 
         public string Description { get; set; }
 
+        public string LoggedInUserName { get; set; }
+
+
         public List<DeviceType> DeviceTypes { get; set; }
 
         public DeviceType SelectedDeviceType { get; set; }

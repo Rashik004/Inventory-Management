@@ -17,6 +17,8 @@
 
         AddItemType=5,
 
-        DeviceDetails=6
+        DeviceDetails=6,
+
+        UserDetails=7
     }
 }

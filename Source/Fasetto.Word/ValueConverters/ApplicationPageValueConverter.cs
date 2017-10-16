@@ -38,6 +38,9 @@ namespace Fasetto.Word
                 case ApplicationPage.DeviceDetails:
                     return new DeviceDetailsPage(viewModel as DeviceDetailsViewModel);
 
+                case ApplicationPage.UserDetails:
+                    return new UserDetailsPage(viewModel as UserDetailsViewModel);
+
                 default:
                     Debugger.Break();
                     return null;

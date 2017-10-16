@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Fasetto.Word.Core
@@ -17,7 +18,12 @@ namespace Fasetto.Word.Core
         /// </summary>
         public ApplicationPage CurrentPage { get; private set; } = ApplicationPage.Login;
 
+        public string LoggedInUser { get; set; } 
+
         public ICommand LogOut { get; set; }
+
+        public ICommand UserDetailsCommand { get; set; }
+
 
         /// <summary>
         /// The view model to use for the current page when the CurrentPage changes
@@ -62,6 +68,16 @@ namespace Fasetto.Word.Core
             // Show side menu or not?
             SideMenuVisible = page == ApplicationPage.Dashboard;
 
+        }
+
+        public ApplicationViewModel()
+        {
+            UserDetailsCommand=new RelayCommand(UserDetails);
+        }
+
+        private void UserDetails()
+        {
+            IoC.Application.GoToPage(ApplicationPage.UserDetails);
         }
     }
 
