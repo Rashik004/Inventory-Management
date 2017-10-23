@@ -1,8 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Security;
+using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
+using PcPool.DataAccessLayer.PcPoolDBaseModel;
 using PcPool.Inventory.BusinessLayer;
 using PcPool.Inventory.BusinessLayer.Interfaces;
-using PcPool.Inventory.Model;
+using UserType = PcPool.Inventory.Model.UserType;
 
 namespace Fasetto.Word.Core
 {
@@ -71,10 +75,16 @@ namespace Fasetto.Word.Core
                 var userDataProvider= new UserDataProvider();
                 var pass = (parameter as IHavePassword).SecurePassword.Unsecure();
 
-                var user=Task.Run(() => userDataProvider.VerifyUser(Email, pass));
-                await user;
+      
 
-            
+                var isAuthenticated = await Task.Run(() => ADHelper.AuthenticateUser("pool.intra", Email, pass));
+                MessageBox.Show(isAuthenticated
+                    ? "Successfully Authenticated using ADFS"
+                    : "Couldn't Authenticated using ADFS");
+
+                var user = Task.Run(() => userDataProvider.VerifyUser("admin", "admin"));
+                await user;
+                //var user=new User();
 
                 if (user.Result != null)
                 {

@@ -38,6 +38,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -52,6 +53,7 @@
     <Compile Include="Interfaces\IUserDataProvider.cs" />
     <Compile Include="InventoryDeviceProvider.cs" />
     <Compile Include="InventoryStatProvide.cs" />
+    <Compile Include="LdapAuthentication.cs" />
     <Compile Include="LoggedInUserData.cs" />
     <Compile Include="UserDataProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
