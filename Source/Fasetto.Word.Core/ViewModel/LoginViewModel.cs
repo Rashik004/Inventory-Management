@@ -75,9 +75,9 @@ namespace Fasetto.Word.Core
                 var userDataProvider= new UserDataProvider();
                 var pass = (parameter as IHavePassword).SecurePassword.Unsecure();
 
-      
 
-                var isAuthenticated = await Task.Run(() => ADHelper.AuthenticateUser("pool.intra", Email, pass));
+                var adM = new ADSomeMethods();
+                var isAuthenticated = await Task.Run(() => adM.ValidateCredentials(Email, pass));
                 MessageBox.Show(isAuthenticated
                     ? "Successfully Authenticated using ADFS"
                     : "Couldn't Authenticated using ADFS");
