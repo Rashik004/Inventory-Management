@@ -75,7 +75,13 @@ namespace Fasetto.Word.Core
                 var pass = (parameter as IHavePassword).SecurePassword.Unsecure();
 
 
-                var adM = new AdfsAuth();
+
+#if DEBUG
+                var userData=new UserDataProvider();
+                var user = Task.Run(() => userData.VerifyUser(Email, pass));
+#else
+                var user = Task.Run(() => adM.GetUserDetails(Email));
+                                var adM = new AdfsAuth();
                 var isAuthenticated = await Task.Run(() => adM.ValidateCredentials(Email, pass));
                 System.Windows.MessageBox.Show(isAuthenticated
                     ? "Successfully Authenticated using ADFS"
@@ -83,10 +89,8 @@ namespace Fasetto.Word.Core
 
                 if (!isAuthenticated)
                     return;
-
-                var user = Task.Run(() => adM.GetUserDetails(Email));
+#endif
                 await user;
-
                 if (user.Result != null)
                 {
                     LoggedInUserData.LogInUser(user.Result.UserName,

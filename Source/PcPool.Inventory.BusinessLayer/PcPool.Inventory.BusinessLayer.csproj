@@ -53,7 +53,6 @@
     <Compile Include="Interfaces\IUserDataProvider.cs" />
     <Compile Include="InventoryDeviceProvider.cs" />
     <Compile Include="InventoryStatProvide.cs" />
-    <Compile Include="LdapAuthentication.cs" />
     <Compile Include="LoggedInUserData.cs" />
     <Compile Include="AdfsAuth.cs" />
     <Compile Include="UserDataProvider.cs" />

@@ -11,11 +11,20 @@ namespace PcPool.Inventory.BusinessLayer
 {
     public  class UserDataProvider: IUserDataProvider
     {
-        public User VerifyUser(string userName, string password)
+        public Model.User VerifyUser(string userName, string password)
         {
             var ctx=new PcPoolEntities();
-            var user = ctx.Users.FirstOrDefault(u => u.UserName == userName && u.Password == password);
-            return user;
+            try
+            {
+                var user = ctx.Users.FirstOrDefault(u => u.UserName == userName && u.Password == password);
+                return ConvertToModel(user);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
 
         public Model.User AddNewUser(Model.User user)

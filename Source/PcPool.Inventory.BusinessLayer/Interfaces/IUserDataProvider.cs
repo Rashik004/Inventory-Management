@@ -9,7 +9,7 @@ namespace PcPool.Inventory.BusinessLayer.Interfaces
 {
     public interface IUserDataProvider
     {
-        User VerifyUser(string userName, string password);
+        Model.User VerifyUser(string userName, string password);
 
         Model.User AddNewUser(Model.User user);
     }

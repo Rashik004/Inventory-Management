@@ -71,21 +71,21 @@ namespace Fasetto.Word.Core
                 var userDataProvider= new UserDataProvider();
                 var pass = (parameter as IHavePassword).SecurePassword.Unsecure();
 
-                var user=Task.Run(() => userDataProvider.VerifyUser(Email, pass));
-                await user;
+                //var user=Task.Run(() => userDataProvider.VerifyUser(Email, pass));
+                //await user;
 
             
 
-                if (user.Result != null)
-                {
-                    LoggedInUserData.LogInUser(user.Result.UserName,
-                        user.Result.FirstName,
-                        user.Result.LastName,
-                        (UserType) user.Result.UserTypeId,
-                        user.Result.UserId);
-                    IoC.Get<ApplicationViewModel>().LoggedInUser = user.Result.FirstName + ' ' + user.Result.LastName;
-                    IoC.Get<ApplicationViewModel>().GoToPage(ApplicationPage.Dashboard);
-                }
+                //if (user.Result != null)
+                //{
+                //    LoggedInUserData.LogInUser(user.Result.UserName,
+                //        user.Result.FirstName,
+                //        user.Result.LastName,
+                //        (UserType) user.Result.UserTypeId,
+                //        user.Result.UserId);
+                //    IoC.Get<ApplicationViewModel>().LoggedInUser = user.Result.FirstName + ' ' + user.Result.LastName;
+                //    IoC.Get<ApplicationViewModel>().GoToPage(ApplicationPage.Dashboard);
+                //}
 
             });
         }
