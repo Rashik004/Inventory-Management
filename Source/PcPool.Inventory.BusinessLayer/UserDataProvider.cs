@@ -18,12 +18,12 @@ namespace PcPool.Inventory.BusinessLayer
             return user;
         }
 
-        public bool AddNewUser(Model.User user)
+        public Model.User AddNewUser(Model.User user)
         {
             var ctx=new PcPoolEntities();
             try
             {
-                 ctx.Users.Add(new User()
+                 var newUser=ctx.Users.Add(new User()
                 {
                     UserTypeId = (int) UserType.User,
                     LastName = user.LastName,
@@ -37,13 +37,31 @@ namespace PcPool.Inventory.BusinessLayer
 
                 });
                 ctx.SaveChanges();
+                return ConvertToModel(newUser);
             }
             catch (Exception ex)
             {
 
-                return false;
+                return null;
             }
-            return true;
+            //return true;
+        }
+
+        private Model.User ConvertToModel(User newUser)
+        {
+            return newUser == null
+                ? null
+                : new Model.User()
+                {
+                    UserName = newUser.UserName,
+                    UserId = newUser.UserId,
+                    Email = newUser.Email,
+                    LastName = newUser.LastName,
+                    FirstName = newUser.LastName,
+                    Address = newUser.Address,
+                    Designation = newUser.Designation,
+                    Title = newUser.Title
+                };
         }
     }
 }

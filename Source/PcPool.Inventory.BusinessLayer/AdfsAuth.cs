@@ -4,13 +4,17 @@ using System.Text;
 using System.DirectoryServices.AccountManagement;
 using System.Data;
 using System.Configuration;
+using System.Linq;
 using System.Windows;
-
+using PcPool.DataAccessLayer.PcPoolDBaseModel;
+using PcPool.Inventory.Model;
+using User = PcPool.Inventory.Model.User;
+using UserType = PcPool.Inventory.Model.UserType;
 
 namespace PcPool.Inventory.BusinessLayer
 {
 
-    public class ADSomeMethods
+    public class AdfsAuth
     {
         #region Variables
 
@@ -46,7 +50,7 @@ namespace PcPool.Inventory.BusinessLayer
         /// <returns>Returns true if Expired</returns>
         public bool IsUserExpired(string sUserName)
         {
-            UserPrincipal oUserPrincipal = GetUser(sUserName);
+            UserPrincipal oUserPrincipal = GetUserPrinciple(sUserName);
             if (oUserPrincipal.AccountExpirationDate != null)
             {
                 return false;
@@ -64,7 +68,7 @@ namespace PcPool.Inventory.BusinessLayer
         /// <returns>Returns true if username Exists</returns>
         public bool IsUserExisting(string sUserName)
         {
-            if (GetUser(sUserName) == null)
+            if (GetUserPrinciple(sUserName) == null)
             {
                 return false;
             }
@@ -81,7 +85,7 @@ namespace PcPool.Inventory.BusinessLayer
         /// <returns>Returns true of Account is locked</returns>
         public bool IsAccountLocked(string sUserName)
         {
-            UserPrincipal oUserPrincipal = GetUser(sUserName);
+            UserPrincipal oUserPrincipal = GetUserPrinciple(sUserName);
             return oUserPrincipal.IsAccountLockedOut();
         }
 
@@ -94,7 +98,7 @@ namespace PcPool.Inventory.BusinessLayer
         /// </summary>
         /// <param name="sUserName">The username to get</param>
         /// <returns>Returns the UserPrincipal Object</returns>
-        public UserPrincipal GetUser(string sUserName)
+        private UserPrincipal GetUserPrinciple(string sUserName)
         {
             try
             {
@@ -107,6 +111,37 @@ namespace PcPool.Inventory.BusinessLayer
             {
                 throw e;
             }
+        }
+
+        public User GetUserDetails(string userName)
+        {
+            var user = DbUserData(userName);
+            if (user != null)
+                return ConvertToModel(GetUserPrinciple(userName), user);
+            var userDataProvide=new UserDataProvider();
+            user = userDataProvide.AddNewUser(new User()
+            {
+                UserName = userName,
+                Password = "",
+                UserType = UserType.User
+            });
+
+            return ConvertToModel(GetUserPrinciple(userName), user);
+        }
+
+        private User DbUserData(string userName)
+        {
+            var ctx= new PcPoolEntities();
+            var userDb = ctx.Users.FirstOrDefault(u => u.UserName == userName);
+            var user = userDb == null
+                ? null
+                : new User()
+                {
+                    UserName = userDb.UserName,
+                    UserId = userDb.UserId,
+                    UserType = (Model.UserType) userDb.UserTypeId
+                };
+            return user;
         }
 
         /// <summary>
@@ -127,6 +162,19 @@ namespace PcPool.Inventory.BusinessLayer
 
         #region Helper Methods
 
+        private User ConvertToModel(UserPrincipal userPrincipal,User user)
+        {
+            var nameParts = userPrincipal.DisplayName.Split(' ');
+            return new User
+            {
+                FirstName = nameParts[0],
+                LastName = nameParts.Length > 0 ? nameParts[1] : null,
+                Email = userPrincipal.EmailAddress,
+                UserId = user.UserId
+                //Address=userPrincipal.add
+            };
+
+        }
         /// <summary>
         /// Gets the base principal context
         /// </summary>

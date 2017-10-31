@@ -72,26 +72,27 @@ namespace Fasetto.Word.Core
         {
             await RunCommandAsync(() => LoginIsRunning, async () =>
             {
-                var userDataProvider= new UserDataProvider();
                 var pass = (parameter as IHavePassword).SecurePassword.Unsecure();
 
 
-                var adM = new ADSomeMethods();
+                var adM = new AdfsAuth();
                 var isAuthenticated = await Task.Run(() => adM.ValidateCredentials(Email, pass));
-                MessageBox.Show(isAuthenticated
+                System.Windows.MessageBox.Show(isAuthenticated
                     ? "Successfully Authenticated using ADFS"
                     : "Couldn't Authenticated using ADFS");
 
-                var user = Task.Run(() => userDataProvider.VerifyUser("admin", "admin"));
+                if (!isAuthenticated)
+                    return;
+
+                var user = Task.Run(() => adM.GetUserDetails(Email));
                 await user;
-                //var user=new User();
 
                 if (user.Result != null)
                 {
                     LoggedInUserData.LogInUser(user.Result.UserName,
                         user.Result.FirstName,
                         user.Result.LastName,
-                        (UserType) user.Result.UserTypeId,
+                        user.Result.UserType,
                         user.Result.UserId);
                     IoC.Get<ApplicationViewModel>().LoggedInUser = user.Result.FirstName + ' ' + user.Result.LastName;
                     IoC.Get<ApplicationViewModel>().GoToPage(ApplicationPage.Dashboard);
@@ -99,6 +100,7 @@ namespace Fasetto.Word.Core
 
             });
         }
+
 
         private void TestMethod()
         {
