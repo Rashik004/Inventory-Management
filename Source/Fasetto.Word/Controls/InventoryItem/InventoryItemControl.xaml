@@ -22,6 +22,7 @@
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
 
                                     <TextBlock Grid.Column="1" Text="{Binding ItemName}"
@@ -49,6 +50,14 @@
                                                FontFamily="{StaticResource LatoRegular}"
                                     />
                                     <TextBlock Grid.Column="4" Text="{Binding MaintanaceCount}"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Center"
+                                               Foreground="{StaticResource ForegroundVeryDarkBrush}"
+                                               FontSize="{StaticResource FontSizeSmall}"
+                                               FontFamily="{StaticResource LatoRegular}"
+                                    />
+
+                                    <TextBlock Grid.Column="5" Text="{Binding TotalCount}"
                                                VerticalAlignment="Center"
                                                HorizontalAlignment="Center"
                                                Foreground="{StaticResource ForegroundVeryDarkBrush}"

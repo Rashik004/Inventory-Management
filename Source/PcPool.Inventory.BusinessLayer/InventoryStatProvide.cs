@@ -32,12 +32,16 @@ namespace PcPool.Inventory.BusinessLayer
                     DeviceInstances.
                     Count(di => di.DeviceTypeId == deviceType.DeviceTypeId
                                 && di.DeviceStatusId.Value == (int)DeviceStatus.Maintanace);
+
+                var total = ctx.DeviceInstances.
+                    Count(di => di.DeviceTypeId == deviceType.DeviceTypeId);
                 result.Add(new InventoryItemStat()
                 {
                     Loaned = loaned,
                     InStock = inStock,
                     Maintanace = maintance,
-                    ItemName = deviceType.DevicaeName
+                    Total = total,
+                    ItemName = deviceType.DevicaeName,
                 });
             }
             return result;

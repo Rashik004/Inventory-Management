@@ -50,6 +50,7 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Grid.Column="1" Text="Item Type"
@@ -77,6 +78,14 @@
                                                FontFamily="{StaticResource LatoRegular}"
                                     />
                     <TextBlock Grid.Column="4" Text="MaintanaceCount"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Center"
+                                               Foreground="{StaticResource ForegroundVeryDarkBrush}"
+                                               FontSize="{StaticResource FontSizeSmall}"
+                                               FontFamily="{StaticResource LatoRegular}"
+                                    />
+
+                    <TextBlock Grid.Column="5" Text="Total Count"
                                                VerticalAlignment="Center"
                                                HorizontalAlignment="Center"
                                                Foreground="{StaticResource ForegroundVeryDarkBrush}"
