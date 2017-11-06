@@ -12,20 +12,20 @@ namespace Fasetto.Word.Core
     /// <summary>
     /// The View Model for a login screen
     /// </summary>
-    public class DashboardViewModel : BaseViewModel
+    public class UserListViewModel : BaseViewModel
     {
-        private IInventoryStatProvide _inventoryStatProvide;
+        private IUserDataProvider _userDataProvider;
 
-        public ObservableCollection<InventoryItemViewModel> Items { get; set; }
+        public ObservableCollection<UserListItemViewModel> Items { get; set; }
         //public TYPE Type { get; set; }
 
         public string Test { get; set; } = "Blah Blah";
 
-        public DashboardViewModel()
+        public UserListViewModel()
         {
-            _inventoryStatProvide=new InventoryStatProvide();
-            var itemList = _inventoryStatProvide.GetInventoryStatus().Select(ModelToViewModelConverter.InventoryItemStatConverter).ToList();
-            Items=new ObservableCollection<InventoryItemViewModel>(itemList);
+            _userDataProvider=new UserDataProvider();
+            var userList = _userDataProvider.GetAllUsers().Select(ModelToViewModelConverter.UserInfoConverter).ToList();
+            Items=new ObservableCollection<UserListItemViewModel>(userList);
         }
     }
 }

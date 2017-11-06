@@ -12,5 +12,7 @@ namespace PcPool.Inventory.BusinessLayer.Interfaces
         Model.User VerifyUser(string userName, string password);
 
         Model.User AddNewUser(Model.User user);
+
+        List<Model.User> GetAllUsers();
     }
 }

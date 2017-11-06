@@ -7,7 +7,7 @@ using PcPool.Inventory.Model;
 
 namespace Fasetto.Word.Core.ViewModelConverter
 {
-    public static class InventoryItemConverter
+    public static class ModelToViewModelConverter
     {
         public static InventoryItemViewModel InventoryItemStatConverter(InventoryItemStat arg)
         {
@@ -18,6 +18,15 @@ namespace Fasetto.Word.Core.ViewModelConverter
                 MaintanaceCount = arg.Maintanace,
                 LoanedCount = arg.Loaned,
                 TotalCount = arg.Total
+            };
+        }
+
+        public static UserListItemViewModel UserInfoConverter(User arg)
+        {
+            return new UserListItemViewModel()
+            {
+                UserName = arg.UserName,
+                CurrentUserType = arg.UserType.ToString()
             };
         }
     }

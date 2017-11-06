@@ -58,7 +58,7 @@
     <Compile Include="IoC\IoC.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\SecureStringHelpers.cs" />
-    <Compile Include="ViewModelConverter\InventoryItemConverter.cs" />
+    <Compile Include="ViewModelConverter\ModelToViewModelConverter.cs" />
     <Compile Include="ViewModel\AddItemTypeViewModel.cs" />
     <Compile Include="ViewModel\AddItemViewModel.cs" />
     <Compile Include="ViewModel\ApplicationViewModel.cs" />
@@ -71,7 +71,10 @@
     <Compile Include="ViewModel\Chat\ChatListViewModel.cs" />
     <Compile Include="ViewModel\Chat\Design\ChatListDesignModel.cs" />
     <Compile Include="ViewModel\Chat\Design\ChatListItemDesignModel.cs" />
+    <Compile Include="ViewModel\UserListViewModel.cs" />
     <Compile Include="ViewModel\DashboardViewModel.cs" />
+    <Compile Include="ViewModel\InventoryItem\Design\UserListItemDesignModel.cs" />
+    <Compile Include="ViewModel\UserListItemViewModel.cs" />
     <Compile Include="ViewModel\DeviceDetailsViewModel.cs" />
     <Compile Include="ViewModel\InventoryItem\Design\InventoryItemDesignModel.cs" />
     <Compile Include="ViewModel\InventoryItem\Design\InventoryListDesignModel.cs" />

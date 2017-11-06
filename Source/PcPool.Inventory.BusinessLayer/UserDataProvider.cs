@@ -56,6 +56,14 @@ namespace PcPool.Inventory.BusinessLayer
             //return true;
         }
 
+        public List<Model.User> GetAllUsers()
+        {
+            var ctx=new PcPoolEntities();
+            var users = ctx.Users.Select(ConvertToModel).ToList();
+            return users;
+            //return null;
+        }
+
         private Model.User ConvertToModel(User newUser)
         {
             return newUser == null
