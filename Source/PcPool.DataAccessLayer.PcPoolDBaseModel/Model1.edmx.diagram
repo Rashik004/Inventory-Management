@@ -7,13 +7,13 @@
       <Diagram DiagramId="7ed872ebe069439d931de8f47da71b16" Name="Diagram1">
         <EntityTypeShape EntityType="PcPoolModel.DeviceInstance" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PcPoolModel.DeviceStatu" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PcPoolModel.DeviceType" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PcPoolModel.ReservationList" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="PcPoolModel.User" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="PcPoolModel.UserType" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
-        <AssociationConnector Association="PcPoolModel.ReservationList_FK_DeviceType" ManuallyRouted="false" />
-        <AssociationConnector Association="PcPoolModel.REL_1" ManuallyRouted="false" />
         <EntityTypeShape EntityType="PcPoolModel.DeviceStatusHistory" Width="1.5" PointX="8.375" PointY="3.75" />
+        <EntityTypeShape EntityType="PcPoolModel.DeviceType" Width="1.5" PointX="3" PointY="5.25" />
+        <EntityTypeShape EntityType="PcPoolModel.ReservationList" Width="1.5" PointX="5.25" PointY="1.25" />
+        <AssociationConnector Association="PcPoolModel.ReservationList_FK_DeviceType" />
+        <AssociationConnector Association="PcPoolModel.REL_1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

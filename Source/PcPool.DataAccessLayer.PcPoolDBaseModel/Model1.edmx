@@ -54,7 +54,7 @@
           <Property Name="ReserverUserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="StartDate" Type="date" />
           <Property Name="EndDate" Type="date" />
-          <Property Name="DeviceTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DeviceInstanceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ReservationDate" Type="date" />
         </EntityType>
         <EntityType Name="User">
@@ -65,7 +65,6 @@
           <Property Name="FirstName" Type="varchar" MaxLength="50" />
           <Property Name="LastName" Type="varchar" MaxLength="50" />
           <Property Name="UserName" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="Password" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Email" Type="varchar" MaxLength="100" />
           <Property Name="Designation" Type="varchar" MaxLength="10" />
           <Property Name="Address" Type="varchar" MaxLength="500" />
@@ -99,7 +98,7 @@
               <PropertyRef Name="DeviceTypeId" />
             </Principal>
             <Dependent Role="ReservationList">
-              <PropertyRef Name="DeviceTypeId" />
+              <PropertyRef Name="DeviceInstanceId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -144,31 +143,6 @@
           <Property Name="DeviceStatusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DeviceStatusEnglishName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="DeviceType">
-          <Key>
-            <PropertyRef Name="DeviceTypeId" />
-          </Key>
-          <Property Name="DeviceTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DevicaeName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="DeviceDescription" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ReservationLists" Relationship="Self.ReservationList_FK_DeviceType" FromRole="DeviceType" ToRole="ReservationList" />
-          <Property Name="DeviceModel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DeviceVersion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DeviceVendor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="ReservationList">
-          <Key>
-            <PropertyRef Name="ReservationId" />
-          </Key>
-          <Property Name="ReservationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ReserverUserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="StartDate" Type="DateTime" />
-          <Property Name="EndDate" Type="DateTime" />
-          <Property Name="DeviceTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ReservationDate" Type="DateTime" />
-          <NavigationProperty Name="DeviceType" Relationship="Self.ReservationList_FK_DeviceType" FromRole="ReservationList" ToRole="DeviceType" />
-          <NavigationProperty Name="User" Relationship="Self.REL_1" FromRole="ReservationList" ToRole="User" />
-        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="UserId" />
@@ -177,13 +151,12 @@
           <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Designation" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ReservationLists" Relationship="Self.REL_1" FromRole="User" ToRole="ReservationList" />
           <Property Name="UserTypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ReservationLists" Relationship="PcPoolModel.REL_1" FromRole="User" ToRole="ReservationList" />
         </EntityType>
         <EntityType Name="UserType">
           <Key>
@@ -192,46 +165,22 @@
           <Property Name="UserTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserTypeEnglishName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
-        <Association Name="ReservationList_FK_DeviceType">
-          <End Role="DeviceType" Type="Self.DeviceType" Multiplicity="1" />
-          <End Role="ReservationList" Type="Self.ReservationList" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DeviceType">
-              <PropertyRef Name="DeviceTypeId" />
-            </Principal>
-            <Dependent Role="ReservationList">
-              <PropertyRef Name="DeviceTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="REL_1">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="ReservationList" Type="Self.ReservationList" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="ReservationList">
-              <PropertyRef Name="ReserverUserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="PcPoolEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="DeviceInstances" EntityType="Self.DeviceInstance" />
           <EntitySet Name="DeviceStatus" EntityType="Self.DeviceStatu" />
-          <EntitySet Name="DeviceTypes" EntityType="Self.DeviceType" />
-          <EntitySet Name="ReservationLists" EntityType="Self.ReservationList" />
           <EntitySet Name="Users" EntityType="Self.User" />
           <EntitySet Name="UserTypes" EntityType="Self.UserType" />
-          <AssociationSet Name="ReservationList_FK_DeviceType" Association="Self.ReservationList_FK_DeviceType">
+          <EntitySet Name="DeviceStatusHistories" EntityType="PcPoolModel.DeviceStatusHistory" />
+          <EntitySet Name="DeviceTypes" EntityType="PcPoolModel.DeviceType" />
+          <EntitySet Name="ReservationLists" EntityType="PcPoolModel.ReservationList" />
+          <AssociationSet Name="ReservationList_FK_DeviceType" Association="PcPoolModel.ReservationList_FK_DeviceType">
             <End Role="DeviceType" EntitySet="DeviceTypes" />
             <End Role="ReservationList" EntitySet="ReservationLists" />
           </AssociationSet>
-          <AssociationSet Name="REL_1" Association="Self.REL_1">
+          <AssociationSet Name="REL_1" Association="PcPoolModel.REL_1">
             <End Role="User" EntitySet="Users" />
             <End Role="ReservationList" EntitySet="ReservationLists" />
           </AssociationSet>
-          <EntitySet Name="DeviceStatusHistories" EntityType="PcPoolModel.DeviceStatusHistory" />
         </EntityContainer>
         <EntityType Name="DeviceStatusHistory">
           <Key>
@@ -243,6 +192,55 @@
           <Property Name="ModifiedByUserId" Type="Int32" Nullable="false" />
           <Property Name="NewStatusId" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="DeviceType">
+          <Key>
+            <PropertyRef Name="DeviceTypeId" />
+          </Key>
+          <Property Name="DeviceTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DevicaeName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="DeviceDescription" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="DeviceModel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DeviceVersion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DeviceVendor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ReservationLists" Relationship="PcPoolModel.ReservationList_FK_DeviceType" FromRole="DeviceType" ToRole="ReservationList" />
+        </EntityType>
+        <EntityType Name="ReservationList">
+          <Key>
+            <PropertyRef Name="ReservationId" />
+          </Key>
+          <Property Name="ReservationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReserverUserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StartDate" Type="DateTime" />
+          <Property Name="EndDate" Type="DateTime" />
+          <Property Name="DeviceInstanceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReservationDate" Type="DateTime" />
+          <NavigationProperty Name="DeviceType" Relationship="PcPoolModel.ReservationList_FK_DeviceType" FromRole="ReservationList" ToRole="DeviceType" />
+          <NavigationProperty Name="User" Relationship="PcPoolModel.REL_1" FromRole="ReservationList" ToRole="User" />
+        </EntityType>
+        <Association Name="ReservationList_FK_DeviceType">
+          <End Type="PcPoolModel.DeviceType" Role="DeviceType" Multiplicity="1" />
+          <End Type="PcPoolModel.ReservationList" Role="ReservationList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeviceType">
+              <PropertyRef Name="DeviceTypeId" />
+            </Principal>
+            <Dependent Role="ReservationList">
+              <PropertyRef Name="DeviceInstanceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="REL_1">
+          <End Type="PcPoolModel.User" Role="User" Multiplicity="1" />
+          <End Type="PcPoolModel.ReservationList" Role="ReservationList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ReservationList">
+              <PropertyRef Name="ReserverUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -271,30 +269,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DeviceTypes">
-            <EntityTypeMapping TypeName="PcPoolModel.DeviceType">
-              <MappingFragment StoreEntitySet="DeviceType">
-                <ScalarProperty Name="DeviceVendor" ColumnName="DeviceVendor" />
-                <ScalarProperty Name="DeviceVersion" ColumnName="DeviceVersion" />
-                <ScalarProperty Name="DeviceModel" ColumnName="DeviceModel" />
-                <ScalarProperty Name="DeviceTypeId" ColumnName="DeviceTypeId" />
-                <ScalarProperty Name="DevicaeName" ColumnName="DevicaeName" />
-                <ScalarProperty Name="DeviceDescription" ColumnName="DeviceDescription" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ReservationLists">
-            <EntityTypeMapping TypeName="PcPoolModel.ReservationList">
-              <MappingFragment StoreEntitySet="ReservationList">
-                <ScalarProperty Name="ReservationId" ColumnName="ReservationId" />
-                <ScalarProperty Name="ReserverUserId" ColumnName="ReserverUserId" />
-                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-                <ScalarProperty Name="DeviceTypeId" ColumnName="DeviceTypeId" />
-                <ScalarProperty Name="ReservationDate" ColumnName="ReservationDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="PcPoolModel.User">
               <MappingFragment StoreEntitySet="User">
@@ -303,7 +277,6 @@
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Designation" ColumnName="Designation" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
@@ -327,6 +300,30 @@
                 <ScalarProperty Name="ModificationDate" ColumnName="ModificationDate" />
                 <ScalarProperty Name="DeviceInstanceId" ColumnName="DeviceInstanceId" />
                 <ScalarProperty Name="DeviceStatusHistoryId" ColumnName="DeviceStatusHistoryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DeviceTypes">
+            <EntityTypeMapping TypeName="PcPoolModel.DeviceType">
+              <MappingFragment StoreEntitySet="DeviceType">
+                <ScalarProperty Name="DeviceVendor" ColumnName="DeviceVendor" />
+                <ScalarProperty Name="DeviceVersion" ColumnName="DeviceVersion" />
+                <ScalarProperty Name="DeviceModel" ColumnName="DeviceModel" />
+                <ScalarProperty Name="DeviceDescription" ColumnName="DeviceDescription" />
+                <ScalarProperty Name="DevicaeName" ColumnName="DevicaeName" />
+                <ScalarProperty Name="DeviceTypeId" ColumnName="DeviceTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReservationLists">
+            <EntityTypeMapping TypeName="PcPoolModel.ReservationList">
+              <MappingFragment StoreEntitySet="ReservationList">
+                <ScalarProperty Name="ReservationDate" ColumnName="ReservationDate" />
+                <ScalarProperty Name="DeviceInstanceId" ColumnName="DeviceInstanceId" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="ReserverUserId" ColumnName="ReserverUserId" />
+                <ScalarProperty Name="ReservationId" ColumnName="ReservationId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
