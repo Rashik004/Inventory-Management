@@ -16,7 +16,7 @@ namespace PcPool.Inventory.BusinessLayer
             var ctx=new PcPoolEntities();
             try
             {
-                var user = ctx.Users.FirstOrDefault(u => u.UserName == userName && u.Password == password);
+                var user = ctx.Users.FirstOrDefault(u => u.UserName == userName /*&& u.Password == password*/);
                 return ConvertToModel(user);
 
             }
@@ -42,7 +42,7 @@ namespace PcPool.Inventory.BusinessLayer
                     Address = user.Address,
                     Designation = user.Designation,
                     Email = user.Email,
-                    Password = user.Password
+                    //Password = user.Password
 
                 });
                 ctx.SaveChanges();
