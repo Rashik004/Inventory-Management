@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Fasetto.Word.Core.ViewModelConverter;
-using PcPool.DataAccessLayer.PcPoolDBaseModel;
+//using PcPool.DataAccessLayer.PcPoolDBaseModel;
 using PcPool.Inventory.BusinessLayer;
 using PcPool.Inventory.BusinessLayer.Interfaces;
 using PcPool.Inventory.Model;

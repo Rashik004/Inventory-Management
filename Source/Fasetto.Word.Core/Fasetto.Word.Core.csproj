@@ -91,9 +91,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PcPool.DataAccessLayer.PcPoolDBaseModel\PcPool.DataAccessLayer.PcPoolDBaseModel.csproj">
-      <Project>{b96a32e6-10c2-45c4-a2a1-c98fcf811b97}</Project>
-      <Name>PcPool.DataAccessLayer.PcPoolDBaseModel</Name>
+    <ProjectReference Include="..\PcPool.DAL\PcPool.DAL.csproj">
+      <Project>{828bf0b3-3aef-4c4f-846f-267ab1487111}</Project>
+      <Name>PcPool.DAL</Name>
     </ProjectReference>
     <ProjectReference Include="..\PcPool.Inventory.BusinessLayer\PcPool.Inventory.BusinessLayer.csproj">
       <Project>{40e009af-687f-4620-bef1-10bef8b8e271}</Project>

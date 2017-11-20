@@ -143,7 +143,7 @@ namespace PcPool.Inventory.BusinessLayer
             try
             {
                 ctx.DeviceInstances.Attach(device);
-                ctx.Entry(device).State = EntityState.Modified;
+                //ctx.Entry(device).State = EntityState.Modified;
                 ctx.SaveChanges();
             }
             catch (Exception ex)

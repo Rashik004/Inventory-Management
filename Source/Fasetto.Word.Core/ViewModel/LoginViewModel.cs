@@ -3,7 +3,7 @@ using System.Security;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using PcPool.DataAccessLayer.PcPoolDBaseModel;
+//using PcPool.DataAccessLayer.PcPoolDBaseModel;
 using PcPool.Inventory.BusinessLayer;
 using PcPool.Inventory.BusinessLayer.Interfaces;
 using UserType = PcPool.Inventory.Model.UserType;
