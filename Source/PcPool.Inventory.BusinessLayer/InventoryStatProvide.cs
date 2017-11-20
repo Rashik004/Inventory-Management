@@ -16,37 +16,47 @@ namespace PcPool.Inventory.BusinessLayer
     {
         public IList<InventoryItemStat> GetInventoryStatus()
         {
-            var ctx=new PcPoolEntities();
-            var devicesTypes = ctx.DeviceTypes;
-            var result=new List<InventoryItemStat>();
-            foreach (var deviceType in devicesTypes)
+            using (var ctx = new PcPoolEntities())
             {
-                var inStock = ctx.
-                    DeviceInstances.
-                    Count(di => di.DeviceTypeID == deviceType.DeviceTypeID
-                                && di.DeviceStatusID.Value == (int) DeviceStatus.InStock);
-                var loaned = ctx.
-                    DeviceInstances.
-                    Count(di => di.DeviceTypeID == deviceType.DeviceTypeID
-                                && di.DeviceStatusID.Value == (int) DeviceStatus.Loaned);
+                var devicesTypes = ctx.DeviceTypes;
 
-                var maintance = ctx.
-                    DeviceInstances.
-                    Count(di => di.DeviceTypeID == deviceType.DeviceTypeID
-                                && di.DeviceStatusID.Value == (int)DeviceStatus.Maintanace);
-
-                var total = ctx.DeviceInstances.
-                    Count(di => di.DeviceTypeID == deviceType.DeviceTypeID);
-                result.Add(new InventoryItemStat()
+                var result = new List<InventoryItemStat>();
+                try
                 {
-                    Loaned = loaned,
-                    InStock = inStock,
-                    Maintanace = maintance,
-                    Total = total,
-                    ItemName = deviceType.DevicaeName,
-                });
+                    foreach (var deviceType in devicesTypes)
+                    {
+                        var inStock = ctx.
+                            DeviceInstances.
+                            Count(di => di.DeviceTypeID == deviceType.DeviceTypeID
+                                        && di.DeviceStatusID.Value == (int)DeviceStatus.InStock);
+                        var loaned = ctx.
+                            DeviceInstances.
+                            Count(di => di.DeviceTypeID == deviceType.DeviceTypeID
+                                        && di.DeviceStatusID.Value == (int)DeviceStatus.Loaned);
+
+                        var maintance = ctx.
+                            DeviceInstances.
+                            Count(di => di.DeviceTypeID == deviceType.DeviceTypeID
+                                        && di.DeviceStatusID.Value == (int)DeviceStatus.Maintanace);
+
+                        var total = ctx.DeviceInstances.
+                            Count(di => di.DeviceTypeID == deviceType.DeviceTypeID);
+                        result.Add(new InventoryItemStat()
+                        {
+                            Loaned = loaned,
+                            InStock = inStock,
+                            Maintanace = maintance,
+                            Total = total,
+                            ItemName = deviceType.DevicaeName,
+                        });
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+                return result; 
             }
-            return result;
         }
 
         public List<DeviceType> GetDeviceTypes()
