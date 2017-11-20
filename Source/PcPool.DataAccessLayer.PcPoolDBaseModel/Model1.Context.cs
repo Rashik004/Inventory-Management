@@ -13,40 +13,40 @@
 namespace PcPool.DataAccessLayer.PcPoolDBaseModel
 {
 
-using System;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
+    using System;
+    using System.Data.Entity;
+    using System.Data.Entity.Infrastructure;
 
 
-public partial class PcPoolEntities : DbContext
-{
-    public PcPoolEntities()
-        : base("name=PcPoolEntities")
+    public partial class PcPoolEntities : DbContext
     {
+        public PcPoolEntities()
+            : base("name=PcPoolEntities")
+        {
+
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            throw new UnintentionalCodeFirstException();
+        }
+
+
+        public DbSet<DeviceInstance> DeviceInstances { get; set; }
+
+        public DbSet<DeviceStatu> DeviceStatus { get; set; }
+
+        public DbSet<User> Users { get; set; }
+
+        public DbSet<UserType> UserTypes { get; set; }
+
+        public DbSet<DeviceStatusHistory> DeviceStatusHistories { get; set; }
+
+        public DbSet<DeviceType> DeviceTypes { get; set; }
+
+        public DbSet<ReservationList> ReservationLists { get; set; }
 
     }
-
-    protected override void OnModelCreating(DbModelBuilder modelBuilder)
-    {
-        throw new UnintentionalCodeFirstException();
-    }
-
-
-    public DbSet<DeviceInstance> DeviceInstances { get; set; }
-
-    public DbSet<DeviceStatu> DeviceStatus { get; set; }
-
-    public DbSet<User> Users { get; set; }
-
-    public DbSet<UserType> UserTypes { get; set; }
-
-    public DbSet<DeviceStatusHistory> DeviceStatusHistories { get; set; }
-
-    public DbSet<DeviceType> DeviceTypes { get; set; }
-
-    public DbSet<ReservationList> ReservationLists { get; set; }
-
-}
 
 }
 
