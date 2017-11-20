@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using PcPool.DataAccessLayer.PcPoolDBaseModel;
+//using PcPool.DataAccessLayer.PcPoolDBaseModel;
+using PcPool.DAL;
+using PcPool.DAL.Models;
 using PcPool.Inventory.BusinessLayer.Interfaces;
 using UserType = PcPool.Inventory.Model.UserType;
 
@@ -32,9 +34,9 @@ namespace PcPool.Inventory.BusinessLayer
             var ctx=new PcPoolEntities();
             try
             {
-                 var newUser=ctx.Users.Add(new User()
+                 var newUser=ctx.Users.Add(new PcPoolModels.User()
                 {
-                    UserTypeId = (int) UserType.User,
+                    UserTypeID = (int) UserType.User,
                     LastName = user.LastName,
                     FirstName = user.FirstName,
                     UserName = user.UserName,
@@ -64,14 +66,14 @@ namespace PcPool.Inventory.BusinessLayer
             //return null;
         }
 
-        private Model.User ConvertToModel(User newUser)
+        private Model.User ConvertToModel(PcPoolModels.User newUser)
         {
             return newUser == null
                 ? null
                 : new Model.User()
                 {
                     UserName = newUser.UserName,
-                    UserId = newUser.UserId,
+                    UserId = newUser.UserID,
                     Email = newUser.Email,
                     LastName = newUser.LastName,
                     FirstName = newUser.LastName,

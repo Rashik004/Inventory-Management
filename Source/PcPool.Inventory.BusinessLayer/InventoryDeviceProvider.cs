@@ -6,11 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using PcPool.DataAccessLayer.PcPoolDBaseModel;
+//using PcPool.DataAccessLayer.PcPoolDBaseModel;
 using PcPool.Inventory.BusinessLayer.Interfaces;
 using PcPool.Inventory.Model;
 using DeviceInstance = PcPool.Inventory.Model.DeviceInstance;
 using DeviceType = PcPool.Inventory.Model.DeviceType;
+using PcPool.DAL;
+using PcPool.DAL.Models;
 
 namespace PcPool.Inventory.BusinessLayer
 {
@@ -38,7 +40,8 @@ namespace PcPool.Inventory.BusinessLayer
         public bool AddnewItemType(DeviceType newType)
         {
             var ctx=new PcPoolEntities();
-            var dbModel = new PcPool.DataAccessLayer.PcPoolDBaseModel.DeviceType()
+            //var as=new PcPoolModels.DeviceType();
+            var dbModel = new PcPoolModels.DeviceType()
             {
                 DevicaeName = newType.DeviceName,
                 DeviceDescription = newType.Description,
@@ -61,14 +64,14 @@ namespace PcPool.Inventory.BusinessLayer
                 //var state = ctx.Entry(test).State;
                 //ctx.SaveChanges();
                 //state = ctx.Entry(test).State;
-                ctx.DeviceInstances.Add(new DataAccessLayer.PcPoolDBaseModel.DeviceInstance()
+                ctx.DeviceInstances.Add(new PcPoolModels.DeviceInstance()
                 {
-                    DeviceTypeId = deviceInstance.DeviceTypeId,
+                    DeviceTypeID = deviceInstance.DeviceTypeId,
                     Description = deviceInstance.Description,
                     DescriptionTitle = deviceInstance.DescriptionTitle,
                     SeriaNo = deviceInstance.SeriaNo,
                     RFID = deviceInstance.RFID,
-                    DeviceStatusId = (int)deviceInstance.DeviceStatus,
+                    DeviceStatusID = (int)deviceInstance.DeviceStatus,
                     ManufacturingYear = deviceInstance.ManufacturingYear
                     
                 });
@@ -101,18 +104,18 @@ namespace PcPool.Inventory.BusinessLayer
         private static IQueryable<DeviceInstance> GetDeviceDetails(PcPoolEntities ctx)
         {
             var devices = ctx.DeviceInstances.Join(ctx.DeviceTypes,
-                di => di.DeviceTypeId,
-                dt => dt.DeviceTypeId,
+                di => di.DeviceTypeID,
+                dt => dt.DeviceTypeID,
                 (di, dt) => new DeviceInstance()
                 {
                     DeviceName = dt.DevicaeName,
-                    DeviceTypeId = dt.DeviceTypeId,
+                    DeviceTypeId = dt.DeviceTypeID,
                     Description = di.Description,
                     DescriptionTitle = di.DescriptionTitle,
-                    Id = di.DeviceInstanceId,
+                    Id = di.DeviceInstanceID,
                     ManufacturingYear = di.ManufacturingYear.Value,
                     Model = dt.DeviceModel,
-                    DeviceStatus = (DeviceStatus) di.DeviceStatusId.Value,
+                    DeviceStatus = (DeviceStatus) di.DeviceStatusID.Value,
                     SeriaNo = di.SeriaNo,
                     RFID = di.RFID
                 });
@@ -127,16 +130,16 @@ namespace PcPool.Inventory.BusinessLayer
             {
                 return false;
             }
-            AddDeviceStatusHistory(ctx, device.DeviceInstanceId, newStatus, userId);
+            AddDeviceStatusHistory(ctx, device.DeviceInstanceID, newStatus, userId);
 
 
             return UpdateDeviceStatus(newStatus, device, ctx);
         }
 
-        private static bool UpdateDeviceStatus(DeviceStatus newStatus, DataAccessLayer.PcPoolDBaseModel.DeviceInstance device, PcPoolEntities ctx)
+        private static bool UpdateDeviceStatus(DeviceStatus newStatus, PcPoolModels.DeviceInstance device, PcPoolEntities ctx)
         {
-            device.DeviceStatusId = (int)newStatus;
-
+            //device.DeviceStatusID.Value = (int)newStatus;
+            device.DeviceStatusID = (int)newStatus;
             try
             {
                 ctx.DeviceInstances.Attach(device);
@@ -154,12 +157,12 @@ namespace PcPool.Inventory.BusinessLayer
         private void AddDeviceStatusHistory(PcPoolEntities ctx, int deviceInstanceId, DeviceStatus newDeviceStatus, int userId)
         {
             //var ctx=new PcPoolEntities();
-            ctx.DeviceStatusHistories.Add(new DeviceStatusHistory()
+            ctx.DeviceStatusHistories.Add(new PcPoolModels.DeviceStatusHistory()
             {
-                DeviceInstanceId = deviceInstanceId,
+                DeviceInstanceID = deviceInstanceId,
                 ModificationDate = DateTime.Now,
-                ModifiedByUserId = userId,
-                NewStatusId = (int) newDeviceStatus
+                ModifiedByUserID = userId,
+                NewStatusID = (int) newDeviceStatus
             });
             //ctx.SaveChanges();
         }

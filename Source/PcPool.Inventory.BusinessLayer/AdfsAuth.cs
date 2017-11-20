@@ -6,10 +6,11 @@ using System.Data;
 using System.Configuration;
 using System.Linq;
 using System.Windows;
-using PcPool.DataAccessLayer.PcPoolDBaseModel;
+//using PcPool.DataAccessLayer.PcPoolDBaseModel;
 using PcPool.Inventory.Model;
 using User = PcPool.Inventory.Model.User;
 using UserType = PcPool.Inventory.Model.UserType;
+using PcPool.DAL;
 
 namespace PcPool.Inventory.BusinessLayer
 {
@@ -138,8 +139,8 @@ namespace PcPool.Inventory.BusinessLayer
                 : new User()
                 {
                     UserName = userDb.UserName,
-                    UserId = userDb.UserId,
-                    UserType = (Model.UserType) userDb.UserTypeId
+                    UserId = userDb.UserID,
+                    UserType = (Model.UserType) userDb.UserTypeID
                 };
             return user;
         }
