@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PcPool.Inventory.Model", "P
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PcPool.Inventory.Converter", "PcPool.Inventory.Converter\PcPool.Inventory.Converter.csproj", "{0D7E60CC-3E45-40CE-8489-51D3138CFEDD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PcPool.DAL", "PcPool.DAL\PcPool.DAL.csproj", "{828BF0B3-3AEF-4C4F-846F-267AB1487111}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{0D7E60CC-3E45-40CE-8489-51D3138CFEDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D7E60CC-3E45-40CE-8489-51D3138CFEDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0D7E60CC-3E45-40CE-8489-51D3138CFEDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{828BF0B3-3AEF-4C4F-846F-267AB1487111}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{828BF0B3-3AEF-4C4F-846F-267AB1487111}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{828BF0B3-3AEF-4C4F-846F-267AB1487111}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{828BF0B3-3AEF-4C4F-846F-267AB1487111}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
