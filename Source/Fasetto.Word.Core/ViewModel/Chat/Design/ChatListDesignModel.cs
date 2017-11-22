@@ -73,6 +73,11 @@ namespace Fasetto.Word.Core
                 });
 
             }
+            Items.Add(new ChatListItemViewModel()
+            {
+                Name = "Reserve",
+                Page = ApplicationPage.DeviceReservation
+            });
         }
 
         #endregion

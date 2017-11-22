@@ -41,6 +41,9 @@ namespace Fasetto.Word
                 case ApplicationPage.UserDetails:
                     return new UserDetailsPage(viewModel as UserDetailsViewModel);
 
+                    case ApplicationPage.DeviceReservation:
+                        return new DeviceReservationPage(viewModel as DeviceReservationViewModel);
+
                 default:
                     Debugger.Break();
                     return null;

@@ -19,6 +19,8 @@
 
         DeviceDetails=6,
 
-        UserDetails=7
+        UserDetails=7,
+
+        DeviceReservation
     }
 }

@@ -92,6 +92,7 @@
     <Compile Include="ViewModel\Chat\ChatListViewModel.cs" />
     <Compile Include="ViewModel\Chat\Design\ChatListDesignModel.cs" />
     <Compile Include="ViewModel\Chat\Design\ChatListItemDesignModel.cs" />
+    <Compile Include="ViewModel\DeviceReservationViewModel.cs" />
     <Compile Include="ViewModel\UserListViewModel.cs" />
     <Compile Include="ViewModel\DashboardViewModel.cs" />
     <Compile Include="ViewModel\InventoryItem\Design\UserListItemDesignModel.cs" />

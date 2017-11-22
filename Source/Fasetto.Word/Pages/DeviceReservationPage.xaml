@@ -1,0 +1,125 @@
+﻿<local:BasePage x:TypeArguments="core:DeviceReservationViewModel" x:Class="Fasetto.Word.DeviceReservationPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Fasetto.Word"
+      xmlns:core="clr-namespace:Fasetto.Word.Core;assembly=Fasetto.Word.Core"
+      mc:Ignorable="d" 
+      x:Name="Page"
+      d:DesignHeight="700" d:DesignWidth="700"
+      Title="ChangeItemStatus">
+
+    <Border>
+        <Grid>
+
+            <!-- Main content scroll -->
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                <StackPanel 
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    TextBlock.TextAlignment="Center">
+
+                    <!-- Login main content white box -->
+                    <Border Background="{StaticResource ForegroundLightBrush}" 
+                            CornerRadius="10"
+                            Padding="15 50 15 15"
+                            Width="530"
+                            Margin="50 50 50 0">
+
+                        <StackPanel>
+
+                            <!-- Device Name -->
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Device Name" 
+                                       FontSize="{StaticResource FontSizeLarge}"
+                                       Margin="0 0 0 20"
+                                       Padding="0 10 0 0"
+                                       />
+                                <TextBox Grid.Column="1"  Tag="{Binding DeviceName}" IsReadOnly="True"/>
+                            </Grid>
+
+                            <!-- Model -->
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Model" 
+                                       FontSize="{StaticResource FontSizeLarge}"
+                                       Margin="0 0 0 20"
+                                       Padding="0 10 0 0"
+                                       />
+                                <TextBox Grid.Column="1"  Tag="{Binding Model}" IsReadOnly="True"/>
+                            </Grid>
+
+                            <!-- RFID -->
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="RFID" 
+                                       FontSize="{StaticResource FontSizeLarge}"
+                                       Margin="0 0 0 20"
+                                       Padding="0 10 0 0"
+                                       />
+                                <TextBox Grid.Column="1"  Tag="{Binding RFID}" IsReadOnly="True"/>
+                            </Grid>
+
+                            <!-- Serial No -->
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Serial No" 
+                                       FontSize="{StaticResource FontSizeLarge}"
+                                       Margin="0 0 0 20"
+                                       Padding="0 10 0 0"
+                                       />
+                                <TextBox Grid.Column="1"  Tag="{Binding SeriaNo}" IsReadOnly="True"/>
+                            </Grid>
+
+                            <!-- Current Status -->
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Current Status" 
+                                       FontSize="{StaticResource FontSizeLarge}"
+                                       Margin="0 0 0 20"
+                                       Padding="0 10 0 0"
+                                       />
+                                <TextBox Grid.Column="1"  Tag="{Binding DeviceStatus}" IsReadOnly="True"/>
+                            </Grid>
+
+                            <!-- Next button -->
+                            <Button Content="Confirm" 
+                                    local:IsBusyProperty.Value="{Binding RegisterIsRunning}"
+                                    Command="{Binding ConfirmCommand}"
+                                    CommandParameter="{Binding ElementName=Page}" 
+                                    HorizontalAlignment="Center"
+                                    IsEnabled="{Binding IsFormValid}"/>
+
+                        </StackPanel>
+
+                    </Border>
+
+                    
+
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Border>
+</local:BasePage>
