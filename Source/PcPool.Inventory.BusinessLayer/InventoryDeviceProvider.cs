@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -143,7 +144,7 @@ namespace PcPool.Inventory.BusinessLayer
             try
             {
                 ctx.DeviceInstances.Attach(device);
-                //ctx.Entry(device).State = EntityState.Modified;
+                ctx.Entry(device).State = EntityState.Modified;
                 ctx.SaveChanges();
             }
             catch (Exception ex)

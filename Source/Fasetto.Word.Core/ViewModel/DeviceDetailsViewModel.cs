@@ -28,6 +28,8 @@ namespace Fasetto.Word.Core
 
         public string DeviceStatus { get; set; }
 
+        public ChoiceItem QueryOption { get; set; }
+
         public int SelectedDeviceStatusId { get; set; } 
 
         public string SeriaNo { get; set; }
@@ -54,12 +56,12 @@ namespace Fasetto.Word.Core
         private void Confirm()
         {
             var result = false;
-            if (SelectedDeviceStatusId == 1)
+            if (QueryOption.Value == 1)
             {
                 result = _inventoryDeviceStatusProvider.ChangeStatusByRfid(RFID, (DeviceStatus) SelectedDeviceStatusId,
                     LoggedInUserData.UserId);
             }
-            else if (SelectedDeviceStatusId == 2)
+            else if (QueryOption.Value == 2)
             {
                 result = _inventoryDeviceStatusProvider.ChangeStatusBySerialNo(SeriaNo, (DeviceStatus)SelectedDeviceStatusId,
                     LoggedInUserData.UserId);

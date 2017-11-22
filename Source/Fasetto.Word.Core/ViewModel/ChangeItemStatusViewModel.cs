@@ -91,7 +91,8 @@ namespace Fasetto.Word.Core
                 RFID = deviceInstance.RFID,
                 ManufacturingYear = deviceInstance.ManufacturingYear,
                 Model = deviceInstance.Model,
-                SelectedDeviceStatusId = SelectedStatus.Value
+                SelectedDeviceStatusId = SelectedStatus.Value,
+                QueryOption = SelectedIdType
             };
             IoC.Application.GoToPage(ApplicationPage.DeviceDetails, deviceDetailsViewModel);
         }
