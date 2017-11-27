@@ -28,6 +28,8 @@ namespace PcPool.Inventory.BusinessLayer.Interfaces
 
         bool IsTransitionPossible(int deviceId, IList<DeviceStatus> newStatus);
 
+        ReservationResult ReserveDevices(int deviceTypeId, int amount);
+
         DeviceInstance GetItemBySerialId(string serialId);
 
         DeviceInstance GetItemByRfid(string rfid);

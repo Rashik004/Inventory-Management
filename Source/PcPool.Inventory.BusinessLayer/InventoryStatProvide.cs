@@ -78,5 +78,46 @@ namespace PcPool.Inventory.BusinessLayer
                 DeviceName = arg.DevicaeName
             };
         }
+
+        public ReservationResult ReserveDevices(int deviceTypeId, int amount)
+        {
+            using (var ctx = new PcPoolEntities())
+            {
+                var inStock = ctx.
+                    DeviceInstances.
+                    Count(di => di.DeviceTypeID == deviceTypeId
+                                && di.DeviceStatusID.Value == (int) DeviceStatus.InStock);
+
+                //var reserved =
+                //    ctx.ReservationLists.Count(rl => rl.DeviceTypeID == deviceTypeId && rl.EndDate >= DateTime.UtcNow);
+                //var reserved = 0;
+                var reservationList = ctx.ReservationLists.Where(s => s.DeviceTypeID == deviceTypeId);
+                var reserved = reservationList.Any() ? reservationList.Sum(rl => rl.Amount) : 0;
+
+                var availableDevices = inStock - reserved;
+                var result = new ReservationResult()
+                {
+                    IsPossible = availableDevices >= amount,
+                    NumberOfAvailableDevice = availableDevices > 0 ? availableDevices : 0
+                };
+
+                if (!result.IsPossible)
+                    return result;
+                ctx.ReservationLists.Add(new PcPoolModels.ReservationList
+
+                {
+                    UserID = LoggedInUserData.UserId,
+                    DeviceTypeID = deviceTypeId,
+                    Amount = amount,
+                    StartDate = DateTime.UtcNow,
+                    EndDate = DateTime.UtcNow.AddDays(-7)
+                    
+                });
+
+                ctx.SaveChanges();
+                return result;
+
+            }
+        }
     }
 }

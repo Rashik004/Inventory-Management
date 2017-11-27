@@ -44,6 +44,7 @@ namespace Fasetto.Word.Core
                  Version = Version
                 
             });
+            IoC.Application.GoToPage(ApplicationPage.Dashboard);
         }
     }
 }

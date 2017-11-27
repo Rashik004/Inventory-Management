@@ -75,17 +75,15 @@ namespace PcPool.DAL.Models
 
             public int ReservationListID { get; set; }
 
-            public int ReserverUserID { get; set; }
+            public int UserID { get; set; }
 
             public Nullable<System.DateTime> StartDate { get; set; }
 
             public Nullable<System.DateTime> EndDate { get; set; }
 
-            public int DeviceInstanceID { get; set; }
+            public int DeviceTypeID { get; set; }
 
-            public Nullable<System.DateTime> ReservationDate { get; set; }
-
-
+            public int Amount { get; set; }
 
             public virtual DeviceType DeviceType { get; set; }
 

@@ -36,12 +36,33 @@
                                     <ColumnDefinition Width="*"/>
 
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Text="Device Name" 
+                                <TextBlock Text="Device Type" 
                                        FontSize="{StaticResource FontSizeLarge}"
                                        Margin="0 0 0 20"
                                        Padding="0 10 0 0"
                                        />
-                                <TextBox Grid.Column="1"  Tag="{Binding DeviceName}" IsReadOnly="True"/>
+                                <ComboBox ItemsSource="{Binding DeviceTypes}"  
+                                          HorizontalContentAlignment="Center"
+                                          VerticalContentAlignment="Center"
+                                          Margin="10 10"
+                                          Grid.Column="1"
+                                          Width="220"  
+                                          Height="30"
+                                          HorizontalAlignment="Left"   
+                                          VerticalAlignment="Top"
+                                          SelectedItem="{Binding SelectedType}"
+                                          
+                                          >
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding Path=DeviceName}" 
+                                                           FontFamily="{StaticResource LatoRegular}"
+                                                           FontSize="{StaticResource FontSizeRegular}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
                             </Grid>
 
                             <!-- Model -->
@@ -51,15 +72,15 @@
                                     <ColumnDefinition Width="*"/>
 
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Text="Model" 
+                                <TextBlock Text="Number of Device" 
                                        FontSize="{StaticResource FontSizeLarge}"
                                        Margin="0 0 0 20"
                                        Padding="0 10 0 0"
                                        />
-                                <TextBox Grid.Column="1"  Tag="{Binding Model}" IsReadOnly="True"/>
+                                <TextBox Grid.Column="1"  Text="{Binding Amount}"/>
                             </Grid>
 
-                            <!-- RFID -->
+                            <!-- RFID --><!--
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
@@ -74,7 +95,7 @@
                                 <TextBox Grid.Column="1"  Tag="{Binding RFID}" IsReadOnly="True"/>
                             </Grid>
 
-                            <!-- Serial No -->
+                            --><!-- Serial No --><!--
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
@@ -89,7 +110,7 @@
                                 <TextBox Grid.Column="1"  Tag="{Binding SeriaNo}" IsReadOnly="True"/>
                             </Grid>
 
-                            <!-- Current Status -->
+                            --><!-- Current Status --><!--
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
@@ -102,12 +123,12 @@
                                        Padding="0 10 0 0"
                                        />
                                 <TextBox Grid.Column="1"  Tag="{Binding DeviceStatus}" IsReadOnly="True"/>
-                            </Grid>
+                            </Grid>-->
 
                             <!-- Next button -->
-                            <Button Content="Confirm" 
+                            <Button Content="Check Availability" 
                                     local:IsBusyProperty.Value="{Binding RegisterIsRunning}"
-                                    Command="{Binding ConfirmCommand}"
+                                    Command="{Binding ProceedCommand}"
                                     CommandParameter="{Binding ElementName=Page}" 
                                     HorizontalAlignment="Center"
                                     IsEnabled="{Binding IsFormValid}"/>

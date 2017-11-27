@@ -204,6 +204,19 @@ namespace PcPool.Inventory.BusinessLayer
             throw new NotImplementedException();
         }
 
+        public ReservationResult ReserveDevices(int deviceTypeId, int amount)
+        {
+            using (var ctx=new PcPoolEntities())
+            {
+                var availbleDevices = ctx.DeviceTypes.Count(dt => dt.DeviceTypeID == deviceTypeId);
+                return new ReservationResult()
+                {
+                    IsPossible = availbleDevices>=amount,
+                    NumberOfAvailableDevice = availbleDevices
+                };
+            }
+        }
+
         public DeviceInstance GetItemBySerialId(string serialId)
         {
             var ctx=new PcPoolEntities();

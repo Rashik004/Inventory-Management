@@ -49,6 +49,7 @@
     <Compile Include="InventoryItemStat.cs" />
     <Compile Include="ModelBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReservationResult.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserInitials.cs" />
     <Compile Include="UserType.cs" />

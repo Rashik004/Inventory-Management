@@ -76,7 +76,7 @@
                                        Margin="0 0 0 20"
                                        Padding="0 10 0 0"
                                        />
-                                <TextBox Grid.Column="1" Text="{Binding Id}" Tag="Id" />
+                                <TextBox Grid.Column="1" Text="{Binding Id}" Tag="Id" TextChanged="TextBox_TextChanged" />
                             </Grid>
 
 

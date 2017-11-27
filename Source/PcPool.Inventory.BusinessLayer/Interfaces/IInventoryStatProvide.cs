@@ -12,5 +12,7 @@ namespace PcPool.Inventory.BusinessLayer.Interfaces
         IList<InventoryItemStat> GetInventoryStatus();
 
         List<DeviceType> GetDeviceTypes();
+
+        ReservationResult ReserveDevices(int deviceTypeId, int amount);
     }
 }

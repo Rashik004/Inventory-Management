@@ -79,7 +79,7 @@ namespace Fasetto.Word
                 return ApplicationPage.DeviceDetails;
 
             // Alert developer of issue
-            Debugger.Break();
+            //Debugger.Break();
             return default(ApplicationPage);
         }
     }
