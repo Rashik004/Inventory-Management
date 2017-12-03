@@ -142,8 +142,8 @@ namespace PcPool.Inventory.BusinessLayer
             //device.DeviceStatusID.Value = (int)newStatus;
             if (newStatus == DeviceStatus.Loaned)
             {
-                var inventoryStatProvider=new InventoryDeviceProvider();
-                var result = inventoryStatProvider.ReserveDevices(device.DeviceTypeID, 1);
+                var inventoryStatProvider=new InventoryStatProvide();
+                var result = inventoryStatProvider.ReserveDevices(device.DeviceTypeID, 1, true);
                 if (!result.IsPossible)
                 {
                     return false;

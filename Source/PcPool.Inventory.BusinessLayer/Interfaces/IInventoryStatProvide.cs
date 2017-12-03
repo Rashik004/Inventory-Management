@@ -13,6 +13,6 @@ namespace PcPool.Inventory.BusinessLayer.Interfaces
 
         List<DeviceType> GetDeviceTypes();
 
-        ReservationResult ReserveDevices(int deviceTypeId, int amount);
+        ReservationResult ReserveDevices(int deviceTypeId, int amount, bool checkOnly);
     }
 }

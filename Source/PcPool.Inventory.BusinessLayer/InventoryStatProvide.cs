@@ -79,7 +79,7 @@ namespace PcPool.Inventory.BusinessLayer
             };
         }
 
-        public ReservationResult ReserveDevices(int deviceTypeId, int amount)
+        public ReservationResult ReserveDevices(int deviceTypeId, int amount, bool checkOnly=false)
         {
             using (var ctx = new PcPoolEntities())
             {
@@ -101,7 +101,7 @@ namespace PcPool.Inventory.BusinessLayer
                     NumberOfAvailableDevice = availableDevices > 0 ? availableDevices : 0
                 };
 
-                if (!result.IsPossible)
+                if (!result.IsPossible || checkOnly)
                     return result;
                 ctx.ReservationLists.Add(new PcPoolModels.ReservationList
 
