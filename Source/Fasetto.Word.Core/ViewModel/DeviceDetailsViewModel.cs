@@ -72,6 +72,12 @@ namespace Fasetto.Word.Core
                         "success",
                         MessageBoxButton.OK); 
             }
+            else
+            {
+                MessageBox.Show("Device is already reserved",
+                    "Error",
+                    MessageBoxButton.OK);
+            }
             IoC.Application.GoToPage(ApplicationPage.ChangeStatus);
         }
     }

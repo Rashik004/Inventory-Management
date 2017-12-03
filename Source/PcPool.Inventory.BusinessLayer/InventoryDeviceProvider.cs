@@ -140,6 +140,15 @@ namespace PcPool.Inventory.BusinessLayer
         private static bool UpdateDeviceStatus(DeviceStatus newStatus, PcPoolModels.DeviceInstance device, PcPoolEntities ctx)
         {
             //device.DeviceStatusID.Value = (int)newStatus;
+            if (newStatus == DeviceStatus.Loaned)
+            {
+                var inventoryStatProvider=new InventoryDeviceProvider();
+                var result = inventoryStatProvider.ReserveDevices(device.DeviceTypeID, 1);
+                if (!result.IsPossible)
+                {
+                    return false;
+                }
+            }
             device.DeviceStatusID = (int)newStatus;
             try
             {
