@@ -14,5 +14,7 @@ namespace PcPool.Inventory.BusinessLayer.Interfaces
         Model.User AddNewUser(Model.User user);
 
         List<Model.User> GetAllUsers();
+
+        void ChangeUserType(int userId);
     }
 }

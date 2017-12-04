@@ -29,54 +29,6 @@
 
                         <StackPanel>
 
-                            <!-- Sign Up header -->
-
-
-                            <!-- Serial No -->
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Text="Serial No" 
-                                       FontSize="{StaticResource FontSizeLarge}"
-                                       Margin="0 0 0 20"
-                                       Padding="0 10 0 0"
-                                       />
-                                <TextBox Grid.Column="1" Text="{Binding SerialNo}" Tag="Serial No" />
-                            </Grid>
-
-                            <!-- RFID -->
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Text="RFID" 
-                                       FontSize="{StaticResource FontSizeLarge}"
-                                       Margin="0 0 0 20"
-                                       Padding="0 10 0 0"
-                                       />
-                                <TextBox Grid.Column="1" Text="{Binding RFID}" Tag="RFID" />
-                            </Grid>
-                            
-                            <!-- Description -->
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Text="Description" 
-                                       FontSize="{StaticResource FontSizeLarge}"
-                                       Margin="0 0 0 20"
-                                       Padding="0 10 0 0"
-                                       />
-                                <TextBox Grid.Column="1" Text="{Binding Description}" Tag="Description" />
-                            </Grid>
-
                             <!-- Item Type -->
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -84,11 +36,11 @@
                                     <ColumnDefinition Width="*"/>
 
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Text="Item Type" Grid.Column="0"
+                                <TextBlock Text="User Name" Grid.Column="0"
                                        FontSize="{StaticResource FontSizeLarge}"
                                      
                                        />
-                                <ComboBox ItemsSource="{Binding DeviceTypes}"  
+                                <ComboBox ItemsSource="{Binding Users}"  
                                           HorizontalContentAlignment="Center"
                                           VerticalContentAlignment="Center"
                                           Margin="10 10"
@@ -97,12 +49,12 @@
                                           Height="30"
                                           HorizontalAlignment="Left"   
                                           VerticalAlignment="Top"
-                                          SelectedItem="{Binding SelectedDeviceType}"
+                                          SelectedItem="{Binding SelectedUser}"
                                           >    
                                     <ComboBox.ItemTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="{Binding Path=DeviceName}"
+                                                <TextBlock Text="{Binding Path=UserName}"
                                                            FontFamily="{StaticResource LatoRegular}"
                                                            FontSize="{StaticResource FontSizeRegular}"/>
                                             </StackPanel>
@@ -112,9 +64,9 @@
                             </Grid>
 
                             <!-- Next button -->
-                            <Button Content="Add Item" 
+                            <Button Content="{Binding ButtonText}" 
                                     local:IsBusyProperty.Value="{Binding RegisterIsRunning}"
-                                    Command="{Binding AddItemCommand}"
+                                    Command="{Binding ChangeuserPermissionCommand}"
                                     CommandParameter="{Binding ElementName=Page}" 
                                     HorizontalAlignment="Center"
                                     IsEnabled="{Binding IsFormValid}"/>

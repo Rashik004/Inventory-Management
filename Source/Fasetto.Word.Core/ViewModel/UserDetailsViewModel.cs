@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using PcPool.Inventory.BusinessLayer;
 using PcPool.Inventory.BusinessLayer.Interfaces;
@@ -13,99 +15,46 @@ namespace Fasetto.Word.Core
     {
         private IUserDataProvider _userDataProvider;
 
-        #region Public Properties
+        public ICommand ChangeuserPermissionCommand { get; set; }
 
-        /// <summary>
-        /// The email of the user
-        /// </summary>
-        public string Email { get; set; }
-
-        public string Password { get; set; }
-
-        /// <summary>
-        /// A flag indicating if the login command is running
-        /// </summary>
-        public bool LoginIsRunning { get; set; }
-
-        #endregion
-
-        #region Commands
-
-        /// <summary>
-        /// The command to login
-        /// </summary>
-        public ICommand LoginCommand { get; set; }
-
-        /// <summary>
-        /// The command to register for a new account
-        /// </summary>
-        public ICommand RegisterCommand { get; set; }
-
-        #endregion
-
-        #region Constructor
-
-        /// <summary>
-        /// Default constructor
-        /// </summary>
-        public UserDetailsViewModel(/*IUserDataProvider userDataProvider*/)
+        public UserDetailsViewModel()
         {
-            // Create commands
-            LoginCommand = new RelayParameterizedCommand(async (parameter) => await LoginAsync(parameter));
-            RegisterCommand = new RelayCommand(async () => await RegisterAsync());
+            ChangeuserPermissionCommand = new RelayCommand(ChangeUserPermission);
+
             _userDataProvider = new UserDataProvider();
-            //_userDataProvider = userDataProvider;
+            Users = _userDataProvider.GetAllUsers();
         }
 
-        #endregion
-
-        /// <summary>
-        /// Attempts to log the user in
-        /// </summary>
-        /// <param name="parameter">The <see cref="SecureString"/> passed in from the view for the users password</param>
-        /// <returns></returns>
-        public async Task LoginAsync(object parameter)
+        private void ChangeUserPermission()
         {
-            await RunCommandAsync(() => LoginIsRunning, async () =>
+            _userDataProvider.ChangeUserType(SelectedUser.UserId);
+            IoC.Application.GoToPage(ApplicationPage.UserDetails);
+        }
+
+        public List<User> Users { get; set; }
+
+
+        private User _selectedUser;
+        public User SelectedUser /*{ get; set; }*/
+        {
+            get { return _selectedUser; }
+            set
             {
-                var userDataProvider= new UserDataProvider();
-                var pass = (parameter as IHavePassword).SecurePassword.Unsecure();
+                this._selectedUser = value;
+                if (value == null)
+                {
+                    ButtonText = "Please Select An User";
+                    return;
+                }
+                ButtonText = value.UserType == UserType.Admin ? "Make Normal User" : "Make Admin User";
 
-                //var user=Task.Run(() => userDataProvider.VerifyUser(Email, pass));
-                //await user;
-
-            
-
-                //if (user.Result != null)
-                //{
-                //    LoggedInUserData.LogInUser(user.Result.UserName,
-                //        user.Result.FirstName,
-                //        user.Result.LastName,
-                //        (UserType) user.Result.UserTypeId,
-                //        user.Result.UserId);
-                //    IoC.Get<ApplicationViewModel>().LoggedInUser = user.Result.FirstName + ' ' + user.Result.LastName;
-                //    IoC.Get<ApplicationViewModel>().GoToPage(ApplicationPage.Dashboard);
-                //}
-
-            });
+            }
         }
 
-        private void TestMethod()
-        {
-            var inventoryData=new InventoryDeviceProvider();
-            var ast=inventoryData.GetAll();
-        }
+        public bool IsFormValid => SelectedUser != null;
 
-        /// <summary>
-        /// Takes the user to the register page
-        /// </summary>
-        /// <returns></returns>
-        public async Task RegisterAsync()
-        {
-            // Go to register page?
-            IoC.Get<ApplicationViewModel>().GoToPage(ApplicationPage.Register);
+        public string ButtonText { get; set; } = "Please Select An User";
 
-            await Task.Delay(1);
-        }
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -61,9 +62,30 @@ namespace PcPool.Inventory.BusinessLayer
         public List<Model.User> GetAllUsers()
         {
             var ctx=new PcPoolEntities();
-            var users = ctx.Users.Select(ConvertToModel).ToList();
+            var users = ctx.Users.Select(ConvertToModel).Where(u => u.UserType != UserType.SuperAdmin).ToList();
             return users;
             //return null;
+        }
+
+        public void ChangeUserType(int userId)
+        {
+            using (var ctx=new PcPoolEntities())
+            {
+                var user = ctx.Users.FirstOrDefault(u => u.UserID == userId);
+                if (user == null) return;
+                switch (user.UserTypeID)
+                {
+                    case (int) UserType.Admin:
+                        user.UserTypeID = (int) UserType.User;
+                        break;
+                    case (int) UserType.User:
+                        user.UserTypeID = (int) UserType.Admin;
+                        break;
+                }
+                ctx.Users.Attach(user);
+                ctx.Entry(user).State = EntityState.Modified;
+                ctx.SaveChanges();
+            }
         }
 
         private Model.User ConvertToModel(PcPoolModels.User newUser)
@@ -79,7 +101,8 @@ namespace PcPool.Inventory.BusinessLayer
                     FirstName = newUser.LastName,
                     Address = newUser.Address,
                     Designation = newUser.Designation,
-                    Title = newUser.Title
+                    Title = newUser.Title,
+                    UserType=(UserType)newUser.UserTypeID
                 };
         }
     }

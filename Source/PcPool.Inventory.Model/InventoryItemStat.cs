@@ -16,6 +16,9 @@ namespace PcPool.Inventory.Model
 
         public int Loaned { get; set; }
 
+        public int ReservedCount { get; set; }
+
+
         public int Total { get; set; }
 
 

@@ -25,29 +25,29 @@ namespace PcPool.Inventory.BusinessLayer
                 {
                     foreach (var deviceType in devicesTypes)
                     {
+                        
+                        //TODO: Check with the product owner if we should subtract reserved devices from instock count
                         var inStock = ctx.
                             DeviceInstances.
                             Count(di => di.DeviceTypeID == deviceType.DeviceTypeID
                                         && di.DeviceStatusID.Value == (int)DeviceStatus.InStock);
+
                         var loaned = ctx.
                             DeviceInstances.
                             Count(di => di.DeviceTypeID == deviceType.DeviceTypeID
                                         && di.DeviceStatusID.Value == (int)DeviceStatus.Loaned);
 
-                        var maintance = ctx.
-                            DeviceInstances.
-                            Count(di => di.DeviceTypeID == deviceType.DeviceTypeID
-                                        && di.DeviceStatusID.Value == (int)DeviceStatus.Maintanace);
-
+                        var reservedCount = GetNumberOfReservedDevices(deviceType.DeviceTypeID, ctx);
                         var total = ctx.DeviceInstances.
                             Count(di => di.DeviceTypeID == deviceType.DeviceTypeID);
+
                         result.Add(new InventoryItemStat()
                         {
                             Loaned = loaned,
                             InStock = inStock,
-                            Maintanace = maintance,
                             Total = total,
                             ItemName = deviceType.DevicaeName,
+                            ReservedCount = reservedCount
                         });
                     }
                 }
@@ -91,8 +91,7 @@ namespace PcPool.Inventory.BusinessLayer
                 //var reserved =
                 //    ctx.ReservationLists.Count(rl => rl.DeviceTypeID == deviceTypeId && rl.EndDate >= DateTime.UtcNow);
                 //var reserved = 0;
-                var reservationList = ctx.ReservationLists.Where(s => s.DeviceTypeID == deviceTypeId);
-                var reserved = reservationList.Any() ? reservationList.Sum(rl => rl.Amount) : 0;
+                var reserved = GetNumberOfReservedDevices(deviceTypeId, ctx);
 
                 var availableDevices = inStock - reserved;
                 var result = new ReservationResult()
@@ -110,7 +109,7 @@ namespace PcPool.Inventory.BusinessLayer
                     DeviceTypeID = deviceTypeId,
                     Amount = amount,
                     StartDate = DateTime.UtcNow,
-                    EndDate = DateTime.UtcNow.AddDays(-7)
+                    EndDate = DateTime.UtcNow.AddDays(7)
                     
                 });
 
@@ -118,6 +117,15 @@ namespace PcPool.Inventory.BusinessLayer
                 return result;
 
             }
+        }
+
+        private static int GetNumberOfReservedDevices(int deviceTypeId, PcPoolEntities ctx)
+        {
+            var reservationList =
+                ctx.ReservationLists.Where(s => s.DeviceTypeID == deviceTypeId && s.EndDate > DateTime.UtcNow);
+
+            var reserved = reservationList.Any() ? reservationList.Sum(rl => rl.Amount) : 0;
+            return reserved;
         }
     }
 }

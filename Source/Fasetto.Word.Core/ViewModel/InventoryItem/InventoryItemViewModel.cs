@@ -11,6 +11,9 @@
 
         public int MaintanaceCount { get; set; }
 
+        public int ReservedCount { get; set; }
+
+
         public int TotalCount { get; set; }
 
     }

@@ -41,18 +41,17 @@ namespace Fasetto.Word.Core
                     Name = "Dashboard",
                     Page = ApplicationPage.Dashboard
 
+                },
+                new ChatListItemViewModel
+                {
+                    Name = "Loan In/Out",
+                    Page = ApplicationPage.ChangeStatus
                 }
             };
             if (LoggedInUserData.UserId != 0
                 && (LoggedInUserData.UserType == UserType.Admin
                     || LoggedInUserData.UserType == UserType.SuperAdmin))
             {
-
-                Items.Add(new ChatListItemViewModel
-                {
-                    Name = "Loan In/Out",
-                    Page = ApplicationPage.ChangeStatus
-                });
 
                 Items.Add(new ChatListItemViewModel
                 {
@@ -70,6 +69,12 @@ namespace Fasetto.Word.Core
                 {
                     Name = "Add new user",
                     Page = ApplicationPage.Register
+                });
+
+                Items.Add(new ChatListItemViewModel()
+                {
+                    Name = "Access",
+                    Page = ApplicationPage.UserDetails
                 });
 
             }

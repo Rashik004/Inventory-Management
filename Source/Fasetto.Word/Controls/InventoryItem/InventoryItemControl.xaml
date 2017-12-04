@@ -49,7 +49,7 @@
                                                FontSize="{StaticResource FontSizeSmall}"
                                                FontFamily="{StaticResource LatoRegular}"
                                     />
-                                    <TextBlock Grid.Column="4" Text="{Binding MaintanaceCount}"
+                                    <TextBlock Grid.Column="4" Text="{Binding ReservedCount}"
                                                VerticalAlignment="Center"
                                                HorizontalAlignment="Center"
                                                Foreground="{StaticResource ForegroundVeryDarkBrush}"
