@@ -121,7 +121,7 @@ namespace PcPool.Inventory.BusinessLayer
         {
             var user = DbUserData(userName);
             if (user != null)
-                return DbUserData(userName);
+                return user;
                 //return ConvertToModel(GetUserPrinciple(userName), user);
             var userDataProvide=new UserDataProvider();
             user = userDataProvide.AddNewUser(new User()
@@ -131,7 +131,7 @@ namespace PcPool.Inventory.BusinessLayer
                 UserType = UserType.User
             });
 
-            return ConvertToModel(GetUserPrinciple(userName), user);
+            return user;
         }
 
         private User DbUserData(string userName)
