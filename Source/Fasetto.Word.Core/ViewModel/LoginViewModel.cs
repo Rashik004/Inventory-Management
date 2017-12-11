@@ -76,20 +76,20 @@ namespace Fasetto.Word.Core
 
 
 
-#if DEBUG
-                var userData=new UserDataProvider();
-                var user = Task.Run(() => userData.VerifyUser(Email, pass));
-#else
+
                 var adM = new AdfsAuth();
-                var user = Task.Run(() => adM.GetUserDetails(Email));
                 var isAuthenticated = await Task.Run(() => adM.ValidateCredentials(Email, pass));
-                System.Windows.MessageBox.Show(isAuthenticated
+
+//#if DEBUG
+//                isAuthenticated = true;
+//#endif
+                MessageBox.Show(isAuthenticated
                     ? "Successfully Authenticated using ADFS"
                     : "Couldn't Authenticated using ADFS");
-
                 if (!isAuthenticated)
                     return;
-#endif
+                var user = Task.Run(() => adM.GetUserDetails(Email));
+
                 await user;
                 if (user.Result != null)
                 {

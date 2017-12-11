@@ -41,6 +41,9 @@ namespace PcPool.Inventory.BusinessLayer
         public bool ValidateCredentials(string sUserName, string sPassword)
         {
             PrincipalContext oPrincipalContext = GetPrincipalContext();
+//#if DEBUG
+//            return true;
+//#endif
             return oPrincipalContext.ValidateCredentials(sUserName, sPassword);
         }
 
@@ -118,7 +121,8 @@ namespace PcPool.Inventory.BusinessLayer
         {
             var user = DbUserData(userName);
             if (user != null)
-                return ConvertToModel(GetUserPrinciple(userName), user);
+                return DbUserData(userName);
+                //return ConvertToModel(GetUserPrinciple(userName), user);
             var userDataProvide=new UserDataProvider();
             user = userDataProvide.AddNewUser(new User()
             {
@@ -190,6 +194,9 @@ namespace PcPool.Inventory.BusinessLayer
             }
             catch (Exception e)
             {
+//#if DEBUG
+//                return null;
+//#endif
                 throw e;
             }
         }
