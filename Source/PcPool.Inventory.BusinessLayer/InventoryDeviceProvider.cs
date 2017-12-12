@@ -19,29 +19,10 @@ namespace PcPool.Inventory.BusinessLayer
 {
     public class InventoryDeviceProvider: IInventoryDeviceProvider
     {
-        //public IList<DeviceInstance> GetAll()
-        //{
-
-
-        //}
-
-
-
-        //private DeviceInstance ConvertToModel(DataAccessLayer.PcPoolDBaseModel.DeviceInstance arg)
-        //{
-        //    var deviceInstance = new DeviceInstance();
-
-        //    deviceInstance.DeviceStatus = (DeviceStatus)arg.DeviceStatusId;
-        //    deviceInstance.DeviceType = arg.DeviceType.DevicaeName;
-        //    //deviceInstance.Model = arg.Model;
-        //    deviceInstance.Description = arg.Description;
-        //    return deviceInstance;
-        //}
 
         public bool AddnewItemType(DeviceType newType)
         {
             var ctx=new PcPoolEntities();
-            //var as=new PcPoolModels.DeviceType();
             var dbModel = new PcPoolModels.DeviceType()
             {
                 DevicaeName = newType.DeviceName,
@@ -59,12 +40,6 @@ namespace PcPool.Inventory.BusinessLayer
             var ctx=new PcPoolEntities();
             try
             {
-                //var test = ctx.DeviceInstances.FirstOrDefault();
-                //test.Description = "Desc changed";
-                //ctx.DeviceInstances.Add(test);
-                //var state = ctx.Entry(test).State;
-                //ctx.SaveChanges();
-                //state = ctx.Entry(test).State;
                 ctx.DeviceInstances.Add(new PcPoolModels.DeviceInstance()
                 {
                     DeviceTypeID = deviceInstance.DeviceTypeId,
@@ -127,90 +102,17 @@ namespace PcPool.Inventory.BusinessLayer
         {
             var ctx=new PcPoolEntities();
             var device = ctx.DeviceInstances.FirstOrDefault(di => di.SeriaNo == serialNo);
-            if (device == null)
-            {
-                return false;
-            }
-            AddDeviceStatusHistory(ctx, device.DeviceInstanceID, newStatus, userId);
-
-
-            return UpdateDeviceStatus(newStatus, device, ctx);
+            return device != null && UpdateDeviceStatusAndHistory(newStatus, userId, device, ctx);
         }
 
-        private static bool UpdateDeviceStatus(DeviceStatus newStatus, PcPoolModels.DeviceInstance device, PcPoolEntities ctx)
-        {
-            //device.DeviceStatusID.Value = (int)newStatus;
-            if (newStatus == DeviceStatus.Loaned)
-            {
-                var inventoryStatProvider=new InventoryStatProvide();
-                var result = inventoryStatProvider.ReserveDevices(device.DeviceTypeID, 1, true);
-                if (!result.IsPossible)
-                {
-                    return false;
-                }
-            }
-            device.DeviceStatusID = (int)newStatus;
-            try
-            {
-                ctx.DeviceInstances.Attach(device);
-                ctx.Entry(device).State = EntityState.Modified;
-                ctx.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-                return false;
-            }
-            return true;
-        }
 
-        private void AddDeviceStatusHistory(PcPoolEntities ctx, int deviceInstanceId, DeviceStatus newDeviceStatus, int userId)
-        {
-            //var ctx=new PcPoolEntities();
-            ctx.DeviceStatusHistories.Add(new PcPoolModels.DeviceStatusHistory()
-            {
-                DeviceInstanceID = deviceInstanceId,
-                ModificationDate = DateTime.Now,
-                ModifiedByUserID = userId,
-                NewStatusID = (int) newDeviceStatus
-            });
-            //ctx.SaveChanges();
-        }
+
+
         public bool ChangeStatusByRfid(string rfid, DeviceStatus newStatus, int userId)
         {
             var ctx = new PcPoolEntities();
             var device = ctx.DeviceInstances.FirstOrDefault(di => di.RFID == rfid);
-            if (device == null)
-            {
-                return false;
-            }
-            return UpdateDeviceStatus(newStatus, device, ctx);
-        }
-
-        public bool ChangeStatusBySerialNo(int deviceId, DeviceStatus newStatus)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool ChangeStatus(int deviceId, IList<DeviceStatus> newStatus)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool ChangeDeviceStatusByDeviceType(int deviceTypeId, int deviceCount)
-        {
-            throw new NotImplementedException();
-
-        }
-
-        public bool IsTransitionPossible(int deviceId, DeviceStatus newStatus)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool IsTransitionPossible(int deviceId, IList<DeviceStatus> newStatus)
-        {
-            throw new NotImplementedException();
+            return device != null && UpdateDeviceStatusAndHistory(newStatus, userId, device, ctx);
         }
 
         public ReservationResult ReserveDevices(int deviceTypeId, int amount)
@@ -236,6 +138,54 @@ namespace PcPool.Inventory.BusinessLayer
         {
             var ctx = new PcPoolEntities();
             return GetDeviceDetails(ctx).FirstOrDefault(dd => dd.SeriaNo == rfid);
+        }
+
+        private void AddDeviceStatusHistory(PcPoolEntities ctx, int deviceInstanceId, DeviceStatus newDeviceStatus, int userId)
+        {
+            //var ctx=new PcPoolEntities();
+            ctx.DeviceStatusHistories.Add(new PcPoolModels.DeviceStatusHistory()
+            {
+                DeviceInstanceID = deviceInstanceId,
+                ModificationDate = DateTime.Now,
+                ModifiedByUserID = userId,
+                NewStatusID = (int)newDeviceStatus
+            });
+        }
+
+        private bool UpdateDeviceStatusAndHistory(DeviceStatus newStatus, int userId, PcPoolModels.DeviceInstance device, PcPoolEntities ctx)
+        {
+            var status = UpdateDeviceStatus(newStatus, device, ctx);
+            if (status)
+            {
+                AddDeviceStatusHistory(ctx, device.DeviceInstanceID, newStatus, userId);
+            }
+            return status;
+        }
+
+        private static bool UpdateDeviceStatus(DeviceStatus newStatus, PcPoolModels.DeviceInstance device, PcPoolEntities ctx)
+        {
+            if (newStatus == DeviceStatus.Loaned)
+            {
+                var inventoryStatProvider = new InventoryStatProvide();
+                var result = inventoryStatProvider.ReserveDevices(device.DeviceTypeID, 1, true);
+                if (!result.IsPossible)
+                {
+                    return false;
+                }
+            }
+            device.DeviceStatusID = (int)newStatus;
+            try
+            {
+                ctx.DeviceInstances.Attach(device);
+                ctx.Entry(device).State = EntityState.Modified;
+                ctx.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return false;
+            }
+            return true;
         }
     }
 }

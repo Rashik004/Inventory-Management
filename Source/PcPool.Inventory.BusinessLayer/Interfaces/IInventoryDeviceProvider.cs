@@ -20,21 +20,11 @@ namespace PcPool.Inventory.BusinessLayer.Interfaces
         bool ChangeStatusByRfid(string rfid, DeviceStatus newStatus, int userId);
 
 
-        bool ChangeStatus(int deviceId, IList<DeviceStatus> newStatus);
-
-        bool ChangeDeviceStatusByDeviceType(int deviceTypeId, int deviceCount);
-
-        bool IsTransitionPossible(int deviceId, DeviceStatus newStatus);
-
-        bool IsTransitionPossible(int deviceId, IList<DeviceStatus> newStatus);
-
         ReservationResult ReserveDevices(int deviceTypeId, int amount);
 
         DeviceInstance GetItemBySerialId(string serialId);
 
         DeviceInstance GetItemByRfid(string rfid);
-
-
 
     }
 }
