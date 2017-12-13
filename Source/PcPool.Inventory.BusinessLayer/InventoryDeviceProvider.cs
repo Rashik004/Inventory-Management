@@ -115,18 +115,18 @@ namespace PcPool.Inventory.BusinessLayer
             return device != null && UpdateDeviceStatusAndHistory(newStatus, userId, device, ctx);
         }
 
-        public ReservationResult ReserveDevices(int deviceTypeId, int amount)
-        {
-            using (var ctx=new PcPoolEntities())
-            {
-                var availbleDevices = ctx.DeviceTypes.Count(dt => dt.DeviceTypeID == deviceTypeId);
-                return new ReservationResult()
-                {
-                    IsPossible = availbleDevices>=amount,
-                    NumberOfAvailableDevice = availbleDevices
-                };
-            }
-        }
+        //public ReservationResult ReserveDevices(int deviceTypeId, int amount)
+        //{
+        //    using (var ctx=new PcPoolEntities())
+        //    {
+        //        var availbleDevices = ctx.DeviceTypes.Count(dt => dt.DeviceTypeID == deviceTypeId);
+        //        return new ReservationResult()
+        //        {
+        //            IsPossible = availbleDevices>=amount,
+        //            NumberOfAvailableDevice = availbleDevices
+        //        };
+        //    }
+        //}
 
         public DeviceInstance GetItemBySerialId(string serialId)
         {
@@ -154,7 +154,7 @@ namespace PcPool.Inventory.BusinessLayer
 
         private bool UpdateDeviceStatusAndHistory(DeviceStatus newStatus, int userId, PcPoolModels.DeviceInstance device, PcPoolEntities ctx)
         {
-            var status = UpdateDeviceStatus(newStatus, device, ctx);
+            var status = UpdateDeviceStatus(newStatus, device, ctx, userId);
             if (status)
             {
                 AddDeviceStatusHistory(ctx, device.DeviceInstanceID, newStatus, userId);
@@ -162,12 +162,12 @@ namespace PcPool.Inventory.BusinessLayer
             return status;
         }
 
-        private static bool UpdateDeviceStatus(DeviceStatus newStatus, PcPoolModels.DeviceInstance device, PcPoolEntities ctx)
+        private static bool UpdateDeviceStatus(DeviceStatus newStatus, PcPoolModels.DeviceInstance device, PcPoolEntities ctx, int userId)
         {
             if (newStatus == DeviceStatus.Loaned)
             {
                 var inventoryStatProvider = new InventoryStatProvide();
-                var result = inventoryStatProvider.ReserveDevices(device.DeviceTypeID, 1, true);
+                var result = inventoryStatProvider.ReserveDevices(device.DeviceTypeID, 1, userId, true);
                 if (!result.IsPossible)
                 {
                     return false;
@@ -176,6 +176,14 @@ namespace PcPool.Inventory.BusinessLayer
             device.DeviceStatusID = (int)newStatus;
             try
             {
+                var reservation =
+                    ctx.ReservationLists.FirstOrDefault(
+                        rl =>
+                            rl.UserID == userId && rl.DeviceTypeID == device.DeviceTypeID &&
+                            rl.EndDate > DateTime.UtcNow);
+                reservation.Amount -= 1;
+                ctx.ReservationLists.Attach(reservation);
+                ctx.Entry(reservation).State=EntityState.Modified;
                 ctx.DeviceInstances.Attach(device);
                 ctx.Entry(device).State = EntityState.Modified;
                 ctx.SaveChanges();

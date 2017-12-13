@@ -79,7 +79,7 @@ namespace PcPool.Inventory.BusinessLayer
             };
         }
 
-        public ReservationResult ReserveDevices(int deviceTypeId, int amount, bool checkOnly=false)
+        public ReservationResult ReserveDevices(int deviceTypeId, int amount, int userId=-1, bool checkOnly=false)
         {
             using (var ctx = new PcPoolEntities())
             {
@@ -88,10 +88,7 @@ namespace PcPool.Inventory.BusinessLayer
                     Count(di => di.DeviceTypeID == deviceTypeId
                                 && di.DeviceStatusID.Value == (int) DeviceStatus.InStock);
 
-                //var reserved =
-                //    ctx.ReservationLists.Count(rl => rl.DeviceTypeID == deviceTypeId && rl.EndDate >= DateTime.UtcNow);
-                //var reserved = 0;
-                var reserved = GetNumberOfReservedDevices(deviceTypeId, ctx);
+                var reserved = GetNumberOfReservedDevices(deviceTypeId, ctx, userId);
 
                 var availableDevices = inStock - reserved;
                 var result = new ReservationResult()
@@ -119,10 +116,13 @@ namespace PcPool.Inventory.BusinessLayer
             }
         }
 
-        private static int GetNumberOfReservedDevices(int deviceTypeId, PcPoolEntities ctx)
+        private static int GetNumberOfReservedDevices(int deviceTypeId, PcPoolEntities ctx, int userId = -1)
         {
             var reservationList =
-                ctx.ReservationLists.Where(s => s.DeviceTypeID == deviceTypeId && s.EndDate > DateTime.UtcNow);
+                ctx.ReservationLists.Where(
+                    s =>
+                        s.DeviceTypeID == deviceTypeId && s.EndDate > DateTime.UtcNow &&
+                        (userId == -1 || s.UserID != userId));
 
             var reserved = reservationList.Any() ? reservationList.Sum(rl => rl.Amount) : 0;
             return reserved;
