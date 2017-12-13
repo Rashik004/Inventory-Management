@@ -52,9 +52,9 @@ namespace Fasetto.Word.Core
         {
             // Always hide settings page if we are changing pages
             //SettingsMenuVisible = false;
-            if (page == ApplicationPage.Dashboard)
+            if (page != ApplicationPage.UserDetails && page != ApplicationPage.DeviceReservation && page == CurrentPage)
             {
-                viewModel = new InventoryListDesignModel();
+                return;
             }
             // Set the view model
             CurrentPageViewModel = viewModel;
