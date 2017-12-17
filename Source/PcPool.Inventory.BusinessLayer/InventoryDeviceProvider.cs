@@ -172,26 +172,30 @@ namespace PcPool.Inventory.BusinessLayer
                 {
                     return false;
                 }
-            }
-            device.DeviceStatusID = (int)newStatus;
-            try
-            {
+                device.DeviceStatusID = (int) newStatus;
+
                 var reservation =
                     ctx.ReservationLists.FirstOrDefault(
                         rl =>
                             rl.UserID == userId && rl.DeviceTypeID == device.DeviceTypeID &&
                             rl.EndDate > DateTime.UtcNow);
-                reservation.Amount -= 1;
-                ctx.ReservationLists.Attach(reservation);
-                ctx.Entry(reservation).State=EntityState.Modified;
+                if (reservation != null | reservation.Amount != 0)
+                {
+                    reservation.Amount -= 1;
+                    ctx.ReservationLists.Attach(reservation);
+                    ctx.Entry(reservation).State = EntityState.Modified;
+
+                    ctx.DeviceInstances.Attach(device);
+                    ctx.Entry(device).State = EntityState.Modified;
+                    ctx.SaveChanges();
+                }
+            }
+            else
+            {
+                device.DeviceStatusID = (int) newStatus;
                 ctx.DeviceInstances.Attach(device);
                 ctx.Entry(device).State = EntityState.Modified;
                 ctx.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-                return false;
             }
             return true;
         }
